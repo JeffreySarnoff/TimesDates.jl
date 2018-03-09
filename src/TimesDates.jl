@@ -248,7 +248,7 @@ for P in (:Nanosecond, :Microsecond, :Millisecond,
         dt -= Day(1)
         end
         dt -= dayp
-        return TimeDate(tm, dt, zone(tdz))
+        return TimeDateZone(tm, dt, zone(tdz))
     end
   end
 end
