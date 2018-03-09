@@ -252,6 +252,3 @@ for P in (:Nanosecond, :Microsecond, :Millisecond,
 end
 
 end  # TimesDates
-
-
-end  # TimesDates
