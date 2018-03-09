@@ -10,8 +10,8 @@ using TimeZones
 const tzUTC = timezones_from_abbr("UTC")[1]
 const tzLOCAL = localzone()
 
-tzDEFAULT = [tzLOCAL]
-tzDEFAULT() = tzDEFAULT[1]
+TZ_DEFAULT = [tzLOCAL]
+tzdefault() = TZ_DEFAULT[1]
 
 mutable struct TimeDate
     attime::Time
@@ -40,21 +40,21 @@ TimeDateZone(x::TimeDate, z::TimeZone) = TimeDateZone(time(x), date(x), z)
 TimeDate(z::Date) =
     TimeDate(Time(0), Date(z))
 TimeDateZone(z::Date) =
-    TimeDateZone(Time(0), Date(z), tzDEFAULT())
+    TimeDateZone(Time(0), Date(z), tzdefault())
 TimeDateZone(z::Date, tz::TimeZone) =
     TimeDateZone(Time(0), Date(z), tz)
 
 TimeDate(z::Time) =
     TimeDate(z, Date(now()))
 TimeDateZone(z::Time) =
-    TimeDateZone(Time(z), Date(now()), tzDEFAULT())
+    TimeDateZone(Time(z), Date(now()), tzdefault())
 TimeDateZone(z::Time, tz::TimeZone) =
     TimeDateZone(Time(z), Date(now()), tz)
 
 TimeDate(z::DateTime) =
     TimeDate(Time(z), Date(z))
 TimeDateZone(z::DateTime) =
-    TimeDateZone(Time(z), Date(z), tzDEFAULT())
+    TimeDateZone(Time(z), Date(z), tzdefault())
 TimeDateZone(z::DateTime, tz::TimeZone) =
     TimeDateZone(Time(z), Date(z), tz)
 
@@ -66,7 +66,7 @@ TimeDateZone(z::ZonedDateTime) =
 ZonedDateTime(tdz::TimeDateZone) = 
     ZonedDateTime(date(tdz)+time(tdz), zone(tdz))
 ZonedDateTime(td::TimeDate) = 
-    ZonedDateTime(date(td)+time(td), tzDEFAULT())
+    ZonedDateTime(date(td)+time(td), tzdefault())
 ZonedDateTime(td::TimeDate, z::TimeZone) = 
     ZonedDateTime(date(td)+time(td), z)
 
