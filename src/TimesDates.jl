@@ -1,7 +1,7 @@
 module TimesDates
 
 export TimeDate, TimeDateZone,
-    timeofday, date, zone, tzdefault!
+    timeofday, date, zone, tzdefault!,
 
 using Dates: CompoundPeriod
 using Dates
@@ -265,5 +265,31 @@ Base.show(io::IO, td::TimeDate) = print(io, string(td))
 Base.show(io::IO, tdz::TimeDateZone) = print(io, string(tdz))
 Base.show(td::TimeDate) = print(Base.STDOUT, string(td))
 Base.show(tdz::TimeDateZone) = print(Base.STDOUT, string(tdz))
+
+function Base.parse(TimeDate, str::String)
+    !contains(str, "T") && throw(ErrorException("\"$str\" is not recognized as a TimeDate"))
+    datepart, timepart = split(str, "T")
+    dateof = parse(Date, datepart)
+    timeof = parse(Time, timepart)
+    return TimeDate(timeof, dateof)
+end
+
+function Base.parse(TimeDateZone, str::String)
+    !contains(str, "T") && throw(ErrorException("\"$str\" is not recognized as a TimeDateZone"))
+    datepart, parts = split(str, "T")
+    if contains(str, " ")
+        timepart, zonepart = split(parts, " ")
+    else
+        timepart = parts
+        zonepart = string(tzdefault())
+    end
+    
+    dateof = parse(Date, datepart)
+    timeof = parse(Time, timepart)
+    zoneof = parse(TimeZone, zonepart)
+    return TimeDateZone(timeof, dateof, zoneof)
+end
+
+    
 
 end # TimesDates
