@@ -266,9 +266,11 @@ Base.show(io::IO, tdz::TimeDateZone) = print(io, string(tdz))
 Base.show(td::TimeDate) = print(Base.STDOUT, string(td))
 Base.show(tdz::TimeDateZone) = print(Base.STDOUT, string(tdz))
 
+splitstring(str::String, splitat::String) = map(String, split(str, splitat))
+    
 function TimeDate(str::String)
     !contains(str, "T") && throw(ErrorException("\"$str\" is not recognized as a TimeDate"))
-    datepart, timepart = split(str, "T")
+    datepart, timepart = splitstring(str, "T")
     dateof = parse(Date, datepart)
     timeof = parse(Time, timepart)
     return TimeDate(timeof, dateof)
@@ -276,9 +278,9 @@ end
 
 function TimeDateZone(str::String)
     !contains(str, "T") && throw(ErrorException("\"$str\" is not recognized as a TimeDateZone"))
-    datepart, parts = split(str, "T")
+    datepart, parts = splitstring(str, "T")
     if contains(str, " ")
-        timepart, zonepart = split(parts, " ")
+        timepart, zonepart = splitstring(parts, " ")
     else
         timepart = parts
         zonepart = string(tzdefault())
@@ -286,7 +288,8 @@ function TimeDateZone(str::String)
     
     dateof = parse(Date, datepart)
     timeof = parse(Time, timepart)
-    zoneof = parse(TimeZone, zonepart)
+    zoneof = all_timezones()[timezone_names() .== zonepart])[1]
+
     return TimeDateZone(timeof, dateof, zoneof)
 end
 
