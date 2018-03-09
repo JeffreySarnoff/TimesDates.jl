@@ -204,4 +204,4 @@ for P in (:Nanosecond, :Microsecond, :Millisecond,
   end
 end
 
-end  # DatingTime
+end  # TimesDates
