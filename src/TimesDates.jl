@@ -271,8 +271,27 @@ splitstring(str::String, splitat::String) = map(String, split(str, splitat))
 function TimeDate(str::String)
     !contains(str, "T") && throw(ErrorException("\"$str\" is not recognized as a TimeDate"))
     datepart, timepart = splitstring(str, "T")
+    if contains(timepart, ".")
+        inttimepart, fractimepart = splitstring(timepart, ".")
+    else
+        inttimepart = timepart
+        fractimepart = ""
+    end
+    
     dateof = parse(Date, datepart)
-    timeof = parse(Time, timepart)
+    timeof = parse(Time, inttimepart)
+    n = length(fractimepart)
+    if n > 0
+        fractime = parse(Int, fractimepart)
+        if n <= 3
+            timeof += Millisecond(fractime)
+        elseif n <= 6
+            timeof += Microsecond(fractime)
+        else
+            timeof += Nanosecond(fractime)
+        end
+    end
+        
     return TimeDate(timeof, dateof)
 end
 
@@ -285,7 +304,28 @@ function TimeDateZone(str::String)
         timepart = parts
         zonepart = string(tzdefault())
     end
+
+    if contains(timepart, ".")
+        inttimepart, fractimepart = splitstring(timepart, ".")
+    else
+        inttimepart = timepart
+        fractimepart = ""
+    end
     
+    dateof = parse(Date, datepart)
+    timeof = parse(Time, inttimepart)
+    n = length(fractimepart)
+    if n > 0
+        fractime = parse(Int, fractimepart)
+        if n <= 3
+            timeof += Millisecond(fractime)
+        elseif n <= 6
+            timeof += Microsecond(fractime)
+        else
+            timeof += Nanosecond(fractime)
+        end
+    end
+        
     dateof = parse(Date, datepart)
     timeof = parse(Time, timepart)
     zoneof = all_timezones()[timezone_names() .== zonepart])[1]
