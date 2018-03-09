@@ -1,0 +1,22 @@
+## Documentation: http://docs.travis-ci.com/user/languages/julia/
+language: julia
+os:
+  - linux
+  - osx
+julia:
+  - nightly
+matrix:
+  fast_finish: true
+  allow_failures:
+    - julia: nightly
+notifications:
+  email: false
+git:
+  depth: 99999999
+## uncomment the following lines to override the default test script
+#script:
+#  - julia -e 'Pkg.clone(pwd()); Pkg.build("TimesDates"); Pkg.test("TimesDates"; coverage=true)'
+after_success:
+  - julia -e 'cd(Pkg.dir("TimesDates")); Pkg.add("Documenter"); using Documenter; include(joinpath("docs", "make.jl"))';
+  - julia -e 'cd(Pkg.dir("TimesDates")); Pkg.add("Coverage"); using Coverage; Coveralls.submit(Coveralls.process_folder())';
+  
