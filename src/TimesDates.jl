@@ -1,7 +1,8 @@
 module TimesDates
 
-export TimeDate, TimeDateZone
-
+export TimeDate, TimeDateZone,
+       timeofday, date, zone, tzdefault!
+       
 using Dates: CompoundPeriod
 using Dates
 
@@ -12,12 +13,16 @@ const tzLOCAL = localzone()
 
 TZ_DEFAULT = [tzLOCAL]
 tzdefault() = TZ_DEFAULT[1]
+function tzdefault!(x::TimeZone)
+    TZ_DEFAULT[1] = x
+end
 
 mutable struct TimeDate
     attime::Time
     ondate::Date
 end
 
+@inline timeofday(x::TimeDate) = x.attime
 @inline time(x::TimeDate) = x.attime
 @inline date(x::TimeDate) = x.ondate
 
@@ -27,9 +32,13 @@ mutable struct TimeDateZone
     inzone::TimeZone
 end
 
+@inline timeofday(x::TimeDateZone) = x.attime
 @inline time(x::TimeDateZone) = x.attime
 @inline date(x::TimeDateZone) = x.ondate
 @inline zone(x::TimeDateZone) = x.inzone
+
+timeofday(x::DateTime) = Time(x)
+timeofday(x::ZonedDateTime) = Time(DateTime(x))
 
 TimeDate(x::TimeDate) = x
 TimeDateZone(x::TimeDateZone) = x
