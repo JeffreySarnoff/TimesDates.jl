@@ -267,7 +267,7 @@ Base.show(td::TimeDate) = print(Base.STDOUT, string(td))
 Base.show(tdz::TimeDateZone) = print(Base.STDOUT, string(tdz))
 
 splitstring(str::String, splitat::String) = map(String, split(str, splitat))
-    
+
 function TimeDate(str::String)
     !contains(str, "T") && throw(ErrorException("\"$str\" is not recognized as a TimeDate"))
     datepart, timepart = splitstring(str, "T")
@@ -277,7 +277,7 @@ function TimeDate(str::String)
         inttimepart = timepart
         fractimepart = ""
     end
-    
+
     dateof = parse(Date, datepart)
     timeof = parse(Time, inttimepart)
     n = length(fractimepart)
@@ -291,7 +291,7 @@ function TimeDate(str::String)
             timeof += Nanosecond(fractime)
         end
     end
-        
+
     return TimeDate(timeof, dateof)
 end
 
@@ -311,7 +311,7 @@ function TimeDateZone(str::String)
         inttimepart = timepart
         fractimepart = ""
     end
-    
+
     dateof = parse(Date, datepart)
     timeof = parse(Time, inttimepart)
     n = length(fractimepart)
@@ -325,14 +325,12 @@ function TimeDateZone(str::String)
             timeof += Nanosecond(fractime)
         end
     end
-        
+
     dateof = parse(Date, datepart)
     timeof = parse(Time, timepart)
-    zoneof = all_timezones()[timezone_names() .== zonepart])[1]
+    zoneof = (all_timezones()[timezone_names() .== zonepart])[1]
 
     return TimeDateZone(timeof, dateof, zoneof)
 end
-
-    
 
 end # TimesDates
