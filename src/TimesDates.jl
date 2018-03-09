@@ -35,21 +35,21 @@ TimeDateZone(x::TimeDate, z::TimeZone) = TimeDateZone(time(x), date(x), z)
 TimeDate(z::Date) =
     TimeDate(Time(0), Date(z))
 TimeDateZone(z::Date) =
-    TimeDateZone(Time(0), Date(z), timezones_from_abbr("UTC")))
+    TimeDateZone(Time(0), Date(z), timezones_from_abbr("UTC"))
 TimeDateZone(z::Date, tz::TimeZone) =
     TimeDateZone(Time(0), Date(z), tz))
 
 TimeDate(z::Time) =
     TimeDate(z, Date(now()))
 TimeDateZone(z::Time) =
-    TimeDateZone(Time(z), Date(now()), timezones_from_abbr("UTC")))
+    TimeDateZone(Time(z), Date(now()), timezones_from_abbr("UTC"))
 TimeDateZone(z::Time, tz::TimeZone) =
     TimeDateZone(Time(z), Date(now()), tz))
 
 TimeDate(z::DateTime) =
     TimeDate(Time(z), Date(z))
 TimeDateZone(z::DateTime) =
-    TimeDateZone(Time(z), Date(z), timezones_from_abbr("UTC")))
+    TimeDateZone(Time(z), Date(z), timezones_from_abbr("UTC"))
 TimeDateZone(z::DateTime, tz::TimeZone) =
     TimeDateZone(Time(z), Date(z), tz))
 
