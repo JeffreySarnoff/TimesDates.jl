@@ -13,6 +13,7 @@ const tzLOCAL = localzone()
 
 TZ_DEFAULT = [tzLOCAL]
 tzdefault() = TZ_DEFAULT[1]
+
 function tzdefault!(x::TimeZone)
     TZ_DEFAULT[1] = x
 end
@@ -44,6 +45,7 @@ TimeDate(x::TimeDate) = x
 TimeDateZone(x::TimeDateZone) = x
 
 TimeDate(x::TimeDateZone) = TimeDate(time(x), date(x))
+TimeDateZone(x::TimeDate) = TimeDateZone(time(x), date(x), tzdefault())
 TimeDateZone(x::TimeDate, z::TimeZone) = TimeDateZone(time(x), date(x), z)
 
 TimeDate(z::Date) =
@@ -263,6 +265,5 @@ Base.show(io::IO, td::TimeDate) = print(io, string(td))
 Base.show(io::IO, tdz::TimeDateZone) = print(io, string(tdz))
 Base.show(td::TimeDate) = print(Base.STDOUT, string(td))
 Base.show(tdz::TimeDateZone) = print(Base.STDOUT, string(tdz))
-    
 
 end # TimesDates
