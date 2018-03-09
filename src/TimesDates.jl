@@ -1,4 +1,4 @@
-module DatingTime
+module TimeDate
 
 export TimeDate, ZonedTimeDate
 
