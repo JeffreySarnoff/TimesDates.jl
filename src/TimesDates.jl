@@ -251,4 +251,18 @@ for P in (:Nanosecond, :Microsecond, :Millisecond,
   end
 end
 
+function Base.string(td::TimeDate)
+    return string(date(td),"T",time(td))
+end
+
+function Base.string(tdz::TimeDateZone)
+    return string(date(tdz),"T",time(tdz)," ",zone(tdz))
+end
+
+Base.show(io::IO, td::TimeDate) = print(io, string(td))
+Base.show(io::IO, tdz::TimeDateZone) = print(io, string(tdz))
+Base.show(td::TimeDate) = print(Base.STDOUT, string(td))
+Base.show(tdz::TimeDateZone) = print(Base.STDOUT, string(tdz))
+    
+
 end # TimesDates
