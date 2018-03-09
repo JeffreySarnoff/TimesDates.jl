@@ -306,10 +306,16 @@ function TimeDate(str::String)
     if n > 0
         fractime = parse(Int, fractimepart)
         if n <= 3
+            delta = fld(1000,10^n)
+            fractime *= delta
             timeof += Millisecond(fractime)
         elseif n <= 6
+            delta = fld(1000,10^(n-3))
+            fractime *= delta
             timeof += Microsecond(fractime)
         else
+            delta = fld(1000,10^(n-6))
+            fractime *= delta
             timeof += Nanosecond(fractime)
         end
     end
@@ -340,10 +346,16 @@ function TimeDateZone(str::String)
     if n > 0
         fractime = parse(Int, fractimepart)
         if n <= 3
+            delta = fld(1000,10^n)
+            fractime *= delta
             timeof += Millisecond(fractime)
         elseif n <= 6
+            delta = fld(1000,10^(n-3))
+            fractime *= delta
             timeof += Microsecond(fractime)
         else
+            delta = fld(1000,10^(n-6))
+            fractime *= delta
             timeof += Nanosecond(fractime)
         end
     end
