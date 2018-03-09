@@ -1,8 +1,8 @@
 module TimesDates
 
 export TimeDate, TimeDateZone,
-       timeofday, date, zone, tzdefault!
-       
+    timeofday, date, zone, tzdefault!
+
 using Dates: CompoundPeriod
 using Dates
 
@@ -72,11 +72,11 @@ TimeDate(z::ZonedDateTime) =
 TimeDateZone(z::ZonedDateTime) =
     TimeDateZone(Time(z.utc_datetime), Date(z.utc_datetime), z.timezone)
 
-ZonedDateTime(tdz::TimeDateZone) = 
+ZonedDateTime(tdz::TimeDateZone) =
     ZonedDateTime(date(tdz)+time(tdz), zone(tdz))
-ZonedDateTime(td::TimeDate) = 
+ZonedDateTime(td::TimeDate) =
     ZonedDateTime(date(td)+time(td), tzdefault())
-ZonedDateTime(td::TimeDate, z::TimeZone) = 
+ZonedDateTime(td::TimeDate, z::TimeZone) =
     ZonedDateTime(date(td)+time(td), z)
 
 DateTime(tdz::TimeDateZone) = date(tdz)+time(tdz)
@@ -100,7 +100,7 @@ function canonical(x::Nanosecond)
                             Second(secs), Millisecond(millis),
                             Microsecond(micros), Nanosecond(nanos))
     return result
-end  
+end
 
 function canonical(x::Microsecond)
     millis, micros = fldmod(x.value, 1_000)
@@ -112,18 +112,18 @@ function canonical(x::Microsecond)
                             Second(secs), Millisecond(millis),
                             Microsecond(micros))
     return result
-end  
+end
 
 function canonical(x::Millisecond)
     secs, millis = fldmod(x.value, 1_000)
     mins, secs = fldmod(secs, 60)
     hors, mins = fldmod(mins, 60)
     dys, hors = fldmod(hors, 24)
-  
+
     result = CompoundPeriod(Day(dys), Hour(hors), Minute(mins),
                             Second(secs), Millisecond(millis))
     return result
-end  
+end
 
 function canonical(x::Second)
     mins, secs = fldmod(x.value, 60)
@@ -132,25 +132,25 @@ function canonical(x::Second)
     result = CompoundPeriod(Day(dys), Hour(hors), Minute(mins),
                             Second(secs))
     return result
-end  
+end
 
 function canonical(x::Minute)
     hors, mins = fldmod(x.value, 60)
     dys, hors = fldmod(hors, 24)
     result = CompoundPeriod(Day(dys), Hour(hors), Minute(mins))
     return result
-end  
+end
 
 function canonical(x::Hour)
     dys, hors = fldmod(x.value, 24)
     result = CompoundPeriod(Day(dys), Hour(hors))
     return result
-end  
+end
 
-function canonical(x::Day)  
+function canonical(x::Day)
     result = CompoundPeriod(x)
     return result
-end  
+end
 
 # separate a CompoundPeriod into periods >= Millisecond, and periods < Millisecond
 function twocompoundperiods(cp::CompoundPeriod)
@@ -158,19 +158,19 @@ function twocompoundperiods(cp::CompoundPeriod)
     n = length(periods)
     ptypes = map(typeof, periods)
     if ptypes[end] === Nanosecond
-      if n>1 && ptypes[end-1] == Microsecond
-         largecp = CompoundPeriod(periods[1:end-2])
-         smallcp = CompoundPeriod(periods[end-1:end])
-      else
-         largecp = CompoundPeriod(periods[1:end-1])
-         smallcp = CompoundPeriod(periods[end])
-      end
-    elseif ptypes[end] == Microsecond
-         largecp = CompoundPeriod(periods[1:end-1])
-         smallcp = CompoundPeriod(periods[end])
+    if n>1 && ptypes[end-1] == Microsecond
+        largecp = CompoundPeriod(periods[1:end-2])
+        smallcp = CompoundPeriod(periods[end-1:end])
     else
-         largecp = cp
-         smallcp = CompoundPeriod()
+        largecp = CompoundPeriod(periods[1:end-1])
+        smallcp = CompoundPeriod(periods[end])
+    end
+    elseif ptypes[end] == Microsecond
+        largecp = CompoundPeriod(periods[1:end-1])
+        smallcp = CompoundPeriod(periods[end])
+    else
+        largecp = cp
+        smallcp = CompoundPeriod()
     end
     return largecp, smallcp
 end
@@ -179,22 +179,22 @@ end
 function threecompoundperiods(cp::CompoundPeriod)
     largeperiods, smallperiods = twocompoundperiods(cp)
     if largeperiods == CompoundPeriod()
-       dayperiod = CompoundPeriod()
+    dayperiod = CompoundPeriod()
     elseif typeof(largeperiods.periods[1]) === Day
-       dayperiod = CompoundPeriod(largeperiods.periods[1])
-       if length(largeperiods.periods) == 1
-           largeperiods = CompoundPeriod()
-       else
-           largeperiods = CompoundPeriod(largeperiods.periods[2:end])
-       end
+    dayperiod = CompoundPeriod(largeperiods.periods[1])
+    if length(largeperiods.periods) == 1
+        largeperiods = CompoundPeriod()
     else
-       dayperiod = CompoundPeriod()
+        largeperiods = CompoundPeriod(largeperiods.periods[2:end])
+    end
+    else
+    dayperiod = CompoundPeriod()
     end
     return dayperiod, largeperiods, smallperiods
 end
 
 for P in (:Nanosecond, :Microsecond, :Millisecond,
-          :Second, :Minute, :Hour, :Day)
+        :Second, :Minute, :Hour, :Day)
   @eval begin
     function Base.:(+)(td::TimeDate, tp::$P)
         cperiods = canonical(tp)
@@ -204,11 +204,11 @@ for P in (:Nanosecond, :Microsecond, :Millisecond,
         tm += smallp
         tm += largep
         if tm < time(td)
-           dt += Day(1)
+        dt += Day(1)
         end
         dt += dayp
         return TimeDate(tm, dt)
-    end                     
+    end
     function Base.:(-)(td::TimeDate, tp::$P)
         cperiods = canonical(tp)
         dayp, largep, smallp = threecompoundperiods(cperiods)
@@ -217,11 +217,11 @@ for P in (:Nanosecond, :Microsecond, :Millisecond,
         tm -= smallp
         tm -= largep
         if tm > time(td)
-           dt -= Day(1)
+        dt -= Day(1)
         end
         dt -= dayp
         return TimeDate(tm, dt)
-     end
+    end
     function Base.:(+)(tdz::TimeDateZone, tp::$P)
         cperiods = canonical(tp)
         dayp, largep, smallp = threecompoundperiods(cperiods)
@@ -230,11 +230,11 @@ for P in (:Nanosecond, :Microsecond, :Millisecond,
         tm += smallp
         tm += largep
         if tm < time(tdz)
-           dt += Day(1)
+        dt += Day(1)
         end
         dt += dayp
         return TimeDateZone(tm, dt, zone(tdz))
-    end                     
+    end
     function Base.:(-)(tdz::TimeDateZone, tp::$P)
         cperiods = canonical(tp)
         dayp, largep, smallp = threecompoundperiods(cperiods)
@@ -243,12 +243,12 @@ for P in (:Nanosecond, :Microsecond, :Millisecond,
         tm -= smallp
         tm -= largep
         if tm > time(tdz)
-           dt -= Day(1)
+        dt -= Day(1)
         end
         dt -= dayp
         return TimeDate(tm, dt, zone(tdz))
-     end
+    end
   end
 end
 
-end  # TimesDates
+end # TimesDates
