@@ -253,6 +253,28 @@ for P in (:Nanosecond, :Microsecond, :Millisecond,
   end
 end
 
+
+Dates.Year(td::TimeDate) = Dates.Year(date(td))
+Dates.Month(td::TimeDate) = Dates.Month(date(td))
+Dates.Day(td::TimeDate) = Dates.Day(date(td))
+Dates.Hour(td::TimeDate) = Dates.Hour(time(td))
+Dates.Minute(td::TimeDate) = Dates.Minute(time(td))
+Dates.Second(td::TimeDate) = Dates.Second(time(td))
+Dates.Millisecond(td::TimeDate) = Dates.Millisecond(time(td))
+Dates.Microsecond(td::TimeDate) = Dates.Microsecond(time(td))
+Dates.Nanosecond(td::TimeDate) = Dates.Nanosecond(time(td))
+
+Dates.Year(tdz::TimeDateZone) = Dates.Year(date(tdz))
+Dates.Month(tdz::TimeDateZone) = Dates.Month(date(tdz))
+Dates.Day(tdz::TimeDateZone) = Dates.Day(date(tdz))
+Dates.Hour(tdz::TimeDateZone) = Dates.Hour(time(tdz))
+Dates.Minute(tdz::TimeDateZone) = Dates.Minute(time(tdz))
+Dates.Second(tdz::TimeDateZone) = Dates.Second(time(tdz))
+Dates.Millisecond(tdz::TimeDateZone) = Dates.Millisecond(time(tdz))
+Dates.Microsecond(tdz::TimeDateZone) = Dates.Microsecond(time(tdz))
+Dates.Nanosecond(tdz::TimeDateZone) = Dates.Nanosecond(time(tdz))
+
+
 function Base.string(td::TimeDate)
     return string(date(td),"T",time(td))
 end
