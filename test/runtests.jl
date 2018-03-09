@@ -19,5 +19,9 @@ td3 = TimeDate(str3)
 @test DateTime(td1) == dt1
 @test DateTime(td2) == dt2
 
+@test Year(td1) == Year(dt1)
+@test Minute(td2) == Minute(dt2)
 
+@test Minute(td1 + Minute(1)) == Minute(td1) + Minute(1)
+@test Microsecond(td3 - Microsecond(1)) == Microsecond(td3) - Microsecond(1)
 
