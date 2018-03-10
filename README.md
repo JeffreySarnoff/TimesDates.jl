@@ -4,6 +4,10 @@
 
 > _this package requires Julia v0.7-_
 
+- _the type `TimeDate` works, and interoperates with DateTime, Date & Time
+
+- _the type `TimeDateZone` works with TimeZones.jl, when released_
+
 ## Setup
 
 ```julia
