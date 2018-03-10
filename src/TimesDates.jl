@@ -356,8 +356,7 @@ for P in (:Nanosecond, :Microsecond, :Millisecond, :Second, :Minute, :Hour)
 
         return TimeDateZone(time(td), date(td), zone(tdz))
      end
-
-
+        
      function Base.:(-)(tdz::TimeDateZone, tp::$P)
         td = TimeDate(tdz)
         td = td - tp
@@ -369,6 +368,10 @@ for P in (:Nanosecond, :Microsecond, :Millisecond, :Second, :Minute, :Hour)
 end
 
 
+Base.:(+)(td::TimeDate, dy::Day) = TimeDate(time(td), date(td)+dy)
+Base.:(-)(td::TimeDate, dy::Day) = TimeDate(time(td), date(td)-dy)
+Base.:(+)(tdz::TimeDateZone, dy::Day) = TimeDate(time(tdz), date(tdz)+dy, zone(tdz))
+Base.:(-)(tdz::TimeDateZone, dy::Day) = TimeDate(time(tdz), date(tdz)-dy, zone(tdz))
 
 function Base.string(td::TimeDate)
     return string(date(td),"T",time(td))
@@ -387,6 +390,54 @@ splitstring(str::String, splitat::String) = map(String, split(str, splitat))
 
 function TimeDate(str::String)
     !contains(str, "T") && throw(ErrorException("\"$str\" is not recognized as a TimeDate"))
+    
+    datepart, inttimepart, fractimepart = datetimeparts(str)
+    
+    dateof = parse(Date, datepart)
+    timeof = parse(Time, inttimepart)
+    timeof = fractionaltime(timeof, fractimepart)
+
+    return TimeDate(timeof, dateof)
+end
+
+function TimeDateZone(str::String)
+    !contains(str, "T") && throw(ErrorException("\"$str\" is not recognized as a TimeDateZone"))
+    
+    datepart, inttimepart, fractimepart, zonepart = datetimezoneparts(str) 
+
+    dateof = parse(Date, datepart)
+    timeof = parse(Time, inttimepart)
+    timeof = fractionaltime(timeof, fractimepart)
+    
+    zoneof = (all_timezones()[timezone_names() .== zonepart])[1]
+
+    return TimeDateZone(timeof, dateof, zoneof)
+end
+
+
+
+function fractionaltime(timeof::Time, fractimepart::String)
+    n = length(fractimepart)
+    if n > 0
+        fractime = parse(Int, fractimepart)
+        if n <= 3
+            delta = fld(1000,10^n)
+            fractime *= delta
+            timeof += Millisecond(fractime)
+        elseif n <= 6
+            delta = fld(1000,10^(n-3))
+            fractime *= delta
+            timeof += Microsecond(fractime)
+        else
+            delta = fld(1000,10^(n-6))
+            fractime *= delta
+            timeof += Nanosecond(fractime)
+        end
+    end
+    return timeof
+end
+
+function datetimeparts(str::String)
     datepart, timepart = splitstring(str, "T")
     if contains(timepart, ".")
         inttimepart, fractimepart = splitstring(timepart, ".")
@@ -395,71 +446,20 @@ function TimeDate(str::String)
         fractimepart = ""
     end
 
-    dateof = parse(Date, datepart)
-    timeof = parse(Time, inttimepart)
-    n = length(fractimepart)
-    if n > 0
-        fractime = parse(Int, fractimepart)
-        if n <= 3
-            delta = fld(1000,10^n)
-            fractime *= delta
-            timeof += Millisecond(fractime)
-        elseif n <= 6
-            delta = fld(1000,10^(n-3))
-            fractime *= delta
-            timeof += Microsecond(fractime)
-        else
-            delta = fld(1000,10^(n-6))
-            fractime *= delta
-            timeof += Nanosecond(fractime)
-        end
-    end
-
-    return TimeDate(timeof, dateof)
+    return datepart, inttimepart, fractimepart
 end
 
-function TimeDateZone(str::String)
-    !contains(str, "T") && throw(ErrorException("\"$str\" is not recognized as a TimeDateZone"))
-    datepart, parts = splitstring(str, "T")
-    if contains(str, " ")
-        timepart, zonepart = splitstring(parts, " ")
+function datetimezoneparts(str::String)
+    datepart, inttimepart, parts = datetimeparts(str)
+    
+    if contains(parts, " ")
+        fractimepart, zonepart = splitstring(parts, " ")
     else
-        timepart = parts
+        fractimepart = parts
         zonepart = string(tzdefault())
     end
 
-    if contains(timepart, ".")
-        inttimepart, fractimepart = splitstring(timepart, ".")
-    else
-        inttimepart = timepart
-        fractimepart = ""
-    end
-
-    dateof = parse(Date, datepart)
-    timeof = parse(Time, inttimepart)
-    n = length(fractimepart)
-    if n > 0
-        fractime = parse(Int, fractimepart)
-        if n <= 3
-            delta = fld(1000,10^n)
-            fractime *= delta
-            timeof += Millisecond(fractime)
-        elseif n <= 6
-            delta = fld(1000,10^(n-3))
-            fractime *= delta
-            timeof += Microsecond(fractime)
-        else
-            delta = fld(1000,10^(n-6))
-            fractime *= delta
-            timeof += Nanosecond(fractime)
-        end
-    end
-
-    dateof = parse(Date, datepart)
-    timeof = parse(Time, timepart)
-    zoneof = (all_timezones()[timezone_names() .== zonepart])[1]
-
-    return TimeDateZone(timeof, dateof, zoneof)
+    return datepart, inttimepart, fractimepart, zonepart
 end
 
 end # TimesDates
