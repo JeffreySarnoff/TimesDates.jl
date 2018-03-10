@@ -89,10 +89,9 @@ julia> timezone = TimeZone(tzname)
 julia> tzdefault!(timezone)
 ```
 
-```
 
 ## Additional Information
-not yet  [About TimesDates](https://jeffreysarnoff.github.io/TimesDates.jl/)
+tbd [About TimesDates](https://jeffreysarnoff.github.io/TimesDates.jl/)
 
 ## Comments are Welcomed
 
