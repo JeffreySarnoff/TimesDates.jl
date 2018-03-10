@@ -3,7 +3,7 @@ module TimesDates
 export TimeDate, TimeDateZone,
     timeofday, date, zone, tzdefault!
 
-import Base:  (==), (<=), (<), isless, isequal
+import Base:  (==), (!=), (<=), (<), isless, isequal
 import Dates: Year, Month, Day, Hour, Minute, Second,
               Millisecond, Microsecond, Nanosecond,
               year, month, day, hour, minute, second,
@@ -422,11 +422,22 @@ function Base.:(-)(atd::TimeDate, btd::TimeDate)
 end
 
 
-(==)(atd::TimeDate, btd::TimeDate) = isempty(btd-atd)
+function (==)(atd::TimeDate, btd::TimeDate)
+    delta = atd - btd
+    isempty(delta)
+end
+function (!=)(atd::TimeDate, btd::TimeDate)
+    delta = atd - btd
+    !isempty(delta)
+end
 (<)(atd::TimeDate, btd::TimeDate) = signbit((atd-btd).periods[1])
+function (<)(atd::TimeDate, btd::TimeDate)
+    delta = atd - btd
+    return !isempty(delta) && signbit(delta.periods[1])
+end    
 function (<=)(atd::TimeDate, btd::TimeDate)
     delta = atd - btd
-    return signbit(delta.periods[1]) || isempty(delta)
+    return isempty(delta) || signbit(delta.periods[1])
 end    
 (isequal)(atd::TimeDate, btd::TimeDate) = atd == btd
 (isless)(atd::TimeDate, btd::TimeDate) = atd < btd
