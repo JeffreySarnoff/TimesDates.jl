@@ -3,6 +3,11 @@ module TimesDates
 export TimeDate, TimeDateZone,
     timeofday, date, zone, tzdefault!
 
+import Dates: Year, Month, Day, Hour, Minute, Second,
+              Millisecond, Microsecond, Nanosecond,
+              year, month, day, hour, minute, second,
+              millisecond, microsecond, nanosecond,
+
 using Dates: CompoundPeriod
 using Dates
 
@@ -91,6 +96,46 @@ TimeZone(tdz::TimeDateZone) = zone(tdz)
 Date(td::TimeDate) = date(td)
 Time(td::TimeDate) = time(td)
 
+
+Year(td::TimeDate)   = Year(date(td))
+Month(td::TimeDate)  = Month(date(td))
+Day(td::TimeDate)    = Day(date(td))
+Hour(td::TimeDate)   = Hour(time(td))
+Minute(td::TimeDate) = Minute(time(td))
+Second(td::TimeDate) = Second(time(td))
+Millisecond(td::TimeDate) = Millisecond(time(td))
+Microsecond(td::TimeDate) = Microsecond(time(td))
+Nanosecond(td::TimeDate)  = Nanosecond(time(td))
+
+Year(tdz::TimeDateZone)   = Year(date(tdz))
+Month(tdz::TimeDateZone)  = Month(date(tdz))
+Day(tdz::TimeDateZone)    = Day(date(tdz))
+Hour(tdz::TimeDateZone)   = Hour(time(tdz))
+Minute(tdz::TimeDateZone) = Minute(time(tdz))
+Second(tdz::TimeDateZone) = Second(time(tdz))
+Millisecond(tdz::TimeDateZone) = Millisecond(time(tdz))
+Microsecond(tdz::TimeDateZone) = Microsecond(time(tdz))
+Nanosecond(tdz::TimeDateZone)  = Nanosecond(time(tdz))
+
+year(td::TimeDate)   = year(date(td))
+month(td::TimeDate)  = month(date(td))
+day(td::TimeDate)    = day(date(td))
+hour(td::TimeDate)   = hour(time(td))
+minute(td::TimeDate) = minute(time(td))
+second(td::TimeDate) = second(time(td))
+millisecond(td::TimeDate) = millisecond(time(td))
+microsecond(td::TimeDate) = microsecond(time(td))
+nanosecond(td::TimeDate)  = nanosecond(time(td))
+
+year(tdz::TimeDateZone)   = year(date(tdz))
+month(tdz::TimeDateZone)  = month(date(tdz))
+day(tdz::TimeDateZone)    = day(date(tdz))
+hour(tdz::TimeDateZone)   = hour(time(tdz))
+minute(tdz::TimeDateZone) = minute(time(tdz))
+second(tdz::TimeDateZone) = second(time(tdz))
+millisecond(tdz::TimeDateZone) = millisecond(time(tdz))
+microsecond(tdz::TimeDateZone) = microsecond(time(tdz))
+nanosecond(tdz::TimeDateZone)  = nanosecond(time(tdz))
 
 function canonical(x::CompoundPeriod)
     periods = x.periods
@@ -364,26 +409,6 @@ for P in (:Nanosecond, :Microsecond, :Millisecond,
   end
 end
 
-
-Dates.Year(td::TimeDate) = Dates.Year(date(td))
-Dates.Month(td::TimeDate) = Dates.Month(date(td))
-Dates.Day(td::TimeDate) = Dates.Day(date(td))
-Dates.Hour(td::TimeDate) = Dates.Hour(time(td))
-Dates.Minute(td::TimeDate) = Dates.Minute(time(td))
-Dates.Second(td::TimeDate) = Dates.Second(time(td))
-Dates.Millisecond(td::TimeDate) = Dates.Millisecond(time(td))
-Dates.Microsecond(td::TimeDate) = Dates.Microsecond(time(td))
-Dates.Nanosecond(td::TimeDate) = Dates.Nanosecond(time(td))
-
-Dates.Year(tdz::TimeDateZone) = Dates.Year(date(tdz))
-Dates.Month(tdz::TimeDateZone) = Dates.Month(date(tdz))
-Dates.Day(tdz::TimeDateZone) = Dates.Day(date(tdz))
-Dates.Hour(tdz::TimeDateZone) = Dates.Hour(time(tdz))
-Dates.Minute(tdz::TimeDateZone) = Dates.Minute(time(tdz))
-Dates.Second(tdz::TimeDateZone) = Dates.Second(time(tdz))
-Dates.Millisecond(tdz::TimeDateZone) = Dates.Millisecond(time(tdz))
-Dates.Microsecond(tdz::TimeDateZone) = Dates.Microsecond(time(tdz))
-Dates.Nanosecond(tdz::TimeDateZone) = Dates.Nanosecond(time(tdz))
 
 
 function Base.string(td::TimeDate)
