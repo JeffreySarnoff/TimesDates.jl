@@ -2,7 +2,7 @@ module TimesDates
 
 export TimeDate, TimeDateZone,
     zone, date, timeofday, time,
-    tzdefault!, timezone_from_tzname
+    tzdefault!
 
 import Base:  (==), (!=), (<=), (<), isless, isequal, isempty, time
 
@@ -110,11 +110,6 @@ function timezone_index(tzname::String)
     found = findall(x->x==tzname, timezone_names())
     length(found) == 0 && throw(DomainError("$tzname is not a recognized timezone."))
     return found[1]
-end
-
-function timezone_from_tzname(tzname::String)
-    idx = timezone_index(tzname)
-    return all_timezones()[idx]
 end
 
 Year(td::TimeDate)   = Year(date(td))
