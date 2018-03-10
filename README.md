@@ -6,7 +6,7 @@
 
 - _the type `TimeDate` works, and interoperates with DateTime, Date & Time
 
-- _the type `TimeDateZone` works with TimeZones.jl, when released_
+- _the type `TimeDateZone` works with ZonedDateTime, TimeZone from TimeZones.jl
 
 ## Setup
 
@@ -15,7 +15,10 @@ using Pkg3
 add TimesDates
 ```
 
-## Some Examples
+## In Use
+
+### `TimeDate` is nanosecond resolved
+
 ```julia
 julia> using TimesDates, Dates
 
@@ -31,6 +34,29 @@ true
 julia> td2018 - td2018
 2 nanoseconds
 ```
+
+----
+
+### `TimeDateZone` is nanosecond resolved and zone situated
+
+```julia
+julia> using TimesDates, Dates, TimeZones
+
+julia> zdt = ZonedDateTime(DateTime(2012,1,21,15,25,45), tz"America/Chicago")
+2012-01-21T15:25:45-06:00
+
+julia> tdz = TimeDateZone(zdt)
+2012-01-21T21:25:45 America/Chicago
+
+julia> tdz += Nanosecond(123456)
+2012-01-21T21:25:45.000123456 America/Chicago
+
+julia> ZonedDateTime(tdz)
+2012-01-21T21:25:45-06:00
+```
+
+### Additional Examples
+
 ```julia
 julia> timedate = TimeDate("2018-03-09T18:29:34.04296875")
 2018-03-09T18:29:34.04296875
@@ -53,6 +79,16 @@ julia> datetime = DateTime("2011-02-05T11:22:33")
 
 julia> timedate = TimeDate(datetime); timedate, DateTime(timedate)
 2011-02-05T11:22:33, 2011-02-05T11:22:33
+```
+
+```julia
+julia> # set the timezone to be used when no zone is specified
+julia> #     without this setting, UTC is used as the default.
+julia> tzname = "Europe/London"
+julia> timezone = TimeZone(tzname)
+julia> tzdefault!(timezone)
+```
+
 ```
 
 ## Additional Information
