@@ -6,7 +6,7 @@ export TimeDate, TimeDateZone,
 import Dates: Year, Month, Day, Hour, Minute, Second,
               Millisecond, Microsecond, Nanosecond,
               year, month, day, hour, minute, second,
-              millisecond, microsecond, nanosecond,
+              millisecond, microsecond, nanosecond
 
 using Dates: CompoundPeriod
 using Dates
