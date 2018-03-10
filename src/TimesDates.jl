@@ -3,7 +3,8 @@ module TimesDates
 export TimeDate, TimeDateZone,
     timeofday, date, zone, tzdefault!
 
-import Base:  (==), (!=), (<=), (<), isless, isequal
+import Base:  (==), (!=), (<=), (<), isless, isequal, isempty
+
 import Dates: Year, Month, Day, Hour, Minute, Second,
               Millisecond, Microsecond, Nanosecond,
               year, month, day, hour, minute, second,
@@ -421,6 +422,8 @@ function Base.:(-)(atd::TimeDate, btd::TimeDate)
     return delta
 end
 
+
+Base.isempty(x::Dates.CompoundPeriod) = x == CompoundPeriod()
 
 function Base.:(==)(atd::TimeDate, btd::TimeDate)
     delta = atd - btd
