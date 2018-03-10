@@ -282,11 +282,11 @@ end
 function canonical(x::CompoundPeriod)
     periods = x.periods
     periods = map(canonical, periods)
-    compound = reduce(+, periods)
+    compound = isempty(periods) ? CompoundPeriod() : reduce(+, periods)
     # repeat to roll up any period multiplicties
     periods = compound.periods
     periods = map(canonical, periods)
-    compound = reduce(+, periods)
+    compound = isempty(periods) ? CompoundPeriod() : reduce(+, periods)
     return compound
 end
 
@@ -306,16 +306,16 @@ function isolate_days(cp::CompoundPeriod)
 end
 
 
-function Base.convert(Time, cp::CompoundPeriod)
+function Base.convert(::Type{Time}, cp::CompoundPeriod)
     cperiods = canonical(cp)
     days, cperiods = isolate_days(cperiods)
-    return reduce(+, cperiods.periods)
+    return isempty(cperiods) ? Time(0) : Time(0) + cperiods
 end
 
 function Dates.Time(cp::CompoundPeriod)
     cperiods = canonical(cp)
     days, cperiods = isolate_days(cperiods)
-    return reduce(+, cperiods.periods)
+    return isempty(cperiods) ? Time(0) : Time(0) + cperiods
 end
 
 
