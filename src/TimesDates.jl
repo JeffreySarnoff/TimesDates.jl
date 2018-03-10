@@ -294,9 +294,7 @@ end
 
 function isolate_days(cp::CompoundPeriod)
     days = Day(cp)
-    if !isempty(days)
-        cp = CompoundPeriod(cp.periods[2:end])
-    end
+    cp = cp - days
     return days, cp
 end
 
