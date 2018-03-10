@@ -438,8 +438,8 @@ function Base.:(<=)(atd::TimeDate, btd::TimeDate)
     delta = atd - btd
     return isempty(delta) || signbit(delta.periods[1])
 end    
-(isequal)(atd::TimeDate, btd::TimeDate) = atd == btd
-(isless)(atd::TimeDate, btd::TimeDate) = atd < btd
+Base.isequal(atd::TimeDate, btd::TimeDate) = atd == btd
+Base.isless(atd::TimeDate, btd::TimeDate) = atd < btd
 
 
 function Base.string(td::TimeDate)
