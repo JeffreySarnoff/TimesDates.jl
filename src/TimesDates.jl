@@ -3,6 +3,7 @@ module TimesDates
 export TimeDate, TimeDateZone,
     timeofday, date, zone, tzdefault!
 
+import Base:  (==), (<=), (<), isless, isequal
 import Dates: Year, Month, Day, Hour, Minute, Second,
               Millisecond, Microsecond, Nanosecond,
               year, month, day, hour, minute, second,
@@ -419,6 +420,16 @@ function Base.:(-)(atd::TimeDate, btd::TimeDate)
     delta = canonical(CompoundPeriod(ddate, dtime))
     return delta
 end
+
+
+(==)(atd::TimeDate, btd::TimeDate) = isempty(btd-atd)
+(<)(atd::TimeDate, btd::TimeDate) = signbit((atd-btd).periods[1])
+function (<=)(atd::TimeDate, btd::TimeDate)
+    delta = atd - btd
+    return signbit(delta.periods[1]) || isempty(delta)
+end    
+(isequal)(atd::TimeDate, btd::TimeDate) = atd == btd
+(isless)(atd::TimeDate, btd::TimeDate) = atd < btd
 
 
 function Base.string(td::TimeDate)
