@@ -422,20 +422,19 @@ function Base.:(-)(atd::TimeDate, btd::TimeDate)
 end
 
 
-function (==)(atd::TimeDate, btd::TimeDate)
+function Base.:(==)(atd::TimeDate, btd::TimeDate)
     delta = atd - btd
     isempty(delta)
 end
-function (!=)(atd::TimeDate, btd::TimeDate)
+function Base.:(!=)(atd::TimeDate, btd::TimeDate)
     delta = atd - btd
     !isempty(delta)
 end
-(<)(atd::TimeDate, btd::TimeDate) = signbit((atd-btd).periods[1])
-function (<)(atd::TimeDate, btd::TimeDate)
+function Base.:(<)(atd::TimeDate, btd::TimeDate)
     delta = atd - btd
     return !isempty(delta) && signbit(delta.periods[1])
 end    
-function (<=)(atd::TimeDate, btd::TimeDate)
+function Base.:(<=)(atd::TimeDate, btd::TimeDate)
     delta = atd - btd
     return isempty(delta) || signbit(delta.periods[1])
 end    
