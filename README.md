@@ -55,6 +55,9 @@ julia> timedate = TimeDate(datetime); timedate, DateTime(timedate)
 2011-02-05T11:22:33, 2011-02-05T11:22:33
 ```
 
+## Additional Information
+not yet  [About TimesDates](https://jeffreysarnoff.github.io/TimesDates.jl/)
+
 ## Comments are Welcomed
 
 http://github.com/JeffreySarnoff/TimesDates.jl
