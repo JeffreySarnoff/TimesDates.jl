@@ -192,66 +192,6 @@ function canonical(x::Nanosecond)
         Millisecond(millis), Microsecond(micros), Nanosecond(nanos))
 end
 
-
-
-function canonical(x::Day)
-     CompoundPeriod(x, Hour(0), Minute(0), Second(0),
-        Millisecond(0), Microsecond(0), Nanosecond(0))
-end
-function canonical(x::Hour)
-    days, hours = fldmod(x.value, 24)
-    CompoundPeriod(Day(days), Hour(hours), Minute(0), Second(0),
-        Millisecond(0), Microsecond(0), Nanosecond(0))
-end
-function canonical(x::Minute)
-    hours, mins = fldmod(x.value, 60)
-    days, hours = fldmod(hours, 24)
-    CompoundPeriod(Day(days), Hour(hours), Minute(mins), Second(0),
-        Millisecond(0), Microsecond(0), Nanosecond(0))
-end
-function canonical(x::Second)
-    mins, secs = fldmod(x.value, 60)
-    hors, mins = fldmod(mins, 60)
-    dys, hors = fldmod(hors, 24)
-    result = CompoundPeriod(Day(dys), Hour(hors), Minute(mins),
-                            Second(secs))
-    return result
-end
-function canonical(x::Millisecond)
-    secs, millis = fldmod(x.value, 1_000)
-    mins, secs = fldmod(secs, 60)
-    hors, mins = fldmod(mins, 60)
-    dys, hors = fldmod(hors, 24)
-
-    result = CompoundPeriod(Day(dys), Hour(hors), Minute(mins),
-                            Second(secs), Millisecond(millis))
-    return result
-end
-function canonical(x::Microsecond)
-    millis, micros = fldmod(x.value, 1_000)
-    secs, millis = fldmod(millis, 1_000)
-    mins, secs = fldmod(secs, 60)
-    hors, mins = fldmod(mins, 60)
-    dys, hors = fldmod(hors, 24)
-    result = CompoundPeriod(Day(dys), Hour(hors), Minute(mins),
-                            Second(secs), Millisecond(millis),
-                            Microsecond(micros))
-    return result
-end
-function canonical(x::Nanosecond)
-    micros, nanos = fldmod(x.value, 1_000)
-    millis, micros = fldmod(micros, 1_000)
-    secs, millis = fldmod(millis, 1_000)
-    mins, secs = fldmod(secs, 60)
-    hors, mins = fldmod(mins, 60)
-    dys, hors = fldmod(hors, 24)
-    result = CompoundPeriod(Day(dys), Hour(hors), Minute(mins),
-                            Second(secs), Millisecond(millis),
-                            Microsecond(micros), Nanosecond(nanos))
-    return result
-end
-
-
 function canonical(days::Day, hours::Hour=Hour(0), minutes::Minute=Minute(0), seconds::Second=Second(0), millisecs::Millisecond=Millisecond(0), microsecs::Microsecond=Microsecond(0), nanosecs::Nanosecond=Nanosecond(0))
     CompoundPeriod(Day(days), Hour(hours), minutes, seconds, millisecs, microsecs, nanosecs)
 end
