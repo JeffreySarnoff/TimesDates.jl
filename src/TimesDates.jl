@@ -95,7 +95,7 @@ TimeZone(tdz::TimeDateZone) = zone(tdz)
 
 Date(td::TimeDate) = date(td)
 Time(td::TimeDate) = time(td)
-
+    
 
 Year(td::TimeDate)   = Year(date(td))
 Month(td::TimeDate)  = Month(date(td))
@@ -299,7 +299,18 @@ function isolate_days(cp::CompoundPeriod)
 end
 
 
-        
+function Base.convert(Time, cp::CompoundPeriod)
+    cperiods = canonical(cp)
+    days, cperiods = isolate_days(cperiods)
+    return reduce(+, cperiods.periods)
+end
+
+function Dates.Time(cp::CompoundPeriod)
+    cperiods = canonical(cp)
+    days, cperiods = isolate_days(cperiods)
+    return reduce(+, cperiods.periods)
+end
+
 
 # separate a CompoundPeriod into periods >= Millisecond, and periods < Millisecond
 function twocompoundperiods(cp::CompoundPeriod)
