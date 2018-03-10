@@ -91,7 +91,7 @@ ZonedDateTime(td::TimeDate, z::TimeZone) =
 
 function DateTime(td::TimeDate)
     timeof, dateof = time(td), date(td)
-    timeof = timeof - Microseconds(timeof) - Nanoseconds(timeof)
+    timeof = timeof - Microsecond(timeof) - Nanosecond(timeof)
     return dateof + timeof
 end
 
@@ -101,19 +101,19 @@ end
 
 function ZonedDateTime(td::TimeDate)
     timeof, dateof = time(td), date(td)
-    timeof = timeof - Microseconds(timeof) - Nanoseconds(timeof)
+    timeof = timeof - Microsecond(timeof) - Nanosecond(timeof)
     return ZonedDateTime(dateof + timeof, tzdefault())
 end
 
 function ZonedDateTime(td::TimeDate, zone::TimeZone)
     timeof, dateof = time(td), date(td)
-    timeof = timeof - Microseconds(timeof) - Nanoseconds(timeof)
+    timeof = timeof - Microsecond(timeof) - Nanosecond(timeof)
     return ZonedDateTime(dateof + timeof, zone)
 end
 
 function ZonedDateTime(tdz::TimeDateZone)
     timeof, dateof = time(tdz), date(tdz)
-    timeof = timeof - Microseconds(timeof) - Nanoseconds(timeof)
+    timeof = timeof - Microsecond(timeof) - Nanosecond(timeof)
     return ZonedDateTime(dateof + timeof, zone(tdz))
 end
 
