@@ -2,7 +2,10 @@
 ### Nanosecond Resolvable Times with Dates, or Times with Dates in TimeZones.
 #### Released under the MIT License. Copyright &copy; 2018 by Jeffrey Sarnoff.
 
+> _this package requires Julia v0.7-_
+
 ## Setup
+
 ```julia
 using Pkg3
 add TimesDates
@@ -10,35 +13,45 @@ add TimesDates
 
 ## Some Examples
 ```julia
-julia> using Dates, TimesDates
+julia> using TimesDates, Dates
 
-julia> TimeDate("2018-01-01T00:00:00") + Nanosecond(1)
+julia> td2018 = TimeDate("2018-01-01T00:00:00") + Nanosecond(1)
 2018-01-01T00:00:00.000000001
 
-julia> TimeDate("2018-01-01T00:00:00") - Nanosecond(1)
+julia> td2017 = TimeDate("2018-01-01T00:00:00") - Nanosecond(1)
 2017-12-31T23:59:59.999999999
 
-julia> DateTime(ans)
+julia> td2017 < td2018
+true
 
-TimeDate("2018-01-01T00:00:00") + Nanosecond(1)
-TimeDate("2018-01-01T00:00:00") - Nanosecond(1)
+julia> td2018 - td2018
+2 nanoseconds
+```
+```julia
+julia> timedate = TimeDate("2018-03-09T18:29:34.04296875")
+2018-03-09T18:29:34.04296875
 
-str1 = "2011-05-08T11:15:00"
-str1 == string(TimeDate(str1))
+julia> Month(timedate), Microsecond(timedate)
+(3 months, 968 microseconds)
 
-str2 = "2018-03-09T18:29:00.04296875"
-tmdt = TimeDate(str2)
-str2 == string(tmdt)
+julia> month(timedate), microsecond(timedate)
+(3, 968)
+```
+```julia
+julia> date = Date("2011-02-05")
+2011-02-05
 
-Month(tmdt) == Month(3)
-Microsecond(tmdt) == Microsecond(968)
-Nanosecond(tmdt) == Nanosecond(750)
+julia> timedate = TimeDate(date); timedate, Date(timedate)
+2011-02-05T00:00:00, 2011-02-05
 
-tmdt + Minute(60*9+22)
+julia> datetime = DateTime("2011-02-05T11:22:33")
+2011-02-05T11:22:33
 
-show(td)
-# or
-using Dates, TimeZones, TimesDates
+julia> timedate = TimeDate(datetime); timedate, DateTime(timedate)
+2011-02-05T11:22:33, 2011-02-05T11:22:33
+```
 
+## Comments are Welcomed
 
+http://github.com/JeffreySarnoff/TimesDates.jl
 
