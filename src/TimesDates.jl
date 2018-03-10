@@ -88,8 +88,15 @@ ZonedDateTime(td::TimeDate) =
 ZonedDateTime(td::TimeDate, z::TimeZone) =
     ZonedDateTime(date(td)+time(td), z)
 
-DateTime(tdz::TimeDateZone) = date(tdz)+time(tdz)
-DateTime(td::TimeDate) = date(td)+time(td)
+function DateTime(td::TimeDate)
+    timeof, dateof = time(td), date(td)
+    timeof = timeof - Microseconds(timeof) - Nanoseconds(timeof)
+    return dateof + timeof
+end
+
+function DateTime(tdz::TimeDateZone)
+    return DateTime(TimeDate(td))
+end
 
 Date(tdz::TimeDateZone) = date(tdz)
 Time(tdz::TimeDateZone) = time(tdz)
