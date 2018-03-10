@@ -239,6 +239,24 @@ function canonical(x::Nanosecond)
     canonical(Microsecond(micros), Nanosecond(nanos))
 end
 
+function Dates.Day(cp::CompoundPeriod)
+    periods = cp.periods
+    isempty(periods) && return Dates.Day(0)
+    firstperiod = periods[1]
+    !isa(firstperiod, Day) && return Dates.Day(0)
+    return firstperiod
+end
+
+function isolate_days(cp::CompoundPeriod)
+    days = Day(cp)
+    if !isempty(days)
+        cp = CompoundPeriod(cp.periods[2:end])
+    end
+    return days, cp
+end
+
+
+        
 
 # separate a CompoundPeriod into periods >= Millisecond, and periods < Millisecond
 function twocompoundperiods(cp::CompoundPeriod)
@@ -282,10 +300,17 @@ function threecompoundperiods(cp::CompoundPeriod)
 end
 
 for P in (:Nanosecond, :Microsecond, :Millisecond,
-        :Second, :Minute, :Hour, :Day)
+          :Second, :Minute, :Hour)
   @eval begin
     function Base.:(+)(td::TimeDate, tp::$P)
-        cperiods = canonical(tp)
+        dateof = date(td)
+        timeof = time(td)
+        compoundtime = CompoundPeriod(timeof)
+        compoundtime += tp
+        compoundtime = canonical(compoundtime)
+        deltadays = Days(compoundtime    
+        tperiods = CompoundPeriod(time(td))    
+            
         dayp, largep, smallp = threecompoundperiods(cperiods)
         tm = time(td)
         dt = date(td)
