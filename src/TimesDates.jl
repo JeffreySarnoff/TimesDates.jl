@@ -353,7 +353,7 @@ for P in (:Nanosecond, :Microsecond, :Millisecond, :Second, :Minute, :Hour)
         compoundtime = canonical(compoundtime)
         deltadays, compoundtime = isolate_days(compoundtime)    
 
-        timeof = reduce(+, compoundtime)
+        timeof = reduce(+, compoundtime.periods)
         dateof += deltadays
 
         return TimeDate(timeof, dateof)
@@ -367,7 +367,7 @@ for P in (:Nanosecond, :Microsecond, :Millisecond, :Second, :Minute, :Hour)
         compoundtime = canonical(compoundtime)
         deltadays, compoundtime = isolate_days(compoundtime)    
 
-        timeof = reduce(+, compoundtime)
+        timeof = reduce(+, compoundtime.periods)
         dateof += deltadays
 
         return TimeDate(timeof, dateof)
