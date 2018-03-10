@@ -1,4 +1,4 @@
-using TimesDates
+using TimesDates, Dates
 using Test
 
 str1 = "2011-05-08T11:15:00"
