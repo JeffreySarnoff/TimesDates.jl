@@ -344,68 +344,52 @@ function threecompoundperiods(cp::CompoundPeriod)
     return dayperiod, largeperiods, smallperiods
 end
 
-for P in (:Nanosecond, :Microsecond, :Millisecond,
-          :Second, :Minute, :Hour)
+for P in (:Nanosecond, :Microsecond, :Millisecond, :Second, :Minute, :Hour)
   @eval begin
+        
     function Base.:(+)(td::TimeDate, tp::$P)
         dateof = date(td)
         timeof = time(td)
         compoundtime = CompoundPeriod(timeof)
         compoundtime += tp
         compoundtime = canonical(compoundtime)
-        deltadays = Days(compoundtime    
-        tperiods = CompoundPeriod(time(td))    
-            
-        dayp, largep, smallp = threecompoundperiods(cperiods)
-        tm = time(td)
-        dt = date(td)
-        tm += smallp
-        tm += largep
-        if tm < time(td)
-        dt += Day(1)
-        end
-        dt += dayp
-        return TimeDate(tm, dt)
-    end
-    function Base.:(-)(td::TimeDate, tp::$P)
-        cperiods = canonical(tp)
-        dayp, largep, smallp = threecompoundperiods(cperiods)
-        tm = time(td)
-        dt = date(td)
-        tm -= smallp
-        tm -= largep
-        if tm > time(td)
-        dt -= Day(1)
-        end
-        dt -= dayp
-        return TimeDate(tm, dt)
-    end
-    function Base.:(+)(tdz::TimeDateZone, tp::$P)
-        cperiods = canonical(tp)
-        dayp, largep, smallp = threecompoundperiods(cperiods)
-        tm = time(tdz)
-        dt = date(tdz)
-        tm += smallp
-        tm += largep
-        if tm < time(tdz)
-        dt += Day(1)
-        end
-        dt += dayp
-        return TimeDateZone(tm, dt, zone(tdz))
-    end
-    function Base.:(-)(tdz::TimeDateZone, tp::$P)
-        cperiods = canonical(tp)
-        dayp, largep, smallp = threecompoundperiods(cperiods)
-        tm = time(tdz)
-        dt = date(tdz)
-        tm -= smallp
-        tm -= largep
-        if tm > time(tdz)
-        dt -= Day(1)
-        end
-        dt -= dayp
-        return TimeDateZone(tm, dt, zone(tdz))
-    end
+        deltadays, compoundtime = isolate_days(compoundtime)    
+
+        timeof = reduce(+, compoundtime)
+        dateof += deltadays
+
+        return TimeDate(timeof, dateof)
+     end
+
+     function Base.:(-)(td::TimeDate, tp::$P)
+        dateof = date(td)
+        timeof = time(td)
+        compoundtime = CompoundPeriod(timeof)
+        compoundtime -= tp
+        compoundtime = canonical(compoundtime)
+        deltadays, compoundtime = isolate_days(compoundtime)    
+
+        timeof = reduce(+, compoundtime)
+        dateof += deltadays
+
+        return TimeDate(timeof, dateof)
+     end
+
+     function Base.:(+)(tdz::TimeDateZone, tp::$P)
+        td = TimeDate(tdz)
+        td = td + tp
+
+        return TimeDateZone(time(td), date(td), zone(tdz))
+     end
+
+
+     function Base.:(-)(tdz::TimeDateZone, tp::$P)
+        td = TimeDate(tdz)
+        td = td - tp
+
+        return TimeDateZone(time(td), date(td), zone(tdz))
+     end
+
   end
 end
 
