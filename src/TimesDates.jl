@@ -137,14 +137,8 @@ millisecond(tdz::TimeDateZone) = millisecond(time(tdz))
 microsecond(tdz::TimeDateZone) = microsecond(time(tdz))
 nanosecond(tdz::TimeDateZone)  = nanosecond(time(tdz))
 
-function canonical(x::CompoundPeriod)
-    periods = x.periods
-    compound = reduce(+, map(canonical, periods))
-    # repeat to roll up any period multiplicties
-    periods = compound.periods
-    compound = reduce(+, map(canonical, periods))
-    return compound
-end
+
+Base.convert(::Type{CompoundPeriod},x::CompoundPeriod) = x
 
 function canonical(x::Day)
      CompoundPeriod(x, Hour(0), Minute(0), Second(0),
@@ -283,6 +277,19 @@ function canonical(x::Nanosecond)
     micros, nanos = fldmod(x.value, 1_000)
     canonical(Microsecond(micros), Nanosecond(nanos))
 end
+
+
+function canonical(x::CompoundPeriod)
+    periods = x.periods
+    periods = map(canonical, periods)
+    compound = reduce(+, periods)
+    # repeat to roll up any period multiplicties
+    periods = compound.periods
+    periods = map(canonical, periods)
+    compound = reduce(+, periods)
+    return compound
+end
+
 
 function Dates.Day(cp::CompoundPeriod)
     periods = cp.periods
