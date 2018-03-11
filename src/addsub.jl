@@ -48,10 +48,10 @@ for P in (:Nanosecond, :Microsecond, :Millisecond, :Second, :Minute, :Hour)
   end
 end
 
-:(+)(td::TimeDate, dy::Day) = TimeDate(time(td), date(td)+dy)
-:(-)(td::TimeDate, dy::Day) = TimeDate(time(td), date(td)-dy)
-:(+)(tdz::TimeDateZone, dy::Day) = TimeDate(time(tdz), date(tdz)+dy, zone(tdz))
-:(-)(tdz::TimeDateZone, dy::Day) = TimeDate(time(tdz), date(tdz)-dy, zone(tdz))
+(+)(td::TimeDate, dy::Day) = TimeDate(time(td), date(td)+dy)
+(-)(td::TimeDate, dy::Day) = TimeDate(time(td), date(td)-dy)
+(+)(tdz::TimeDateZone, dy::Day) = TimeDate(time(tdz), date(tdz)+dy, zone(tdz))
+(-)(tdz::TimeDateZone, dy::Day) = TimeDate(time(tdz), date(tdz)-dy, zone(tdz))
 
 function (+)(td::TimeDate, cperiod::CompoundPeriod)
     dateof = date(td)
@@ -87,10 +87,10 @@ function (-)(tdz::TimeDateZone, cperiod::CompoundPeriod)
     return TimeDateZone(time(td), date(td), zone(tdz))
 end
 
-:(+)(period::Period, td::TimeDate) = td + period
-:(+)(period::Period, tdz::TimeDateZone) = tdz + period
-:(+)(cperiod::CompoundPeriod, td::TimeDate) = td + cperiod
-:(+)(cperiod::CompoundPeriod, tdz::TimeDateZone) = tdz + cperiod
+(+)(period::Period, td::TimeDate) = td + period
+(+)(period::Period, tdz::TimeDateZone) = tdz + period
+(+)(cperiod::CompoundPeriod, td::TimeDate) = td + cperiod
+(+)(cperiod::CompoundPeriod, tdz::TimeDateZone) = tdz + cperiod
 
 function (-)(atd::TimeDate, btd::TimeDate)
     atime, adate = time(atd), date(atd)
