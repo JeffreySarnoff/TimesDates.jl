@@ -1,7 +1,7 @@
 module TimesDates
 
 export TimeDate, TimeDateZone,
-       time, date, zone,  tzdefault!
+       time, date, timezone,  tzdefault!
 
 import Base:  (==), (!=), (<=), (<), isless, isequal, isempty, time
 
