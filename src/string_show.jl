@@ -58,6 +58,8 @@ function fractionaltime(timeof::Time, fractimepart::String)
             fractime *= delta
             timeof += Nanosecond(fractime)
         end
+    else
+        timeof = Nanosecond(0)
     end
     return timeof
 end
