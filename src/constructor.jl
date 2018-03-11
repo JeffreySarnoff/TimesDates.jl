@@ -34,13 +34,6 @@ TimeDate(z::ZonedDateTime) =
 TimeDateZone(z::ZonedDateTime) =
     TimeDateZone(Time(z.utc_datetime), Date(z.utc_datetime), z.timezone)
 
-ZonedDateTime(tdz::TimeDateZone) =
-    ZonedDateTime(date(tdz)+time(tdz), zone(tdz))
-ZonedDateTime(td::TimeDate) =
-    ZonedDateTime(date(td)+time(td), tzdefault())
-ZonedDateTime(td::TimeDate, z::TimeZone) =
-    ZonedDateTime(date(td)+time(td), z)
-
 function DateTime(td::TimeDate)
     timeof, dateof = time(td), date(td)
     timeof = timeof - Microsecond(timeof) - Nanosecond(timeof)
