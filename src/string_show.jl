@@ -40,7 +40,6 @@ function TimeDateZone(str::String)
     return TimeDateZone(timeof, dateof, zoneof)
 end
 
-
 function fractionaltime(timeof::Time, fractimepart::String)
     n = length(fractimepart)
     if n > 0
