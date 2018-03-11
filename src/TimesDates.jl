@@ -1,7 +1,6 @@
 module TimesDates
 
-export TimeDate, TimeDateZone,
-       time, date, timezone,  tzdefault!
+export TimeDate, TimeDateZone, timezone, time, date, tzdefault!
 
 import Base:  (==), (!=), (<=), (<), (>), (>=), isless, isequal,
               isempty, time
@@ -39,8 +38,7 @@ end
 @inline time(x::TimeDateZone) = x.attime
 @inline date(x::TimeDateZone) = x.ondate
 @inline zone(x::TimeDateZone) = x.inzone
-
-# ======================================= #
+@inline timezone(x::TimeDateZone) = x.inzone
 
 include("constructor.jl")
 include("selector.jl")
