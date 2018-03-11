@@ -46,19 +46,17 @@ function fractionaltime(timeof::Time, fractimepart::String)
         fractime = parse(Int, fractimepart)
         if n <= 3
             delta = fld(1000,10^n)
-            fractime *= delta
-            timeof += Millisecond(fractime)
+            fractime = delta
+            timeof = timeof + Millisecond(fractime)
         elseif n <= 6
             delta = fld(1000,10^(n-3))
             fractime *= delta
-            timeof += Microsecond(fractime)
+            timeof = timeof + Microsecond(fractime)
         else
             delta = fld(1000,10^(n-6))
             fractime *= delta
-            timeof += Nanosecond(fractime)
+            timeof = timeof + Nanosecond(fractime)
         end
-    else
-        timeof = Nanosecond(0)
     end
     return timeof
 end
