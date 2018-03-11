@@ -42,6 +42,7 @@ nanosecond(tdz::TimeDateZone)  = nanosecond(time(tdz))
 
 # ======================================= #
 
+#=
 function canonical(x::Day)
      CompoundPeriod(x, Hour(0), Minute(0), Second(0),
         Millisecond(0), Microsecond(0), Nanosecond(0))
@@ -91,7 +92,7 @@ function canonical(x::Nanosecond)
     CompoundPeriod(Day(days), Hour(hours), Minute(mins), Second(secs),
         Millisecond(millis), Microsecond(micros), Nanosecond(nanos))
 end
-
+=#
 function canonical(days::Day, hours::Hour=Hour(0), minutes::Minute=Minute(0), seconds::Second=Second(0), millisecs::Millisecond=Millisecond(0), microsecs::Microsecond=Microsecond(0), nanosecs::Nanosecond=Nanosecond(0))
     CompoundPeriod(Day(days), Hour(hours), minutes, seconds, millisecs, microsecs, nanosecs)
 end
@@ -119,6 +120,7 @@ function canonical(x::Nanosecond)
     micros, nanos = fldmod(x.value, 1_000)
     canonical(Microsecond(micros), Nanosecond(nanos))
 end
+
 
 function canonical(x::CompoundPeriod)
     periods = x.periods
