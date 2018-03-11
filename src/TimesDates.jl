@@ -40,9 +40,10 @@ end
 
 include("constructor.jl")
 include("selector.jl")
+
+include("compare.jl")
+include("addsub.jl")
 include("string_show.jl")
-
-
 
 end # TimesDates
 
