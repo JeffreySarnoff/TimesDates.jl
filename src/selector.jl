@@ -139,6 +139,13 @@ function Dates.Day(cp::CompoundPeriod)
     return firstperiod
 end
 
+function Dates.Time(cp::CompoundPeriod)
+    cperiods = canonical(cp)
+    days, cperiods = isolate_days(cperiods)
+    return isempty(cperiods) ? Time(0) : Time(0) + cperiods
+end
+
+
 function isolate_days(cp::CompoundPeriod)
     days = Day(cp)
     cp = cp - days
