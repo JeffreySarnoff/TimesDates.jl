@@ -82,12 +82,6 @@ TimeDate(z::ZonedDateTime) =
 TimeDateZone(z::ZonedDateTime) =
     TimeDateZone(Time(z.utc_datetime), Date(z.utc_datetime), z.timezone)
 
-ZonedDateTime(tdz::TimeDateZone) =
-    ZonedDateTime(date(tdz)+time(tdz), zone(tdz))
-ZonedDateTime(td::TimeDate) =
-    ZonedDateTime(date(td)+time(td), tzdefault())
-ZonedDateTime(td::TimeDate, z::TimeZone) =
-    ZonedDateTime(date(td)+time(td), z)
 
 function DateTime(td::TimeDate)
     timeof, dateof = time(td), date(td)
@@ -192,6 +186,7 @@ function canonical(x::Minute)
     CompoundPeriod(Day(days), Hour(hours), Minute(mins), Second(0),
         Millisecond(0), Microsecond(0), Nanosecond(0))
 end
+
 function canonical(x::Second)
     mins, secs = fldmod(x.value, 60)
     hours, mins = fldmod(mins, 60)
@@ -226,35 +221,6 @@ function canonical(x::Nanosecond)
     CompoundPeriod(Day(days), Hour(hours), Minute(mins), Second(secs),
         Millisecond(millis), Microsecond(micros), Nanosecond(nanos))
 end
-
-function canonical(days::Day, hours::Hour=Hour(0), minutes::Minute=Minute(0), seconds::Second=Second(0), millisecs::Millisecond=Millisecond(0), microsecs::Microsecond=Microsecond(0), nanosecs::Nanosecond=Nanosecond(0))
-    CompoundPeriod(Day(days), Hour(hours), minutes, seconds, millisecs, microsecs, nanosecs)
-end
-function canonical(hours::Hour, minutes::Minute=Minute(0), seconds::Second=Second(0), millisecs::Millisecond=Millisecond(0), microsecs::Microsecond=Microsecond(0), nanosecs::Nanosecond=Nanosecond(0))
-    days, hours = fldmod(hours.value, 24)
-    CompoundPeriod(Day(days), Hour(hours), minutes, seconds, millisecs, microsecs, nanosecs)
-end
-function canonical(minutes::Minute, seconds::Second=Second(0), millisecs::Millisecond=Millisecond(0), microsecs::Microsecond=Microsecond(0), nanosecs::Nanosecond=Nanosecond(0))
-    hours, mins = fldmod(minutes.value, 60)
-    canonical(Hour(hours), Minute(mins), seconds, millisecs, microsecs, nanosecs)
-end
-function canonical(seconds::Second, millisecs::Millisecond=Millisecond(0), microsecs::Microsecond=Microsecond(0), nanosecs::Nanosecond=Nanosecond(0))
-    mins, secs = fldmod(seconds.value, 60)
-    canonical(Minute(mins), Second(secs), millisecs, microsecs, nanosecs)
-end
-function canonical(millisecs::Millisecond, microsecs::Microsecond=Microsecond(0), nanosecs::Nanosecond=Nanosecond(0))
-    secs, millis = fldmod(millisecs.value, 1_000)
-    canonical(Second(secs), Millisecond(millis), microsecs, nanosecs)
-end
-function canonical(microsecs::Microsecond, nanosecs::Nanosecond=Nanosecond(0))
-    millis, micros = fldmod(microsecs.value, 1_000)
-    canonical(Millisecond(millis), Microsecond(micros), nanosecs)
-end
-function canonical(x::Nanosecond)
-    micros, nanos = fldmod(x.value, 1_000)
-    canonical(Microsecond(micros), Nanosecond(nanos))
-end
-
 
 function canonical(x::CompoundPeriod)
     periods = x.periods
