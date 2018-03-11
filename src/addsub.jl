@@ -104,12 +104,10 @@ end
 (+)(atd::TimeDate, atm::Time) = (+)(atd, CompoundPeriod(atm))
 (-)(atd::TimeDate, atm::Time) = (-)(atd, CompoundPeriod(atm))
 (+)(atm::Time, atd::TimeDate) = (+)(atd, CompoundPeriod(atm))
-(-)(atd::TimeDate, atm::Time) = (-)(atd, CompoundPeriod(atm))
 
 (+)(atdz::TimeDateZone, atm::Time) = (+)(atdz, CompoundPeriod(atm))
 (-)(atdz::TimeDateZone, atm::Time) = (-)(atdz, CompoundPeriod(atm))
 (+)(atm::Time, atdz::TimeDateZone) = (+)(atdz, CompoundPeriod(atm))
-(-)(atdz::TimeDateZone, atm::Time) = (-)(atdz, CompoundPeriod(atm))
 
 
 (-)(atd::TimeDate, adt::DateTime) = (-)(atd, TimeDate(adt))
