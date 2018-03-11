@@ -1,7 +1,7 @@
 module TimesDates
 
 export TimeDate, TimeDateZone,
-    zone, date, timeofday, time,
+    timezone, time, date,
     tzdefault!
 
 import Base:  (==), (!=), (<=), (<), isless, isequal, isempty, time
@@ -31,7 +31,6 @@ mutable struct TimeDate
     ondate::Date
 end
 
-@inline timeofday(x::TimeDate) = x.attime
 @inline time(x::TimeDate) = x.attime
 @inline date(x::TimeDate) = x.ondate
 
@@ -45,6 +44,7 @@ end
 @inline time(x::TimeDateZone) = x.attime
 @inline date(x::TimeDateZone) = x.ondate
 @inline zone(x::TimeDateZone) = x.inzone
+@inline timezone(x::TimeDateZone) = x.inzone
 
 timeofday(x::DateTime) = Time(x)
 timeofday(x::ZonedDateTime) = Time(DateTime(x))
