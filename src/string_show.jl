@@ -16,9 +16,9 @@ splitstring(str::String, splitat::String) = map(String, split(str, splitat))
 
 function TimeDate(str::String)
     !contains(str, "T") && throw(ErrorException("\"$str\" is not recognized as a TimeDate"))
-    
+
     datepart, inttimepart, fractimepart = datetimeparts(str)
-    
+
     dateof = parse(Date, datepart)
     timeof = parse(Time, inttimepart)
     timeof = fractionaltime(timeof, fractimepart)
@@ -28,13 +28,13 @@ end
 
 function TimeDateZone(str::String)
     !contains(str, "T") && throw(ErrorException("\"$str\" is not recognized as a TimeDateZone"))
-    
-    datepart, inttimepart, fractimepart, zonepart = datetimezoneparts(str) 
+
+    datepart, inttimepart, fractimepart, zonepart = datetimezoneparts(str)
 
     dateof = parse(Date, datepart)
     timeof = parse(Time, inttimepart)
     timeof = fractionaltime(timeof, fractimepart)
-    
+
     zoneof = (all_timezones()[timezone_names() .== zonepart])[1]
 
     return TimeDateZone(timeof, dateof, zoneof)
@@ -46,7 +46,7 @@ function fractionaltime(timeof::Time, fractimepart::String)
         fractime = parse(Int, fractimepart)
         if n <= 3
             delta = fld(1000,10^n)
-            fractime = delta
+            fractime *= delta
             timeof = timeof + Millisecond(fractime)
         elseif n <= 6
             delta = fld(1000,10^(n-3))
@@ -75,7 +75,7 @@ end
 
 function datetimezoneparts(str::String)
     datepart, inttimepart, parts = datetimeparts(str)
-    
+
     if contains(parts, " ")
         fractimepart, zonepart = splitstring(parts, " ")
     else

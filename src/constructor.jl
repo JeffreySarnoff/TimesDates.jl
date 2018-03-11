@@ -69,7 +69,7 @@ TimeZone(tdz::TimeDateZone) = zone(tdz)
 
 Date(td::TimeDate) = date(td)
 Time(td::TimeDate) = time(td)
-    
+
 Base.convert(::Type{CompoundPeriod},x::CompoundPeriod) = x
 
 function Base.convert(::Type{Time}, cp::CompoundPeriod)

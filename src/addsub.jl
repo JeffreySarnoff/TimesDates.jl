@@ -2,14 +2,14 @@
 
 for P in (:Nanosecond, :Microsecond, :Millisecond, :Second, :Minute, :Hour)
   @eval begin
-        
+
     function (+)(td::TimeDate, tp::$P)
         dateof = date(td)
         timeof = time(td)
         compoundtime = CompoundPeriod(timeof)
         compoundtime += tp
         compoundtime = canonical(compoundtime)
-        deltadays, compoundtime = isolate_days(compoundtime)    
+        deltadays, compoundtime = isolate_days(compoundtime)
 
         timeof = Time(0) + compoundtime
         dateof += deltadays
@@ -23,7 +23,7 @@ for P in (:Nanosecond, :Microsecond, :Millisecond, :Second, :Minute, :Hour)
         compoundtime = CompoundPeriod(timeof)
         compoundtime -= tp
         compoundtime = canonical(compoundtime)
-        deltadays, compoundtime = isolate_days(compoundtime)    
+        deltadays, compoundtime = isolate_days(compoundtime)
 
         timeof = Time(0) + compoundtime
         dateof += deltadays
@@ -37,7 +37,7 @@ for P in (:Nanosecond, :Microsecond, :Millisecond, :Second, :Minute, :Hour)
 
         return TimeDateZone(time(td), date(td), zone(tdz))
      end
-        
+
      function (-)(tdz::TimeDateZone, tp::$P)
         td = TimeDate(tdz)
         td = td - tp
