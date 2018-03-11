@@ -3,7 +3,11 @@ module TimesDates
 export TimeDate, TimeDateZone,
        time, date, timezone,  tzdefault!
 
-import Base:  (==), (!=), (<=), (<), isless, isequal, isempty, time
+import Base:  (==), (!=), (<=), (<), (>), (>=), isless, isequal,
+              isempty, time
+
+import Base.Math: (+), (-), (*), (/),
+                  fld, cld, div, rem, mod, round
 
 import Dates: Year, Month, Day, Hour, Minute, Second,
               Millisecond, Microsecond, Nanosecond,
