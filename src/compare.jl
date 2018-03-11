@@ -15,4 +15,4 @@ function Base.:(<=)(atd::TimeDate, btd::TimeDate)
     return isempty(delta) || signbit(delta.periods[1].value)
 end    
 Base.isequal(atd::TimeDate, btd::TimeDate) = atd == btd
-Base.isless(atd::TimeDate, btd::TimeD
+Base.isless(atd::TimeDate, btd::TimeDate) = atd < btd
