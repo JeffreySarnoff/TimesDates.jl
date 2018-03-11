@@ -3,7 +3,7 @@
 for P in (:Nanosecond, :Microsecond, :Millisecond, :Second, :Minute, :Hour)
   @eval begin
         
-    function Base.:(+)(td::TimeDate, tp::$P)
+    function (+)(td::TimeDate, tp::$P)
         dateof = date(td)
         timeof = time(td)
         compoundtime = CompoundPeriod(timeof)
@@ -17,7 +17,7 @@ for P in (:Nanosecond, :Microsecond, :Millisecond, :Second, :Minute, :Hour)
         return TimeDate(timeof, dateof)
      end
 
-     function Base.:(-)(td::TimeDate, tp::$P)
+     function (-)(td::TimeDate, tp::$P)
         dateof = date(td)
         timeof = time(td)
         compoundtime = CompoundPeriod(timeof)
@@ -31,14 +31,14 @@ for P in (:Nanosecond, :Microsecond, :Millisecond, :Second, :Minute, :Hour)
         return TimeDate(timeof, dateof)
      end
 
-     function Base.:(+)(tdz::TimeDateZone, tp::$P)
+     function (+)(tdz::TimeDateZone, tp::$P)
         td = TimeDate(tdz)
         td = td + tp
 
         return TimeDateZone(time(td), date(td), zone(tdz))
      end
         
-     function Base.:(-)(tdz::TimeDateZone, tp::$P)
+     function (-)(tdz::TimeDateZone, tp::$P)
         td = TimeDate(tdz)
         td = td - tp
 
@@ -48,12 +48,12 @@ for P in (:Nanosecond, :Microsecond, :Millisecond, :Second, :Minute, :Hour)
   end
 end
 
-Base.:(+)(td::TimeDate, dy::Day) = TimeDate(time(td), date(td)+dy)
-Base.:(-)(td::TimeDate, dy::Day) = TimeDate(time(td), date(td)-dy)
-Base.:(+)(tdz::TimeDateZone, dy::Day) = TimeDate(time(tdz), date(tdz)+dy, zone(tdz))
-Base.:(-)(tdz::TimeDateZone, dy::Day) = TimeDate(time(tdz), date(tdz)-dy, zone(tdz))
+:(+)(td::TimeDate, dy::Day) = TimeDate(time(td), date(td)+dy)
+:(-)(td::TimeDate, dy::Day) = TimeDate(time(td), date(td)-dy)
+:(+)(tdz::TimeDateZone, dy::Day) = TimeDate(time(tdz), date(tdz)+dy, zone(tdz))
+:(-)(tdz::TimeDateZone, dy::Day) = TimeDate(time(tdz), date(tdz)-dy, zone(tdz))
 
-function Base.:(+)(td::TimeDate, cperiod::CompoundPeriod)
+function (+)(td::TimeDate, cperiod::CompoundPeriod)
     dateof = date(td)
     tdperiod = CompoundPeriod(time(td))
     tdperiod = tdperiod + cperiod
@@ -64,7 +64,7 @@ function Base.:(+)(td::TimeDate, cperiod::CompoundPeriod)
     return TimeDate(timeof, dateof)
 end
 
-function Base.:(-)(td::TimeDate, cperiod::CompoundPeriod)
+function (-)(td::TimeDate, cperiod::CompoundPeriod)
     dateof = date(td)
     tdperiod = CompoundPeriod(time(td))
     tdperiod = tdperiod - cperiod
@@ -75,25 +75,24 @@ function Base.:(-)(td::TimeDate, cperiod::CompoundPeriod)
     return TimeDate(timeof, dateof)
 end
 
-(+)(td::TimeDate, tm::Time) = 
-function Base.:(+)(tdz::TimeDateZone, cperiod::CompoundPeriod)
+function (+)(tdz::TimeDateZone, cperiod::CompoundPeriod)
     td = TimeDate(tdz)
     td = td + cperiod
     return TimeDateZone(time(td), date(td), zone(tdz))
 end
 
-function Base.:(-)(tdz::TimeDateZone, cperiod::CompoundPeriod)
+function (-)(tdz::TimeDateZone, cperiod::CompoundPeriod)
     td = TimeDate(tdz)
     td = td - cperiod
     return TimeDateZone(time(td), date(td), zone(tdz))
 end
 
-Base.:(+)(period::Period, td::TimeDate) = td + period
-Base.:(+)(period::Period, tdz::TimeDateZone) = tdz + period
-Base.:(+)(cperiod::CompoundPeriod, td::TimeDate) = td + cperiod
-Base.:(+)(cperiod::CompoundPeriod, tdz::TimeDateZone) = tdz + cperiod
+:(+)(period::Period, td::TimeDate) = td + period
+:(+)(period::Period, tdz::TimeDateZone) = tdz + period
+:(+)(cperiod::CompoundPeriod, td::TimeDate) = td + cperiod
+:(+)(cperiod::CompoundPeriod, tdz::TimeDateZone) = tdz + cperiod
 
-function Base.:(-)(atd::TimeDate, btd::TimeDate)
+function (-)(atd::TimeDate, btd::TimeDate)
     atime, adate = time(atd), date(atd)
     btime, bdate = time(btd), date(btd)
     dtime = atime - btime
@@ -121,4 +120,3 @@ end
     TimeDateZone((-)(ZonedDateTime(atdz), ZonedDateTime(adt)))
 (-)(adt::ZonedDateTime, atdz::TimeDateZone) =
     TimeDateZone((-)(ZonedDateTime(atd), ZonedDateTime(atdz)))
-
