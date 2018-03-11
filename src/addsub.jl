@@ -75,6 +75,7 @@ function Base.:(-)(td::TimeDate, cperiod::CompoundPeriod)
     return TimeDate(timeof, dateof)
 end
 
+(+)(td::TimeDate, tm::Time) = 
 function Base.:(+)(tdz::TimeDateZone, cperiod::CompoundPeriod)
     td = TimeDate(tdz)
     td = td + cperiod
@@ -100,4 +101,15 @@ function Base.:(-)(atd::TimeDate, btd::TimeDate)
     delta = canonical(CompoundPeriod(ddate, dtime))
     return delta
 end
+
+(+)(atd::TimeDate, atm::Time) = (+)(atd, CompoundPeriod(atm))
+(-)(atd::TimeDate, atm::Time) = (-)(atd, CompoundPeriod(atm))
+(+)(atm::Time, atd::TimeDate) = (+)(atd, CompoundPeriod(atm))
+(-)(atd::TimeDate, atm::Time) = (-)(atd, CompoundPeriod(atm))
+
+(+)(atdz::TimeDateZone, atm::Time) = (+)(atdz, CompoundPeriod(atm))
+(-)(atdz::TimeDateZone, atm::Time) = (-)(atdz, CompoundPeriod(atm))
+(+)(atm::Time, atdz::TimeDateZone) = (+)(atdz, CompoundPeriod(atm))
+(-)(atdz::TimeDateZone, atm::Time) = (-)(atdz, CompoundPeriod(atm))
+
 
