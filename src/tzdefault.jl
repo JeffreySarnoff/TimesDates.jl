@@ -1,4 +1,4 @@
-TZ_DEFAULT = [TZ_UT]
+TZ_DEFAULT = TimeZone[TZ_UT]
 tzdefault() = TZ_DEFAULT[1]
 
 function tzdefault!(x::TimeZone)
