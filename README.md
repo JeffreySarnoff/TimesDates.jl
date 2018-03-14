@@ -4,9 +4,9 @@
 
 > _this package requires Julia v0.7-_
 
-- _the type `TimeDate` works, and interoperates with DateTime, Date & Time
+- the type `TimeDate` works with DateTime, Date & Time (Dates.jl)
 
-- _the type `TimeDateZone` works with ZonedDateTime, TimeZone from TimeZones.jl
+- the type `TimeDateZone` works with ZonedDateTime, TimeZone (TimeZones.jl)
 
 ## Setup
 
