@@ -1,14 +1,15 @@
-using Documenter, TimesDates
+using Dates, TimeZones, TimesDates, Documenter
 
 makedocs(
     modules = [TimesDates],
     clean = false,
     format = :html,
     sitename = "TimesDates.jl",
-    pages = Any[
+    authors = "Jeffrey Sarnoff",
+    pages = [
         "Home" => "index.md",
-        "API" => "api.md",
-        "Implementations" => "implementations.md",
+        "Overview" => "overview.md",
+        "Examples" => "examples.md"
     ],
 )
 
