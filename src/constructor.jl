@@ -28,11 +28,17 @@ TimeDateZone(z::DateTime, tz::TimeZone) =
 
 # ======================================= #
 
+function TimeDate(zdt::ZonedDateTime)
+    zdt = astimezone(zdt, tzdefault())
+    datetime = DateTime(zdt)
+    return TimeDate(datetime)
+end
 
-TimeDate(z::ZonedDateTime) =
-    TimeDate(Time(z.utc_datetime), Date(z.utc_datetime))
-TimeDateZone(z::ZonedDateTime) =
-    TimeDateZone(Time(z.utc_datetime), Date(z.utc_datetime), z.timezone)
+function TimeDateZone(zdt::ZonedDateTime)
+    datetime = DateTime(zdt)
+    tzone = timezone(zdt)
+    return TimeDateZone(datetime, tzone)
+end
 
 function DateTime(td::TimeDate)
     timeof, dateof = time(td), date(td)
@@ -41,7 +47,7 @@ function DateTime(td::TimeDate)
 end
 
 function DateTime(tdz::TimeDateZone)
-    return DateTime(TimeDate(td))
+    return DateTime(TimeDate(tdz))
 end
 
 function ZonedDateTime(td::TimeDate)

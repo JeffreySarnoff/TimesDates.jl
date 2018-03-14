@@ -2,7 +2,10 @@ __precompile__()
 
 module TimesDates
 
-export TimeDate, TimeDateZone, timezone, time, date, tzdefault, tzdefault!
+export TimeDate, TimeDateZone,
+    TimeZone,
+    timezone, time, date, tzdefault, tzdefault!,
+    localtime, uttime, astimezone, TZ_LOCAL, TZ_UT
 
 import Base:  (==), (!=), (<=), (<), (>), (>=), isless, isequal,
               isempty, time
@@ -18,7 +21,10 @@ import Dates: Year, Month, Day, Hour, Minute, Second,
 using Dates: CompoundPeriod
 using Dates
 
-using TimeZones
+import TimeZones: @tz_str, ZonedDateTime, TimeZone,
+    localzone, astimezone, FixedTimeZone, VariableTimeZone
+
+include("timezones.jl")
 include("tzdefault.jl")
 
 # ======================================= #
@@ -45,9 +51,10 @@ end
 include("constructor.jl")
 include("selector.jl")
 
+include("interop.jl")
+
 include("compare.jl")
 include("addsub.jl")
 include("string_show.jl")
 
 end # TimesDates
-
