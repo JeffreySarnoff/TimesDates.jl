@@ -1,3 +1,5 @@
+__precompile__()
+
 module TimesDates
 
 export TimeDate, TimeDateZone, timezone, time, date, tzdefault!
