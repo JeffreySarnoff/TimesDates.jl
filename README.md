@@ -14,6 +14,11 @@
 using Pkg3
 add TimesDates
 ```
+or
+```julia
+using Pkg
+add("TimesDates")
+```
 
 ## In Use
 
