@@ -1,4 +1,4 @@
-using TimesDates, Dates
+using Dates, TimeZones, TimesDates
 using Test
 
 str1 = "2011-05-08T11:15:00"
@@ -11,6 +11,11 @@ dt2 = DateTime(str2)
 td1 = TimeDate(str1)
 td2 = TimeDate(str2)
 td3 = TimeDate(str3)
+
+dtz1 = ZonedDateTime(dt1, tz"UTC")
+dtz2 = ZonedDateTime(dt1, tz"America/New_York")
+tdz1 = TimeDateZone(td1, tz"UTC")
+tdz2 = TimeDateZone(td1, tz"America/New_York")
 
 @test string(td1) == str1
 @test string(td2) == str2
@@ -25,3 +30,7 @@ td3 = TimeDate(str3)
 @test Minute(td1 + Minute(1)) == Minute(td1) + Minute(1)
 @test Microsecond(td3 - Microsecond(1)) == Microsecond(td3) - Microsecond(1)
 
+@test tz"UTC" == tzdefault()
+
+@test TimeDateZone(dtz1) == tdz1
+@test TimeDateZone(dtz2) == tdz2
