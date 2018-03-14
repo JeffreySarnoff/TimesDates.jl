@@ -87,7 +87,7 @@ julia> datetime = DateTime("2011-02-05T11:22:33")
 julia> timedate = TimeDate(datetime); timedate, DateTime(timedate)
 2011-02-05T11:22:33, 2011-02-05T11:22:33
 ```
-Get and Set the timezone to be used when no zone is specified.
+Get and Set the timezone to be used when no zone is specified.    
 Without this setting, UTC is used as the default.
 ```julia
 julia> tzdefault()
