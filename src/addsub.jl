@@ -87,6 +87,15 @@ function (-)(tdz::TimeDateZone, cperiod::CompoundPeriod)
     return TimeDateZone(time(td), date(td), zone(tdz))
 end
 
+function (-)(tdz1::TimeDateZone, tdz2::TimeDateZone)
+    tdz1 = astimezone(tdz1, tz"UTC")
+    tdz2 = astimezone(tdz1, tz"UTC")
+    ddate = date(tdz1) - date(tdz2)
+    dtime = time(tdz1) - time(tdz2)
+    delta = canonical(ddate + dtime)
+    return delta
+end
+
 (+)(period::Period, td::TimeDate) = td + period
 (+)(period::Period, tdz::TimeDateZone) = tdz + period
 (+)(cperiod::CompoundPeriod, td::TimeDate) = td + cperiod

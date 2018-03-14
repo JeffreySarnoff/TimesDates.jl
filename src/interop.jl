@@ -38,3 +38,8 @@ localtime(x::DateTime) = localtime(TimeDate(x))
 uttime(x::DateTime) = uttime(TimeDate(x))
 localtime(x::Date) = localtime(TimeDate(x))
 uttime(x::Date) = uttime(TimeDate(x))
+
+@inline fasttime(x::TimeDate) = Microsecond(x) + Nanosecond(x)
+@inline fasttime(x::TimeDateZone) = Microsecond(x) + Nanosecond(x)
+@inline slowtime(x::TimeDate) = time(x) - fasttime(x)
+@inline slowtime(x::TimeDateZone) = time(x) - fasttime(x)
