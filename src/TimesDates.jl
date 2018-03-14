@@ -2,7 +2,7 @@ __precompile__()
 
 module TimesDates
 
-export TimeDate, TimeDateZone, timezone, time, date, tzdefault!
+export TimeDate, TimeDateZone, timezone, time, date, tzdefault, tzdefault!
 
 import Base:  (==), (!=), (<=), (<), (>), (>=), isless, isequal,
               isempty, time
