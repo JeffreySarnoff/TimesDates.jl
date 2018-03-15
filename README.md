@@ -12,9 +12,9 @@
 
 ## Types
 
-- ### [`TimeDate`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedate-is-nanosecond-resolved-1)
+- ### [`TimeDate`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedate-is-nanosecond-resolved)
 
-- ### [`TimeDateZone`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedatezone-is-nanosecond-resolved-and-zone-situated-1)
+- ### [`TimeDateZone`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedatezone-is-nanosecond-resolved-and-zone-situated)
 
 ----
 
