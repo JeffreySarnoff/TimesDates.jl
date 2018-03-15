@@ -78,7 +78,7 @@ julia> ZonedDateTime(tdz)
 
 ### Additional Examples
 
-Get components.
+#### Get components.
 ```julia
 julia> using Dates, TimesDates
 
@@ -91,7 +91,7 @@ julia> Month(timedate), Microsecond(timedate)
 julia> month(timedate), microsecond(timedate)
 (3, 968)
 ```
-Interconvert.
+#### Interconvert.
 ```julia
 julia> using Dates, TimesDates
 
@@ -107,7 +107,7 @@ julia> datetime = DateTime("2011-02-05T11:22:33")
 julia> timedate = TimeDate(datetime); timedate, DateTime(timedate)
 (2011-02-05T11:22:33, 2011-02-05T11:22:33)
 ```
-Adjust with precision.
+#### Adjust with precision.
 ```julia
 julia> using Dates, TimesDates
 
@@ -120,7 +120,7 @@ julia> timedate = TimeDate(datetime)
 julia> timedate = TimeDate(datetime, Millisecond(1)+Nanosecond(1))
 2001-05-10T00:00:00.000000001
 ```
-Get and Set the timezone to be used when no zone is specified.
+#### Get and Set the timezone to be used when no zone is specified.    
 Without this setting, UTC is used as the default.
 ```julia
 julia> using Dates, TimeZones, TimesDates
@@ -134,7 +134,7 @@ America/New_York (UTC-5/UTC-4)
 julia> tzdefault!(tz"Europe/London"); tzdefault()
 Europe/London (UTC+0/UTC+1)
 ```
-Use `localtime` and `uttime`.
+#### Use `localtime` and `uttime`.
 ```julia
 julia> using Dates, TimeZones, TimesDates
 
