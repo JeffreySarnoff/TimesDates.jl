@@ -8,8 +8,9 @@ export TimeDate, TimeDateZone,
     localtime, uttime, astimezone, TZ_LOCAL, TZ_UT,
     stringcompact
 
-import Base:  (==), (!=), (<=), (<), (>), (>=), isless, isequal,
-              isempty, time, string, show, showcompact
+import Base: promote_rule, convert, string, show, showcompact,
+             (==), (!=), (<=), (<), (>), (>=), isless, isequal,
+             isempty, time
 
 import Base.Math: (+), (-), (*), (/),
                   fld, cld, div, rem, mod, round
