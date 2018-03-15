@@ -6,7 +6,7 @@ export TimeDate, TimeDateZone,
     TimeZone,
     timezone, time, date, tzdefault, tzdefault!,
     localtime, uttime, astimezone, TZ_LOCAL, TZ_UT,
-    stringcompact
+    stringwithzone
 
 import Base: promote_rule, convert, string, show, showcompact,
              (==), (!=), (<=), (<), (>), (>=), isless, isequal,
