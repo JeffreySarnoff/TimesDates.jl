@@ -25,7 +25,8 @@ using Dates: CompoundPeriod
 using Dates
 
 import TimeZones: @tz_str, ZonedDateTime, TimeZone,
-    localzone, astimezone, FixedTimeZone, VariableTimeZone
+    localzone, astimezone, FixedTimeZone, VariableTimeZone,
+    all_timezones, timezone_names
 
 include("timezones.jl")
 include("tzdefault.jl")
