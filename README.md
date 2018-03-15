@@ -18,7 +18,7 @@
 
 ----
 
-## [Examples](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#additional-examples)
+## Examples
 
 - ### [get components](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-components)
 
@@ -29,6 +29,9 @@
 - ### [set the default timezone](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-and-set-the-timezone-to-be-used-when-no-zone-is-specified)
 
 - ### [localtime() and uttime()](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#use-localtime-and-uttime)
+
+
+----
 
 ### [The Design](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design)
 
