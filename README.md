@@ -8,6 +8,16 @@
 
 - the type `TimeDateZone` works with ZonedDateTime, TimeZone (TimeZones.jl)
 
+----
+[Setup](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#setup])
+
+[`TimeDate`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedate-is-nanosecond-resolved])
+
+[`TimeDateZone`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedatezone-is-nanosecond-resolved-and-zone-situated])
+
+
+[The Design](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design)
+
 ## Setup
 
 ```julia
