@@ -20,25 +20,25 @@
 
 ## Examples
 
-- ### [get components](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-components-1)
+- ### [get components](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-components)
 
-- ### [interconvert](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#interconvert-1)
+- ### [interconvert](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#interconvert)
 
-- ### [adjust accurately](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#adjust-with-precision-1)
+- ### [adjust accurately](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#adjust-with-precision)
 
-- ### [set the default timezone](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-and-set-the-timezone-to-be-used-when-no-zone-is-specified-1)
+- ### [set the default timezone](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-and-set-the-timezone-to-be-used-when-no-zone-is-specified)
 
-- ### [localtime() and uttime()](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#use-localtime-and-uttime-1)
+- ### [localtime() and uttime()](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#use-localtime-and-uttime)
 ----
 
-## [The Design](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design-1)
+## [The Design](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design)
 
 
 ----
 
-### [Setup](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#setup-1)
+### [Setup](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#setup)
 
-### [Acknowledgments](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#acknowledgements-1)
+### [Acknowledgments](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#acknowledgements)
 
 ----
 
