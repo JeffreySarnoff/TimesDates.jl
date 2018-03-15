@@ -12,23 +12,23 @@
 
 ## Types
 
-- ### [`TimeDate`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedate-is-nanosecond-resolved)
+- ### [`TimeDate`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedate-is-nanosecond-resolved-1)
 
-- ### [`TimeDateZone`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedatezone-is-nanosecond-resolved-and-zone-situated)
+- ### [`TimeDateZone`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedatezone-is-nanosecond-resolved-and-zone-situated-1)
 
 ----
 
 ## Examples
 
-- ### [get components](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-components)
+- ### [get components](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-components-1)
 
-- ### [interconvert](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#interconvert)
+- ### [interconvert](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#interconvert-1)
 
-- ### [adjust accurately](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#adjust-with-precision)
+- ### [adjust accurately](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#adjust-with-precision-1)
 
-- ### [set the default timezone](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-and-set-the-timezone-to-be-used-when-no-zone-is-specified)
+- ### [set the default timezone](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-and-set-the-timezone-to-be-used-when-no-zone-is-specified-1)
 
-- ### [localtime() and uttime()](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#use-localtime-and-uttime)
+- ### [localtime() and uttime()](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#use-localtime-and-uttime-1)
 ----
 
 ## [The Design](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design-1)
@@ -36,9 +36,9 @@
 
 ----
 
-### [Setup](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#setup)
+### [Setup](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#setup-1)
 
-### [Acknowledgments](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#acknowledgements)
+### [Acknowledgments](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#acknowledgements-1)
 
 ----
 
