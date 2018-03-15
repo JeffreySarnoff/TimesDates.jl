@@ -16,7 +16,7 @@
 
 ### [`TimeDateZone`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedatezone-is-nanosecond-resolved-and-zone-situated)
 
-### [`Examples`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#additional-examples)
+### [Examples](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#additional-examples)
 
 ### [The Design](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design)
 
