@@ -4,7 +4,11 @@ TimeDate(dt::Date) = TimeDate(Time(0), dt)
 TimeDate(tm::Time) = tzdefault() === tz"UTC" ?
                         TimeDate(tm, Date(now(Dates.UTC))) :
                         TimeDate(tm, Date(now()))
-TimeDate(zdt::ZonedDateTime) = TimeDate(Time(zdt), Date(zdt))
+
+function TimeDate(zdt::ZonedDateTime)
+   tdz = TimeDateZone(zdt)
+   return TimeDate(tdz)
+end
 
 Date(td::TimeDate) = td.on_date
 Time(td::TimeDate) = td.at_time
@@ -27,13 +31,28 @@ function TimeDateZone(zdt::ZonedDateTime)
      return TimeDateZone(at_time, on_date, in_zone, at_zone)
 end
 
-TimeDateZone(td::TimeDate, tz::TimeZone) = TimeDateZone(ZonedDateTime(DateTime(td), tz))
-
 TimeDateZone(tm::Time, dt::Date, tz::TimeZone) = TimeDateZone(TimeDate(tm, dt), tz)
+
+
+function TimeDateZone(td::TimeDate, tz::TimeZone)
+   dtm = DateTime(td)
+   fast_time = fasttime(td)
+   zdt = ZonedDateTime(dtm, tz)
+   td = TimeDate(zdt) + fast_time
+   tdz = TimeDateZone(td.at_time, td.on_date, zdt.timezone, zdt.zone)
+   return tdz
+end
+
+TimeDateZone(td::TimeDate) = TimeDateZone(td, tzdefault())
 
 
 function TimeDateZone(dtm::DateTime)
    zdt = ZonedDateTime(dtm, tzdefault())
+   return TimeDateZone(zdt)
+end
+
+function TimeDateZone(dtm::DateTime, tz::TimeZone)
+   zdt = ZonedDateTime(dtm, tz)
    return TimeDateZone(zdt)
 end
 
@@ -140,3 +159,4 @@ TimeZone(tdz::TimeDateZone) = tdz.in_zone
 Date(td::TimeDate) = td.on_date
 Time(td::TimeDate) = td.at_time
 =#
+
