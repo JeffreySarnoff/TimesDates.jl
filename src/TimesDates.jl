@@ -5,10 +5,11 @@ module TimesDates
 export TimeDate, TimeDateZone,
     TimeZone,
     timezone, time, date, tzdefault, tzdefault!,
-    localtime, uttime, astimezone, TZ_LOCAL, TZ_UT
+    localtime, uttime, astimezone, TZ_LOCAL, TZ_UT,
+    stringcompact
 
 import Base:  (==), (!=), (<=), (<), (>), (>=), isless, isequal,
-              isempty, time
+              isempty, time, string, show, showcompact
 
 import Base.Math: (+), (-), (*), (/),
                   fld, cld, div, rem, mod, round
