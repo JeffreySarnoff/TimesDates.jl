@@ -10,15 +10,15 @@
 
 ----
 
-- [Setup](https://(https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#setup)
+### [Setup](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#setup)
 
-- [`TimeDate`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedate-is-nanosecond-resolved)
+### [`TimeDate`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedate-is-nanosecond-resolved)
 
-- [`TimeDateZone`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedatezone-is-nanosecond-resolved-and-zone-situated)
+### [`TimeDateZone`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedatezone-is-nanosecond-resolved-and-zone-situated)
 
-- [`Examples`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#additional-examples)
+### [`Examples`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#additional-examples)
 
-- [The Design](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design)
+### [The Design](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design)
 
 ## Setup
 
