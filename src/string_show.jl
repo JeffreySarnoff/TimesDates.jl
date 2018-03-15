@@ -1,3 +1,5 @@
+const DASH = '-'
+const DASHSTR = "-"
 
 function string(td::TimeDate)
     return string(date(td),"T",time(td))
@@ -59,7 +61,10 @@ function TimeDateZone(str::String)
         zonepart = string("+", zonepart)
     elseif contains(rest, "-")
         timepart, zonepart = split(rest, "-")
-        zonepart = string("-", zonepart)
+        zonepart = string(DASHSTR, zonepart)
+    elseif contains(rest, DASHSTR)
+        timepart, zonepart = split(rest, DASHSTR)
+        zonepart = string(DASHSTR, zonepart)
     else
         throw(ErrorException("\"$str\" is not recognized as a TimeDateZone"))
     end
