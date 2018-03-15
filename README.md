@@ -20,6 +20,8 @@
 
 ### [The Design](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design)
 
+### [Acknowledgments](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#acknowledgements)
+
 ----
 
 ## Setup
