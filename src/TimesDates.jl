@@ -13,7 +13,8 @@ import Base:  (==), (!=), (<=), (<), (>), (>=), isless, isequal,
 import Base.Math: (+), (-), (*), (/),
                   fld, cld, div, rem, mod, round
 
-import Dates: Year, Month, Day, Hour, Minute, Second,
+import Dates: Time, Date, DateTime,
+              Year, Month, Day, Hour, Minute, Second,
               Millisecond, Microsecond, Nanosecond,
               year, month, day, hour, minute, second,
               millisecond, microsecond, nanosecond
