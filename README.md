@@ -9,14 +9,16 @@
 - the type `TimeDateZone` works with ZonedDateTime, TimeZone (TimeZones.jl)
 
 ----
-[Setup](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#setup])
 
-[`TimeDate`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedate-is-nanosecond-resolved)
+- [Setup](https://(https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#setup)
 
-[`TimeDateZone`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedatezone-is-nanosecond-resolved-and-zone-situated)
+- [`TimeDate`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedate-is-nanosecond-resolved)
 
+- [`TimeDateZone`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedatezone-is-nanosecond-resolved-and-zone-situated)
 
-[The Design](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design)
+- [`Examples`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#additional-examples)
+
+- [The Design](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design)
 
 ## Setup
 
@@ -59,7 +61,7 @@ julia> using Dates, TimeZones, TimesDates
 
 julia> zdt = ZonedDateTime(DateTime(2012,1,21,15,25,45), tz"America/Chicago")
 2012-01-21T15:25:45-06:00
-
+https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#additional-examples
 julia> tdz = TimeDateZone(zdt)
 2012-01-21T21:25:45 America/Chicago
 
