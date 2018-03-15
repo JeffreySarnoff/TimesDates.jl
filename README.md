@@ -191,6 +191,6 @@ While both are collaborative works, a few people deserve mention:
 - `Dates`: Jacob Quinn and Stefan Karpinski
 - `TimeZones`: Curtis Vogt
 
-## Comments are Welcomed
+## Comments and Pull Requests are welcomed
 
 http://github.com/JeffreySarnoff/TimesDates.jl
