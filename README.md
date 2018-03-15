@@ -31,7 +31,8 @@
 - ### [localtime() and uttime()](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#use-localtime-and-uttime)
 ----
 
-## [The Design](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design)
+## [The Design](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design-1)
+
 
 ----
 
