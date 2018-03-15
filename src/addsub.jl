@@ -50,8 +50,8 @@ end
 
 (+)(td::TimeDate, dy::Day) = TimeDate(time(td), date(td)+dy)
 (-)(td::TimeDate, dy::Day) = TimeDate(time(td), date(td)-dy)
-(+)(tdz::TimeDateZone, dy::Day) = TimeDate(time(tdz), date(tdz)+dy, zone(tdz))
-(-)(tdz::TimeDateZone, dy::Day) = TimeDate(time(tdz), date(tdz)-dy, zone(tdz))
+(+)(tdz::TimeDateZone, dy::Day) = TimeDateZone(time(tdz), date(tdz)+dy, zone(tdz))
+(-)(tdz::TimeDateZone, dy::Day) = TimeDateZone(time(tdz), date(tdz)-dy, zone(tdz))
 
 function (+)(td::TimeDate, cperiod::CompoundPeriod)
     dateof = date(td)
@@ -121,9 +121,8 @@ end
 
 (-)(atd::TimeDate, adt::DateTime) = (-)(atd, TimeDate(adt))
 (-)(adt::DateTime, atd::TimeDate) = (-)(TimeDate(adt), atd)
-(-)(atdz::TimeDateZone, adt::DateTime) = (-)(atdz, ZonedDateTime(adt))
-(-)(adt::DateTime, atdz::TimeDateZone) = (-)(ZonedDateTime(adt), atdz)
-(-)(atdz::TimeDateZone, adt::ZonedDateTime) =
-    TimeDateZone((-)(ZonedDateTime(atdz), ZonedDateTime(adt)))
-(-)(adt::ZonedDateTime, atdz::TimeDateZone) =
-    TimeDateZone((-)(ZonedDateTime(adt), ZonedDateTime(atdz)))
+(-)(atdz::TimeDateZone, adt::DateTime) = (-)(atdz, TimeDateZone(adt))
+(-)(adt::DateTime, atdz::TimeDateZone) = (-)(TimeDateZone(adt), atdz)
+(-)(atdz::TimeDateZone, adzt::ZonedDateTime) = (-)(atdz, TimeDateZone(azdt))
+(-)(azdt::ZonedDateTime, atdz::TimeDateZone) = (-)(TimeDateZone(azdt), atdz)
+
