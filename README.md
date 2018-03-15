@@ -52,7 +52,7 @@ julia> td2017 = TimeDate("2018-01-01T00:00:00") - Nanosecond(1)
 julia> td2017 < td2018
 true
 
-julia> td2018 - td2018
+julia> td2018 - td2017
 2 nanoseconds
 ```
 
@@ -65,21 +65,23 @@ julia> using Dates, TimeZones, TimesDates
 
 julia> zdt = ZonedDateTime(DateTime(2012,1,21,15,25,45), tz"America/Chicago")
 2012-01-21T15:25:45-06:00
-https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#additional-examples
+
 julia> tdz = TimeDateZone(zdt)
-2012-01-21T21:25:45 America/Chicago
+2012-01-21T15:25:45-06:00
 
 julia> tdz += Nanosecond(123456)
-2012-01-21T21:25:45.000123456 America/Chicago
+2012-01-21T15:25:45-06:00
 
 julia> ZonedDateTime(tdz)
-2012-01-21T21:25:45-06:00
+2012-01-21T15:25:45-06:00
 ```
 
 ### Additional Examples
 
 Get components.
 ```julia
+julia> using Dates, TimesDates
+
 julia> timedate = TimeDate("2018-03-09T18:29:34.04296875")
 2018-03-09T18:29:34.04296875
 
@@ -91,21 +93,25 @@ julia> month(timedate), microsecond(timedate)
 ```
 Interconvert.
 ```julia
+julia> using Dates, TimesDates
+
 julia> date = Date("2011-02-05")
 2011-02-05
 
 julia> timedate = TimeDate(date); timedate, Date(timedate)
-2011-02-05T00:00:00, 2011-02-05
+(2011-02-05T00:00:00, 2011-02-05)
 
 julia> datetime = DateTime("2011-02-05T11:22:33")
 2011-02-05T11:22:33
 
 julia> timedate = TimeDate(datetime); timedate, DateTime(timedate)
-2011-02-05T11:22:33, 2011-02-05T11:22:33
+(2011-02-05T11:22:33, 2011-02-05T11:22:33)
 ```
 Get and Set the timezone to be used when no zone is specified.
 Without this setting, UTC is used as the default.
 ```julia
+julia> using Dates, TimeZones, TimesDates
+
 julia> tzdefault()
 UTC
 
@@ -123,25 +129,25 @@ julia> tzdefault!(localzone())
 America/New_York (UTC-5/UTC-4)
 
 julia> localtime()
-2018-03-14T16:41:17.249 America/New_York
+2018-03-15T14:50:28.719-04:00
 
 julia> uttime()
-2018-03-14T20:41:17.251 UTC
+2018-03-15T18:50:30.282+00:00
 
 julia> localtime(TimeDate), localtime(TimeDateZone)
-(2018-03-14T16:41:17.252, 2018-03-14T16:41:17.252 America/New_York)
+(2018-03-15T14:50:30.291, 2018-03-15T14:50:30.294-04:00)
 
 julia> uttime(TimeDate), uttime(TimeDateZone)
-(2018-03-14T20:41:17.254, 2018-03-14T20:41:17.254 UTC)
+(2018-03-15T18:50:30.484, 2018-03-15T18:50:30.489+00:00)
 
 julia> dtm = now() - Month(7) - Minute(55)
-2017-08-14T15:46:17.256
+2017-08-15T13:55:30.491
 
 julia> localtime(dtm)
-2017-08-14T15:46:17.256 America/New_York
+2017-08-15T13:55:30.491-04:00
 
 julia> uttime(dtm)
-2017-08-14T19:46:17.256 UTC
+2017-08-15T17:55:30.491+00:00
 ```
 
 
@@ -186,7 +192,7 @@ tbd [About TimesDates](https://jeffreysarnoff.github.io/TimesDates.jl/)
 
 ## Acknowledgements
 
-This work is built atop `Dates` and `TimeZones`.    
+This work is built atop `Dates` and `TimeZones`.
 While both are collaborative works, a few people deserve mention:
 - `Dates`: Jacob Quinn and Stefan Karpinski
 - `TimeZones`: Curtis Vogt
