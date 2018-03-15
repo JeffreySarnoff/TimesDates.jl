@@ -5,9 +5,33 @@ TimeDate(tm::Time) = tzdefault() === tz"UTC" ?
                         TimeDate(tm, Date(now(Dates.UTC))) :
                         TimeDate(tm, Date(now()))
 
+function TimeDate(dtm::DateTime, moretime::P) where {P<:Union{Period, CompoundPeriod}}
+   on_date = Date(dtm)
+   at_time = Time(dtm)
+   in_time = CompoundPeriod(at_time)
+   in_time += moretime
+   in_time = canonical(in_time)
+   ndays   = Day(in_time)
+   in_time -= ndays
+   on_date += ndays
+   return TimeDate(in_time, on_date)
+end
+
 function TimeDate(zdt::ZonedDateTime)
    tdz = TimeDateZone(zdt)
    return TimeDate(tdz)
+end
+
+function TimeDate(td::TimeDate, moretime::P) where {P<:Union{Period, CompoundPeriod}}
+   on_date = Date(td)
+   at_time = Time(td)
+   in_time = CompoundPeriod(at_time)
+   in_time += moretime
+   in_time = canonical(in_time)
+   ndays   = Day(in_time)
+   in_time -= ndays
+   on_date += ndays
+   return TimeDate(in_time, on_date)
 end
 
 Date(td::TimeDate) = td.on_date
