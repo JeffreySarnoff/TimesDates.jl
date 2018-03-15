@@ -41,7 +41,29 @@ end
 function TimeDateZone(str::String)
     !contains(str, "T") && throw(ErrorException("\"$str\" is not recognized as a TimeDateZone"))
 
+    if contains(str, " ")
+        TimeDateZonename(str)
+    elseif contains(str, "-") || contains(str,"+")
+        TimeDateZoneoffset(str)
+    else
+        throw(ErrorException("\"$str\" is not recognized as a TimeDateZone"))
+    end    
+end
+
+function TimeDateZonename(str::String)
     datepart, inttimepart, fractimepart, zonepart = datetimezoneparts(str)
+
+    dateof = parse(Date, datepart)
+    timeof = parse(Time, inttimepart)
+    timeof = fractionaltime(timeof, fractimepart)
+
+    zoneof = (all_timezones()[timezone_names() .== zonepart])[1]
+
+    return TimeDateZone(timeof, dateof, zoneof)
+end
+
+function TimeDateZoneoffset(str::String)
+    datepart, inttimepart, fractimepart, zonepart = datetimezoneoffsetparts(str)
 
     dateof = parse(Date, datepart)
     timeof = parse(Time, inttimepart)
@@ -96,5 +118,25 @@ function datetimezoneparts(str::String)
     end
 
     return datepart, inttimepart, fractimepart, zonepart
+end
+
+function datetimezoneoffsetparts(str::String)
+    datepart, inttimepart, parts = datetimeparts(str)
+
+    if contains(parts, "+")
+        fractimepart, zoneoffset = splitstring(parts, "+")
+        zoneoffset = string("+", zoneoffset)
+    elseif contains(parts, "-")
+        fractimepart, zoneoffset = splitstring(parts, "-")
+        zoneoffset = string("-", zoneoffset)        
+    else
+        throw(ErrorException("\"$str\" is not recognized as a TimeDateZone"))
+    end
+
+    zonepart = Time(zoneoffset[2:end])
+    zonesign = zoneoffset[1] == '+' ? 1 : -1
+    zoneofs = zonesign * Hour(zonepart) + zonesign * Minute(zonepart)
+    
+    return datepart, inttimepart, fractimepart, zoneoffset, zoneofs
 end
 
