@@ -107,6 +107,19 @@ julia> datetime = DateTime("2011-02-05T11:22:33")
 julia> timedate = TimeDate(datetime); timedate, DateTime(timedate)
 (2011-02-05T11:22:33, 2011-02-05T11:22:33)
 ```
+Adjust with precision.
+```julia
+julia> using Dates, TimesDates
+
+julia> datetime = DateTime("2001-05-10T23:59:59.999")
+2001-05-10T23:59:59.999
+
+julia> timedate = TimeDate(datetime)
+2001-05-10T23:59:59.999
+
+julia> timedate = TimeDate(datetime, Millisecond(1)+Nanosecond(1))
+2001-05-10T00:00:00.000000001
+```
 Get and Set the timezone to be used when no zone is specified.
 Without this setting, UTC is used as the default.
 ```julia
