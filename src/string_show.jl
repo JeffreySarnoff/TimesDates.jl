@@ -1,6 +1,11 @@
 const DASH = '-'
 const DASHSTR = "-"
 
+function splitstring(str::AbstractString, splitat::AbstractString)
+    a, z = split(str, splitat)
+    return String(a), String(z)
+end
+
 function string(td::TimeDate)
     return string(date(td),"T",time(td))
 end
@@ -53,30 +58,30 @@ end
 function TimeDateZone(str::String)
     !contains(str, "T") && throw(ErrorException("\"$str\" is not recognized as a TimeDateZone"))
 
-    datepart, rest = split(str, "T")
+    datepart, rest = splitstring(str, "T")
     if contains(rest, " ")
-        timepart, zonepart = split(rest, " ")
+        timepart, zonepart = splitstring(rest, " ")
     elseif contains(rest, "+")
-        timepart, zonepart = split(rest, "+")
+        timepart, zonepart = splitstring(rest, "+")
         zonepart = string("+", zonepart)
     elseif contains(rest, "-")
-        timepart, zonepart = split(rest, "-")
+        timepart, zonepart = splitstring(rest, "-")
         zonepart = string(DASHSTR, zonepart)
     elseif contains(rest, DASHSTR)
-        timepart, zonepart = split(rest, DASHSTR)
+        timepart, zonepart = splitstring(rest, DASHSTR)
         zonepart = string(DASHSTR, zonepart)
     else
         throw(ErrorException("\"$str\" is not recognized as a TimeDateZone"))
     end
     
     if contains(timepart,".")
-        inttimepart, fractimepart = split(timepart, ".")
+        inttimepart, fractimepart = splitstring(timepart, ".")
     else
         inttimepart = timepart
         fractimepart = ""
     end
     
-    zdtstr = string(datepart,"T",inttimepart)
+    zdtstr = string(datepart,"T",inttimepart,".000")
     if contains(rest, " ")
         tz = TimeZone(zonepart)
         zdt = ZonedDateTime(DateTime(zdtstr), tz)
@@ -88,7 +93,7 @@ function TimeDateZone(str::String)
     zdt = ZonedDateTime(zdtstr)
     tdz = TimeDateZone(zdt)
     tm, dt = Time(tdz), Date(tdz)
-    tm = tm + fractionaltime(tm, fractimepart)
+    tm = fractionaltime(tm, fractimepart)
     tdz = TimeDateZone(tm, dt, zone(tdz))
     
     return tdz
