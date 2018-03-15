@@ -1,3 +1,44 @@
+"""
+    fasttime(x)
+
+    isolates the sub-millisecond elements of x
+
+    fasttime(x) == Microsecond(x) + Nanosecond(x)
+""" fasttime
+
+"""
+    slowtime(x)
+
+    isolates the supra-microsecond elements of x
+
+    slowtime(x) == x - fasttime(x)
+""" slowtime
+
+"""
+    subsecs(x)
+
+    isolates the sub-second elements of x
+
+    subsecs(x) = Millisecond(x) + Microsecond(x) + Nanosecond(x)
+""" subsecs
+
+"""
+    secstime(x)
+
+    isolates the supra-millisecond elements of x
+
+    secstime(x) = x - subsecs(x)
+""" secstime
+
+"""
+    fastnanos(x)
+
+    isolates the sub-millisecond elements of x as Nanoseconds
+
+    fastnanos(x) = Nanosecond(1_000 * microsecond(x) + nanosecond(x))
+""" fastnanos
+
+
 @inline fasttime(x::T) where {T<:NanosecTime} = Microsecond(x) + Nanosecond(x)
 @inline slowtime(x::T) where {T<:NanosecTime} = Time(x) - fasttime(x)
 @inline subsecs(x::T) where {T<:NanosecTime} = Millisecond(x) + fasttime(x)
