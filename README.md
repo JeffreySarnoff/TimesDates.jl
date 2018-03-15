@@ -129,7 +129,43 @@ julia> uttime(dtm)
 ```
 
 
-## Additional Information
+## The Design
+
+`Dates` has a `Time` type that has nanosecond resolution; it is not well supported, even within `Dates`.  This `Time` type recognizes strings only if they are limited to millisecond resolution.  It does form strings with nanosecond resolution.  This situation is exacerbated with the `DateTime` type.  Only millisecond (or coarser) resolved times are `DateTime` useful.
+
+`TimeZones` is a laudable package.  At present it is limited by the millisecond barrier that accompanies `DateTime`.
+
+This package exists to provide the community with two types.  One type `TimeDate` holds the caledar date with the time of day in nanoseconds.  The other `TimeDateZone` holds the the caledar date with the time of day in nanoseconds and the timezone.
+
+The inner dynamics rely upon the `Period` types (`Year` .. `Day`, `Hour`, .., `Nanosecond`) and `CompoundPeriod` all provided by `Dates`.  We distinguish _slowtime_, which is millisecond resolved, from a nanosecond resolved _fasttime_.
+
+```julia
+julia> using Dates, TimesDates
+
+julia> datetime = now()
+2018-03-15T06:41:33.643
+
+julia> currentdate = Date(datetime)
+2018-03-15
+
+julia> currenttime = Time(datetime)
+06:41:33.643
+
+julia> highrestime = currenttime + Nanosecond(98765)
+06:41:33.643098765
+
+julia> date = currentdate
+2018-03-15
+
+julia> fasttime = Microsecond(highrestime) + Nanosecond(highrestime)
+98 microseconds, 765 nanoseconds
+
+julia> slowtime = highrestime - fasttime
+06:41:33.643
+```
+
+The general approach is separate the date, slowtime, fasttime, and timezone (if appropriate), then use the date, slowtime and timezone (if appropriate) to obtain a coarse result using the facilities provided by the `Date` and `TimeZones` packages.  We refine the coarse result by adding or subtracting the fasttime, as appropriate.
+
 tbd [About TimesDates](https://jeffreysarnoff.github.io/TimesDates.jl/)
 
 ## Comments are Welcomed
