@@ -1,16 +1,28 @@
 
-function Base.string(td::TimeDate)
+function string(td::TimeDate)
     return string(date(td),"T",time(td))
 end
 
-function Base.string(tdz::TimeDateZone)
+function string(tdz::TimeDateZone)
     return string(date(tdz),"T",time(tdz)," ",zone(tdz))
 end
 
-Base.show(io::IO, td::TimeDate) = print(io, string(td))
-Base.show(io::IO, tdz::TimeDateZone) = print(io, string(tdz))
-Base.show(td::TimeDate) = print(Base.STDOUT, string(td))
-Base.show(tdz::TimeDateZone) = print(Base.STDOUT, string(tdz))
+function stringcompact(tdz::TimeDateZone)
+    zdt = ZonedDateTime(tdz)
+    offset = zdt.zone.offset
+    offsetstr = string(offset)
+    return string(date(tdz),"T",time(tdz),offsetstr)
+end
+
+show(io::IO, td::TimeDate) = print(io, string(td))
+show(io::IO, tdz::TimeDateZone) = print(io, string(tdz))
+show(td::TimeDate) = print(Base.STDOUT, string(td))
+show(tdz::TimeDateZone) = print(Base.STDOUT, string(tdz))
+
+showcompact(io::IO, td::TimeDate) = print(io, stringcompact(td))
+showcompact(io::IO, tdz::TimeDateZone) = print(io, stringcompact(tdz))
+showcompact(td::TimeDate) = print(Base.STDOUT, stringcompact(td))
+showcompact(tdz::TimeDateZone) = print(Base.STDOUT, stringcompact(tdz))
 
 splitstring(str::String, splitat::String) = map(String, split(str, splitat))
 
