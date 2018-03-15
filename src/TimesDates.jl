@@ -6,7 +6,7 @@ export TimeDate, TimeDateZone,
     TimeZone,
     timezone, time, date, tzdefault, tzdefault!,
     localtime, uttime, astimezone, TZ_LOCAL, TZ_UT,
-    stringwithzone
+    stringwithzoneff
 
 import Base: promote_rule, convert, string, show, showcompact,
              (==), (!=), (<=), (<), (>), (>=), isless, isequal,
@@ -21,44 +21,31 @@ import Dates: Time, Date, DateTime,
               year, month, day, hour, minute, second,
               millisecond, microsecond, nanosecond
 
-using Dates: CompoundPeriod
+using Dates: AbstractTime, CompoundPeriod
 using Dates
 
 import TimeZones: @tz_str, ZonedDateTime, TimeZone,
     localzone, astimezone, FixedTimeZone, VariableTimeZone,
     all_timezones, timezone_names
 
-include("timezones.jl")
-include("tzdefault.jl")
+# ======================================= #
+
+include("timezone/timezones.jl")
+include("timezone/tzdefault.jl")
 
 # ======================================= #
 
-mutable struct TimeDate
-    attime::Time
-    ondate::Date
-end
+include("type/nanotime.jl")
+include("type/timeparts.jl")
+include("type/constructor.jl")
+include("type/selector.jl")
+include("type/compare.jl")
+include("type/addsub.jl")
+include("type/string_show.jl")
 
-@inline time(x::TimeDate) = x.attime
-@inline date(x::TimeDate) = x.ondate
+# ======================================= #
 
-mutable struct TimeDateZone
-    attime::Time
-    ondate::Date
-    inzone::TimeZone
-end
-
-@inline time(x::TimeDateZone) = x.attime
-@inline date(x::TimeDateZone) = x.ondate
-@inline zone(x::TimeDateZone) = x.inzone
-@inline timezone(x::TimeDateZone) = x.inzone
-
-include("constructor.jl")
-include("selector.jl")
-
-include("interop.jl")
-
-include("compare.jl")
-include("addsub.jl")
-include("string_show.jl")
+include("justwork/slow_fast.jl")
+include("justwork/with_zone.jl")
 
 end # TimesDates
