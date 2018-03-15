@@ -10,11 +10,13 @@
 
 ----
 
-### [`TimeDate`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedate-is-nanosecond-resolved)
+## Types
 
-### [`TimeDateZone`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedatezone-is-nanosecond-resolved-and-zone-situated)
+- ### [`TimeDate`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedate-is-nanosecond-resolved)
 
-### [Examples](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#additional-examples)
+- ### [`TimeDateZone`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedatezone-is-nanosecond-resolved-and-zone-situated)
+
+## [Examples](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#additional-examples)
 
 - #### [get components](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-components)
 
@@ -26,9 +28,9 @@
 
 - #### [localtime() and uttime()](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#use-localtime-and-uttime)
 
-----
-
 ### [The Design](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design)
+
+----
 
 ### [Setup](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#setup)
 
