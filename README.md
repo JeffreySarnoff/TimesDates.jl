@@ -10,9 +10,6 @@
 
 ----
 
-### [Setup](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#setup)
-
-
 ### [`TimeDate`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedate-is-nanosecond-resolved)
 
 ### [`TimeDateZone`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedatezone-is-nanosecond-resolved-and-zone-situated)
@@ -33,21 +30,11 @@
 
 ### [The Design](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design)
 
+### [Setup](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#setup)
+
 ### [Acknowledgments](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#acknowledgements)
 
->&nbsp;
-
-## Setup
-
-```julia
-using Pkg3
-add TimesDates
-```
-or
-```julia
-using Pkg
-add("TimesDates")
-```
+----
 
 ## In Use
 
@@ -216,6 +203,21 @@ julia> slowtime = highrestime - fasttime
 The general approach is separate the date, slowtime, fasttime, and timezone (if appropriate), then use the date, slowtime and timezone (if appropriate) to obtain a coarse result using the facilities provided by the `Date` and `TimeZones` packages.  We refine the coarse result by adding or subtracting the fasttime, as appropriate.
 
 tbd [About TimesDates](https://jeffreysarnoff.github.io/TimesDates.jl/)
+
+
+## Setup
+
+```julia
+using Pkg3
+add TimesDates
+```
+or
+```julia
+using Pkg
+add("TimesDates")
+```
+
+
 
 ## Acknowledgements
 
