@@ -120,10 +120,10 @@ end
 
 
 (-)(atd::TimeDate, adt::DateTime) = (-)(atd, TimeDate(adt))
-(-)(adt::DateTime, atd::TimeDate) = (-)(TimeDate(atd), atd)
+(-)(adt::DateTime, atd::TimeDate) = (-)(TimeDate(adt), atd)
 (-)(atdz::TimeDateZone, adt::DateTime) = (-)(atdz, ZonedDateTime(adt))
-(-)(adt::DateTime, atdz::TimeDateZone) = (-)(ZonedDateTime(atd), atdz)
+(-)(adt::DateTime, atdz::TimeDateZone) = (-)(ZonedDateTime(adt), atdz)
 (-)(atdz::TimeDateZone, adt::ZonedDateTime) =
     TimeDateZone((-)(ZonedDateTime(atdz), ZonedDateTime(adt)))
 (-)(adt::ZonedDateTime, atdz::TimeDateZone) =
-    TimeDateZone((-)(ZonedDateTime(atd), ZonedDateTime(atdz)))
+    TimeDateZone((-)(ZonedDateTime(adt), ZonedDateTime(atdz)))
