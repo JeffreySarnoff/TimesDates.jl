@@ -36,6 +36,18 @@ showcompact(tdz::TimeDateZone) = print(Base.STDOUT, stringcompact(tdz))
 
 splitstring(str::String, splitat::String) = map(String, split(str, splitat))
 
+function TimeDate(str::String)
+    !contains(str, "T") && throw(ErrorException("\"$str\" is not recognized as a TimeDate"))
+
+    datepart, inttimepart, fractimepart = datetimeparts(str)
+
+    dateof = parse(Date, datepart)
+    timeof = parse(Time, inttimepart)
+    timeof = fractionaltime(timeof, fractimepart)
+
+    return TimeDate(timeof, dateof)
+end
+
 function TimeDateZone(str::String)
     !contains(str, "T") && throw(ErrorException("\"$str\" is not recognized as a TimeDateZone"))
 
