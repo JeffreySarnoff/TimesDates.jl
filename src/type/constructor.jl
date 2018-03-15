@@ -44,6 +44,11 @@ Date(tdz::TimeDateZone) = tdz.on_date
 Time(tdz::TimeDateZone) = tdz.at_time
 DateTime(tdz::TimeDateZone) = tdz.on_date + slowtime(tdz.at_time)
 
+function ZonedDateTime(tdz::TimeDateZone)
+    datetime = tdz.on_date + slowtime(tdz.at_time)
+    return ZonedDateTime(datetime, tdz.in_zone)
+end
+
 # ============= #
 
 convert(::Type{CompoundPeriod},x::CompoundPeriod) = x
