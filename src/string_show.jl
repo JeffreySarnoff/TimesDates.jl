@@ -36,8 +36,8 @@ showcompact(tdz::TimeDateZone) = print(Base.STDOUT, stringcompact(tdz))
 
 splitstring(str::String, splitat::String) = map(String, split(str, splitat))
 
-function TimeDate(str::String)
-    !contains(str, "T") && throw(ErrorException("\"$str\" is not recognized as a TimeDate"))
+function TimeDateZone(str::String)
+    !contains(str, "T") && throw(ErrorException("\"$str\" is not recognized as a TimeDateZone"))
 
     datepart, rest = split(str, "T")
     if contains(rest, " ")
@@ -49,7 +49,7 @@ function TimeDate(str::String)
         timepart, zonepart = split(rest, "-")
         zonepart = string("-", zonepart)
     else
-        throw(ErrorException("\"$str\" is not recognized as a TimeDate"))
+        throw(ErrorException("\"$str\" is not recognized as a TimeDateZone"))
     end
     
     if contains(timepart,".")
