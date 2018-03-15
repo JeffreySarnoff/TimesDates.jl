@@ -182,6 +182,13 @@ The general approach is separate the date, slowtime, fasttime, and timezone (if 
 
 tbd [About TimesDates](https://jeffreysarnoff.github.io/TimesDates.jl/)
 
+## Acknowledgements
+
+This work is built atop `Dates` and `TimeZones`.    
+While both are collaborative works, a few people deserve mention:
+- `Dates`: Jacob Quinn and Stefan Karpinski
+- `TimeZones`: Curtis Vogt
+
 ## Comments are Welcomed
 
 http://github.com/JeffreySarnoff/TimesDates.jl
