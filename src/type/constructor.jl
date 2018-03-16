@@ -29,6 +29,15 @@ DateTime(tm::Time) = tzdefault() === tz"UTC" ?
 
 
 
+
+
+TimeDateZone(on_date::Date, at_time::Time, in_zone::FixedTimeZone, at_zone::FixedTimeZone) =
+    TimeDateZone(at_time, on_date, in_zone, at_zone)
+
+TimeDateZone(on_date::Date, at_time::Time, in_zone::VariableTimeZone, at_zone::FixedTimeZone) =
+    TimeDateZone(at_time, on_date, in_zone, at_zone)
+
+
 TimeDateZone(tm::Time, dt::Date) = TimeDateZone(Time(dtm), Date(dtm), tzdefault())
 
 TimeDateZone(dtm::DateTime) = TimeDateZone(Time(dtm), Date(dtm))
