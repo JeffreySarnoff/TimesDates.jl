@@ -28,11 +28,6 @@ import TimeZones: @tz_str, ZonedDateTime, TimeZone,
     localzone, astimezone, FixedTimeZone, VariableTimeZone,
     all_timezones, timezone_names
 
-# ======================================= #
-
-include("timezone/timezones.jl")
-include("timezone/tzdefault.jl")
-include("timezone/astimezone.jl")
 
 # ======================================= #
 
@@ -44,6 +39,13 @@ include("timesupport/slow_fast.jl")
 
 include("type/nanotime.jl")
 include("type/timeparts.jl")
+
+# ======================================= #
+include("timezone/timezones.jl")
+include("timezone/tzdefault.jl")
+include("timezone/astimezone.jl")
+# ======================================= #
+
 include("type/constructor.jl")
 include("type/selector.jl")
 include("type/compare.jl")
@@ -52,7 +54,5 @@ include("type/string_show.jl")
 
 # ======================================= #
 
-
-# ======================================= #
 
 end # TimesDates
