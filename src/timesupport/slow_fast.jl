@@ -39,12 +39,12 @@
 """ fastnanos
 
 
-@inline fasttime(x::T) where {T<:NanosecTime} = Microsecond(x) + Nanosecond(x)
-@inline slowtime(x::T) where {T<:NanosecTime} = Time(x) - fasttime(x)
-@inline subsecs(x::T) where {T<:NanosecTime} = Millisecond(x) + fasttime(x)
-@inline secstime(x::T) where {T<:NanosecTime} = Time(x) - subsecs(x)
+@inline fasttime(x::T) where {T<:NanosecondTime} = Microsecond(x) + Nanosecond(x)
+@inline slowtime(x::T) where {T<:NanosecondTime} = Time(x) - fasttime(x)
+@inline subsecs(x::T) where {T<:NanosecondTime} = Millisecond(x) + fasttime(x)
+@inline secstime(x::T) where {T<:NanosecondTime} = Time(x) - subsecs(x)
 
-@inline fastnanos(x::T) where {T<:NanosecTime} =
+@inline fastnanos(x::T) where {T<:NanosecondTime} =
     sum(map(Nanosecond,TimesDates.fasttime(x).periods))
 
 @inline fasttime(x::DateTime) = Nanosecond(0)
