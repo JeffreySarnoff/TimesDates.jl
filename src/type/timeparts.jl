@@ -1,10 +1,10 @@
-struct TimeDateParts <: HighResParts
+struct TimeDateParts <: NanosecondTimeBase
     date::Date
     slowtime::Time
     fasttime::Nanosecond
 end
 
-struct TimeDateZoneParts <: HighResParts
+struct TimeDateZoneParts <: NanosecondTimeBase
     date::Date
     slowtime::Time
     fasttime::Nanosecond
