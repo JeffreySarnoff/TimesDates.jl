@@ -5,7 +5,7 @@ module TimesDates
 export TimeDate, TimeDateZone,
     TimeZone,
     timezone, time, date, tzdefault, tzdefault!,
-    localtime, uttime, astimezone, TZ_LOCAL, TZ_UT,
+    localtime, utime, astimezone, TZ_LOCAL, TZ_UT,
     stringwithzoneff
 
 import Base: promote_rule, convert, string, show, showcompact,
@@ -47,5 +47,6 @@ include("type/string_show.jl")
 
 include("justwork/slow_fast.jl")
 include("justwork/with_zone.jl")
+include("justwork/utime_localtime.jl")
 
 end # TimesDates
