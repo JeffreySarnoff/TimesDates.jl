@@ -24,6 +24,8 @@
 
 - ### [interconvert](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#interconvert)
 
+- ### [parse times with timezones](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#parse-times-with-timezones)
+
 - ### [adjust accurately](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#adjust-with-precision)
 
 - ### [set the default timezone](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-and-set-the-timezone-to-be-used-when-no-zone-is-specified)
@@ -113,6 +115,33 @@ julia> datetime = DateTime("2011-02-05T11:22:33")
 julia> timedate = TimeDate(datetime); timedate, DateTime(timedate)
 (2011-02-05T11:22:33, 2011-02-05T11:22:33)
 ```
+#### parse times with timezones
+```julia
+julia> using TimesDates, TimeZones, Dates
+
+julia> datetime = DateTime("2011-05-08T12:11:15.050");
+julia> zdt = ZonedDateTime(datetime, tz"Australia/Sydney")
+2011-05-08T12:11:15.05+10:00
+
+julia> tdz = TimeDateZone(zdt)
+2011-05-08T12:11:15.05+10:00
+
+julia> tdz += Microsecond(11)
+2011-05-08T12:11:15.050011+10:00
+
+julia> string(tdz)
+"2011-05-08T12:11:15.050011+10:00"
+
+julia> TimeDateZone(string(tdz))
+2011-05-08T12:11:15.050011+10:00
+
+julia> stringwithzone(tdz)
+"2011-05-08T12:11:15.050011 Australia/Sydney"
+
+julia> TimeDateZone(stringwithzone(tdz))
+2011-05-08T12:11:15.050011+10:00
+```
+
 #### Adjust with precision.
 ```julia
 julia> using Dates, TimesDates
