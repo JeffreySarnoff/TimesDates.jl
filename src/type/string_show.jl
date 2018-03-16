@@ -62,17 +62,30 @@ function TimeDateZone(str::String)
         timedatestr, tzname = splitstring(str, " ")
         timedate    = TimeDate(timedatestr)
         tz          = TimeZone(tzname)
-        return TimeDateZone(timedate, tz)
-    end
-    
+        TimeDateZone(timedate, tz)
+    else
+        timedatestr = str[1:end-6]
+        tzoffsetstr = str[end-5:end]
+        timedate = TimeDate(timedatestr)
+        tm = Time(timedate)
+        dt = Date(timedate)
+        tzstr = string("UTC",tzoffsetstr)
+        tz = TimeZone(tzstr)
+        TimeDateZone(tm, dt, tz)
+    end   
+end
+
+#=
     if contains(str, "+")
         timedatestr, tzoffsetstr = splitstring(str, "+")
         timedate = TimeDate(timedatestr)
         tm = Time(timedate)
         dt = Date(timedate)
-        tzoffsetstr = string("UTC+",tzoffsetstr)
-        tz = TimeZone(tzoffsetstr)
+        tzstr = string("UTC+",tzoffsetstr)
+        tz = TimeZone(tzstr)
         return TimeDateZone(tm, dt, tz)
+    else
+        
     end
     
     timedatestr = str[1:end-6]
@@ -84,7 +97,7 @@ function TimeDateZone(str::String)
     tz = TimeZone(string("UTC",tzoffsetstr))
     return TimeDateZone(timedate, tz)
 end
-
+=#
 
 #=
         tzoffset
