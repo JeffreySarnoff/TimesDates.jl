@@ -94,6 +94,13 @@ end
 
 # ============= #
 
+CompoundPeriod(dt::Date) = Year(dt) + Month(dt) + Day(dt)
+CompoundPeriod(dtm::DateTime) =
+   CompoundPeriod(Date(dtm)) + CompoundPeriod(Time(dtm))
+
+CompoundPeriod(td::TimeDate) =
+    CompoundPeriod(dtm.on_date) + CompoundPeriod(dtm.at_time)
+
 convert(::Type{CompoundPeriod},x::CompoundPeriod) = x
 
 function convert(::Type{Time}, cp::CompoundPeriod)
@@ -104,83 +111,11 @@ end
 
 isempty(x::Dates.CompoundPeriod) = x == CompoundPeriod()
 
-#=
-TimeDate(x::TimeDate) = x
-TimeDateZone(x::TimeDateZone) = x
-
-TimeDate(x::TimeDateZone) = TimeDate(time(x), date(x))
-TimeDateZone(x::TimeDate) = TimeDateZone(time(x), date(x), tzdefault())
-TimeDateZone(x::TimeDate, z::TimeZone) = TimeDateZone(time(x), date(x), z)
-
-TimeDate(z::Date) =
-    TimeDate(Time(0), Date(z))
-TimeDateZone(z::Date) =
-    TimeDateZone(Time(0), Date(z), tzdefault())
-TimeDateZone(z::Date, tz::TimeZone) =
-    TimeDateZone(Time(0), Date(z), tz)
-
-TimeDate(z::Time) =
-    TimeDate(z, Date(now()))
-TimeDateZone(z::Time) =
-    TimeDateZone(Time(z), Date(now()), tzdefault())
-TimeDateZone(z::Time, tz::TimeZone) =
-    TimeDateZone(Time(z), Date(now()), tz)
-
-TimeDate(z::DateTime) =
-    TimeDate(Time(z), Date(z))
-TimeDateZone(z::DateTime) =
-    TimeDateZone(Time(z), Date(z), tzdefault())
-TimeDateZone(z::DateTime, tz::TimeZone) =
-    TimeDateZone(Time(z), Date(z), tz)
-
-# ======================================= #
-
-function TimeDate(zdt::ZonedDateTime)
-    zdt = astimezone(zdt, tzdefault())
-    datetime = DateTime(zdt)
-    return TimeDate(datetime)
+function convert(::Type{CompoundPeriod}, dt::Date)
+    return Year(dt)+Month(dt)+Day(dt)
 end
 
-function TimeDateZone(zdt::ZonedDateTime)
-    datetime = DateTime(zdt)
-    tzone = timezone(zdt)
-    return TimeDateZone(datetime, tzone)
-end
+convert(::Type{CompoundPeriod}, tm::Time) = CompoundPeriod(tm)
 
-function DateTime(td::TimeDate)
-    at_time, on_date = td.at_time, td.on_date
-    at_time = at_time - Microsecond(at_time) - Nanosecond(at_time)
-    return on_date + at_time
-end
-
-function DateTime(tdz::TimeDateZone)
-    return DateTime(TimeDate(tdz))
-end
-
-function ZonedDateTime(td::TimeDate)
-    at_time, on_date = td.at_time, td.on_date
-    at_time = at_time - Microsecond(at_time) - Nanosecond(at_time)
-    return ZonedDateTime(on_date + at_time, tzdefault())
-end
-
-function ZonedDateTime(td::TimeDate, zone::TimeZone)
-    at_time, on_date = td.at_time, td.on_date
-    at_time = at_time - Microsecond(at_time) - Nanosecond(at_time)
-    return ZonedDateTime(on_date + at_time, zone)
-end
-
-function ZonedDateTime(tdz::TimeDateZone)
-    at_time, on_date = tdz.at_time, tdz.on_date
-    at_time = at_time - Microsecond(at_time) - Nanosecond(at_time)
-    return ZonedDateTime(on_date + at_time, tdz.in_zone)
-end
-
-
-Date(tdz::TimeDateZone) = tdz.on_date
-Time(tdz::TimeDateZone) = tdz.at_time
-TimeZone(tdz::TimeDateZone) = tdz.in_zone
-
-Date(td::TimeDate) = td.on_date
-Time(td::TimeDate) = td.at_time
-=#
-
+convert(::Type{CompoundPeriod}, dtm::DateTime) =
+    CompoundPeriod(Date(dtm)) + CompoundPeriod(Time(tm))
