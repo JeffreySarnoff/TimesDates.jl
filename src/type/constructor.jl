@@ -30,7 +30,7 @@ TimeDateZone(tm::Time) = tzdefault() === tz"UTC" ?
                         TimeDateZone(tm, Date(now(Dates.UTC))) :
                         TimeDateZone(tm, Date(now()))
 
-function TimeDateZone(at_time::Time, on_date::Date, in_zone::Z) where {Z<:TimeZone}
+function TimeDateZone(at_time::Time, on_date::Date, in_zone::Z) where {Z<:AkoTimeZone}
     fast_time = fasttime(at_time)
     slow_time = at_time - fast_time
     if in_zone !== TZ_UT
@@ -60,7 +60,7 @@ function TimeDateZone(td::TimeDate)
     return TimeDateZone(at_time, on_date, in_zone, at_zone)
 end
 
-function TimeDateZone(td::TimeDate, tz::Z) where {Z<:TimeZone}
+function TimeDateZone(td::TimeDate, tz::Z) where {Z<:AkoTimeZone}
    at_time = Time(td)
    on_date = Date(td)
    in_zone = tz
