@@ -260,6 +260,7 @@ This work is built atop `Dates` and `TimeZones`.
 While both are collaborative works, a few people deserve mention:
 - `Dates`: Jacob Quinn and Stefan Karpinski
 - `TimeZones`: Curtis Vogt
+- _groundwork_: Avik Sengupta
 
 ## Comments and Pull Requests are welcomed
 
