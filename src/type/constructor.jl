@@ -60,7 +60,7 @@ function TimeDateZone(td::TimeDate)
     return TimeDateZone(at_time, on_date, in_zone, at_zone)
 end
 
-TimeDateZone(td::TimeDate, tz::Z) where {Z<:TimeZone) =
+TimeDateZone(td::TimeDate, tz::Z) where {Z<:TimeZone} =
    TimeDateZone(Time(td), Date(td), tz)
      
 function TimeDateZone(zdt::ZonedDateTime)
