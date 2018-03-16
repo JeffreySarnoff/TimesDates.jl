@@ -30,10 +30,13 @@ mutable struct TimeDateZone{Z} <: NanosecondBasis
 
     # ensure other constructors will be give explictly
     
-    function TimeDateZone{Z}(at_time::Time, on_date::Date, in_zone::Z, at_zone::FixedTimeZone) where {Z<:AkoTimeZone}
+    function TimeDateZone{Z}(at_time::Time, on_date::Date, at_zone::FixedTimeZone)
+        return new{Z}(at_time, on_date, at_zone, at_zone)
+    end
+    function TimeDateZone{Z}(at_time::Time, on_date::Date, in_zone::FixedTimeZone, at_zone::FixedTimeZone)
         return new{Z}(at_time, on_date, in_zone, at_zone)
     end
-    function TimeDateZone{Z}(on_date::Date, at_time::Time, in_zone::Z, at_zone::FixedTimeZone) where {Z<:AkoTimeZone}
+    function TimeDateZone{Z}(at_time::Time, on_date::Date, in_zone::VariableTimeZone, at_zone::FixedTimeZone)
         return new{Z}(at_time, on_date, in_zone, at_zone)
     end
 end
