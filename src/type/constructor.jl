@@ -60,9 +60,13 @@ function TimeDateZone(td::TimeDate)
     return TimeDateZone(at_time, on_date, in_zone, at_zone)
 end
 
-TimeDateZone(td::TimeDate, tz::Z) where {Z<:TimeZone} =
-   TimeDateZone(Time(td), Date(td), tz)
-     
+function TimeDateZone(td::TimeDate, tz::Z) where {Z<:TimeZone}
+   at_time = Time(td)
+   on_date = Date(td)
+   in_zone = tz
+   return TimeDateZone(at_time, on_date, in_zone)
+end  
+  
 function TimeDateZone(zdt::ZonedDateTime)
     datetime = zdt.utc_datetime
     at_time = Time(datetime)
