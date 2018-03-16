@@ -32,7 +32,7 @@ import TimeZones: @tz_str, ZonedDateTime, TimeZone,
 
 include("timezone/timezones.jl")
 include("timezone/tzdefault.jl")
-include("timezone/withzone.jl")
+include("timezone/astimezone.jl")
 
 # ======================================= #
 
