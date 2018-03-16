@@ -34,3 +34,21 @@ tdz2 = TimeDateZone(td1, tz"America/New_York")
 
 @test TimeDateZone(dtz1) == tdz1
 @test TimeDateZone(dtz2) == tdz2
+
+
+str2000ms    = "2000-01-01T00:00:00.123"
+str2000ms_ut = string(str2000ms, "+00:00")
+str2000ms_ny = string(str2000ms, "-05:00")
+
+str2000ns    = "2000-01-01T00:00:00.123456789"
+str2000ns_ut = string(str2000ns, "+00:00")
+str2000ns_ny = string(str2000ns, "-05:00")
+
+zdt2000_ut = ZonedDateTime(str2000ms_ut)
+zdt2000_ny = ZonedDateTime(str2000ms_ny)
+
+tdz2000_ut = TimeDateZone(str2000ns_ut)
+tdz2000_ny = TimeDateZone(str2000ns_ny)
+
+@test  zdt2000_ut == ZonedDateTime(tdz2000_ut)
+@test  zdt2000_ny == ZonedDateTime(tdz2000_ny)
