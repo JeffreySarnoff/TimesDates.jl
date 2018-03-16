@@ -64,6 +64,30 @@ function TimeDateZone(str::String)
         tz          = TimeZone(tzname)
         return TimeDateZone(timedate, tz)
     end
+    
+    if contains(str, "+")
+        timedatestr, tzoffsetstr = splitstring(str, "+")
+        timedate = TimeDate(timedatestr)
+        tzoffsetstr = string(tzoffsetstr[2:end], ":00")
+        tzoffset = parse(Time,tzoffsetstr)
+        tz = TimeZone(tzoffset)
+        return TimeDateZone(timedate, tz)
+    end
+    
+    timedatestr = str[1:end-6]
+    timedate = TimeDate(timedatestr)
+    
+    tzoffsetstr   = str[end-5:end]
+    tzoffsetstr = string(tzoffsetstr[2:end], ":00")
+    tzoffset = parse(Time,tzoffsetstr)
+    tz = TimeZone(string("UTC",tzoffsetstr))
+    return TimeDateZone(timedate, tz)
+end
+
+
+#=
+        tzoffset
+        tzoffsetstr = string("+", tzoffsetstr)
         
     datepart, rest = splitstring(str, "T")
     if contains(rest, " ")
@@ -105,7 +129,7 @@ function TimeDateZone(str::String)
 
     return tdz
 end
-
+=#
 function fractionaltime(at_time::Time, fractimepart::String)
     n = length(fractimepart)
     if n > 0
