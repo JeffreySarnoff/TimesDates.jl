@@ -32,15 +32,12 @@ import TimeZones: @tz_str, ZonedDateTime, TimeZone,
 # ======================================= #
 
 include("timesupport/ctime.jl")
-include("timesupport/utime_localtime.jl")
-include("timesupport/slow_fast.jl")
-
-# ======================================= #
-
 include("type/nanotime.jl")
 include("type/timeparts.jl")
 
-# ======================================= #
+include("timesupport/utime_localtime.jl")
+include("timesupport/slow_fast.jl")
+
 include("timezone/timezones.jl")
 include("timezone/tzdefault.jl")
 include("timezone/astimezone.jl")
