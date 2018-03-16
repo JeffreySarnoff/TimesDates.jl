@@ -70,7 +70,7 @@ function TimeDateZone(str::String)
         timedate = TimeDate(timedatestr)
         tm = Time(timedate)
         dt = Date(timedate)
-        tzoffsetstr = string("UTC",tzoffsetstr)
+        tzoffsetstr = string("UTC+",tzoffsetstr)
         tz = TimeZone(tzoffsetstr)
         return TimeDateZone(tm, dt, tz)
     end
