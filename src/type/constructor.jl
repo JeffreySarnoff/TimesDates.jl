@@ -20,6 +20,13 @@ end
      
 TimeDate(zdt::ZonedDateTime) = TimeDate(TimeDateZone(zdt))
 
+Date(td::TimeDate) = td.on_date
+Time(td::TimeDate) = td.at_time
+DateTime(td::TimeDate) = td.on_date + slowtime(td.at_time)
+DateTime(tm::Time) = tzdefault() === tz"UTC" ?
+                        Date(now(Dates.UTC)) + slowtime(tm) :
+                        Date(now()) + slowtime(tm)
+
 
 
 TimeDateZone(tm::Time, dt::Date) = TimeDateZone(Time(dtm), Date(dtm), tzdefault())
