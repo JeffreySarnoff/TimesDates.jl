@@ -43,11 +43,11 @@ function TimeDateZone(at_time::Time, on_date::Date, in_zone::Z) where {Z<:TimeZo
 end
 
 
-function TimeDateZone(tdz::TimeDate)
-    at_time = tdz.at_time  # utc time
+function TimeDateZone(td::TimeDate)
+    at_time = td.at_time  # utc time
     fast_time = fasttime(at_time)
     slow_time = at_time - fast_time
-    on_date = tdz.on_date  # utc date
+    on_date = td.on_date  # utc date
     in_zone = tzdefault()
     # when the default timezone is other than UT
     # this becomes the timezone to apply
@@ -60,6 +60,8 @@ function TimeDateZone(tdz::TimeDate)
     return TimeDateZone(at_time, on_date, in_zone, at_zone)
 end
 
+TimeDateZone(td::TimeDate, tz::Z) where {Z<:TimeZone) =
+   TimeDateZone(Time(td), Date(td), tz)
      
 function TimeDateZone(zdt::ZonedDateTime)
     datetime = zdt.utc_datetime
