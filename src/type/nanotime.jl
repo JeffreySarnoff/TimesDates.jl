@@ -2,7 +2,7 @@ abstract type NanosecondTime      <: AbstractTime   end
 abstract type NanosecondTimeBase  <: NanosecondTime end  # to define Periods, CompoundPeriods
 abstract type NanosecondBasis     <: NanosecondTime end  # a structural trait, inherited
 
-mutable struct TimeDate <: NanosecondBasis
+struct TimeDate <: NanosecondBasis
     at_time::Time
     on_date::Date
     
@@ -22,7 +22,7 @@ end
 TimeDate(x::TimeDate) = x
 
 
-mutable struct TimeDateZone <: NanosecondBasis
+struct TimeDateZone <: NanosecondBasis
     at_time::Time
     on_date::Date
     in_zone::AkoTimeZone               # one of {FixedTimeZone, VariableTimeZone}
