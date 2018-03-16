@@ -29,6 +29,8 @@ import TimeZones: @tz_str, ZonedDateTime, TimeZone,
     localzone, astimezone, FixedTimeZone, VariableTimeZone,
     all_timezones, timezone_names
 
+const AkoTimeZone = Union{FixedTimeZone, VariableTimeZone}
+
 
 # ======================================= #
 
