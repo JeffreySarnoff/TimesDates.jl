@@ -33,10 +33,10 @@
 - ### [localtime() and utime()](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#use-localtime-and-utime)
 ----
 
-## [design notes](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design)
-
 
 ----
+
+## [design notes](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design)
 
 ### [Setup](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#setup)
 
