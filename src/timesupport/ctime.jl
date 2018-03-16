@@ -260,8 +260,6 @@ function utime_from_localtime(tm::Time, dt::Date)
     return u_time, u_date
 end
 
-utime_from_localtime(dt::Date) = utime_from_localtime(dt + Time(0))
-
 function localtime_from_utime(dt::DateTime)
     millis = Millisecond(dt)
     sec = floor(Int64, datetime2unix(dt))
