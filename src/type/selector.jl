@@ -1,5 +1,3 @@
-
-
 Year(td::TimeDate)   = Year(td.on_date)
 Month(td::TimeDate)  = Month(td.on_date)
 Day(td::TimeDate)    = Day(td.on_date)
