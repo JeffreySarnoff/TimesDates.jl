@@ -1,9 +1,9 @@
 
-localtime(::Type{TimeDate}) = TimeDate(Dates.now())
-localtime(::Type{TimeDateZone}) = TimeDateZone(Dates.now(), TZ_LOCAL)
+localtime(::Type{TimeDate}) = TimeDate(now())
+localtime(::Type{TimeDateZone}) = TimeDateZone(now(), TZ_LOCAL)
 
-utime(::Type{TimeDate}) = TimeDate(Dates.now(Dates.UTC))
-utime(::Type{TimeDateZone}) = TimeDateZone(Dates.now(UTC), TZ_UT)
+utime(::Type{TimeDate}) = TimeDate(now(Dates.UTC))
+utime(::Type{TimeDateZone}) = TimeDateZone(now(Dates.UTC), TZ_UT)
 
 localtime(x::TimeDate) = astimezone(TimeDateZone(x), TZ_LOCAL)
 utime(x::TimeDate) = astimezone(TimeDateZone(x), TZ_UT)
