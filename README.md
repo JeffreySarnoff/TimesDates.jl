@@ -20,9 +20,9 @@
 
 ## Examples
 
-- ### [get components](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-components)
+- ### [get components](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-components-1)
 
-- ### [interconvert](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#interconvert)
+- ### [interconvert](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#interconvert-1)
 
 - ### [parse times with timezones](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#parse-times-with-timezones-1)
 
@@ -30,7 +30,7 @@
 
 - ### [set the default timezone](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-and-set-the-timezone-to-be-used-when-no-zone-is-specified)
 
-- ### [localtime() and uttime()](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#use-localtime-and-uttime)
+- ### [localtime() and utime()](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#use-localtime-and-utime)
 ----
 
 ## [The Design](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design)
@@ -169,7 +169,7 @@ America/New_York (UTC-5/UTC-4)
 julia> tzdefault!(tz"Europe/London"); tzdefault()
 Europe/London (UTC+0/UTC+1)
 ```
-#### use `localtime` and `uttime`
+#### use `localtime` and `utime`
 ```julia
 julia> using Dates, TimeZones, TimesDates
 
@@ -179,13 +179,13 @@ America/New_York (UTC-5/UTC-4)
 julia> localtime()
 2018-03-15T14:50:28.719-04:00
 
-julia> uttime()
+julia> utime()
 2018-03-15T18:50:30.282+00:00
 
 julia> localtime(TimeDate), localtime(TimeDateZone)
 (2018-03-15T14:50:30.291, 2018-03-15T14:50:30.294-04:00)
 
-julia> uttime(TimeDate), uttime(TimeDateZone)
+julia> utime(TimeDate), utime(TimeDateZone)
 (2018-03-15T18:50:30.484, 2018-03-15T18:50:30.489+00:00)
 
 julia> dtm = now() - Month(7) - Minute(55)
@@ -194,7 +194,7 @@ julia> dtm = now() - Month(7) - Minute(55)
 julia> localtime(dtm)
 2017-08-15T13:55:30.491-04:00
 
-julia> uttime(dtm)
+julia> utime(dtm)
 2017-08-15T17:55:30.491+00:00
 ```
 
