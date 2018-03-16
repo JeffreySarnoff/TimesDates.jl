@@ -58,6 +58,13 @@ end
 function TimeDateZone(str::String)
     !contains(str, "T") && throw(ErrorException("\"$str\" is not recognized as a TimeDateZone"))
 
+    if contains(str, " ")
+        timedatestr, tzname = splitstring(str, " ")
+        timedate    = TimeDate(timedatestr)
+        tz          = TimeZone(tzname)
+        return TimeDateZone(timedate, tz)
+    end
+        
     datepart, rest = splitstring(str, "T")
     if contains(rest, " ")
         timepart, zonepart = splitstring(rest, " ")
