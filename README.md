@@ -159,6 +159,8 @@ julia> utime(dtm)
 
 This package exists to provide the community with two types.  One type `TimeDate` holds the caledar date with the time of day in nanoseconds.  The other `TimeDateZone` holds the the caledar date with the time of day in nanoseconds and the timezone.
 
+The general approach is separate the date, slowtime, fasttime, and timezone (if appropriate), then use the date, slowtime and timezone (if appropriate) to obtain a coarse result using the facilities provided by the `Date` and `TimeZones` packages.  We refine the coarse result by adding or subtracting the fasttime, as appropriate.
+
 The inner dynamics rely upon the `Period` types (`Year` .. `Day`, `Hour`, .., `Nanosecond`) and `CompoundPeriod` all provided by `Dates`.  We distinguish _slowtime_, which is millisecond resolved, from a nanosecond resolved _fasttime_.
 
 ```julia
@@ -185,8 +187,6 @@ julia> fasttime = Microsecond(highrestime) + Nanosecond(highrestime)
 julia> slowtime = highrestime - fasttime
 06:41:33.643
 ```
-
-The general approach is separate the date, slowtime, fasttime, and timezone (if appropriate), then use the date, slowtime and timezone (if appropriate) to obtain a coarse result using the facilities provided by the `Date` and `TimeZones` packages.  We refine the coarse result by adding or subtracting the fasttime, as appropriate.
 
 tbd [About TimesDates](https://jeffreysarnoff.github.io/TimesDates.jl/)
 
