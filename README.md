@@ -10,37 +10,31 @@
 
 ----
 
-## Types
-
-- ### [`TimeDate`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedate-is-nanosecond-resolved)
-
-- ### [`TimeDateZone`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedatezone-is-nanosecond-resolved-and-zone-situated)
-
-----
-
-## Examples
-
-- ### [get components](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-components)
-
-- ### [interconvert](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#interconvert)
-
-- ### [adjust accurately](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#adjust-with-precision)
-
-- ### [set the default timezone](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-and-set-the-timezone-to-be-used-when-no-zone-is-specified)
-
-- ### [localtime() and uttime()](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#use-localtime-and-uttime)
-----
-
-## [The Design](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design)
-
-
-----
-
 ### [Setup](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#setup)
+
+### [`TimeDate`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedate-is-nanosecond-resolved)
+
+### [`TimeDateZone`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedatezone-is-nanosecond-resolved-and-zone-situated)
+
+### [Examples](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#additional-examples)
+
+### [The Design](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design)
 
 ### [Acknowledgments](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#acknowledgements)
 
 ----
+
+## Setup
+
+```julia
+using Pkg3
+add TimesDates
+```
+or
+```julia
+using Pkg
+add("TimesDates")
+```
 
 ## In Use
 
@@ -84,7 +78,7 @@ julia> ZonedDateTime(tdz)
 
 ### Additional Examples
 
-#### Get components.
+Get components.
 ```julia
 julia> using Dates, TimesDates
 
@@ -97,7 +91,7 @@ julia> Month(timedate), Microsecond(timedate)
 julia> month(timedate), microsecond(timedate)
 (3, 968)
 ```
-#### Interconvert.
+Interconvert.
 ```julia
 julia> using Dates, TimesDates
 
@@ -113,20 +107,7 @@ julia> datetime = DateTime("2011-02-05T11:22:33")
 julia> timedate = TimeDate(datetime); timedate, DateTime(timedate)
 (2011-02-05T11:22:33, 2011-02-05T11:22:33)
 ```
-#### Adjust with precision.
-```julia
-julia> using Dates, TimesDates
-
-julia> datetime = DateTime("2001-05-10T23:59:59.999")
-2001-05-10T23:59:59.999
-
-julia> timedate = TimeDate(datetime)
-2001-05-10T23:59:59.999
-
-julia> timedate = TimeDate(datetime, Millisecond(1)+Nanosecond(1))
-2001-05-10T00:00:00.000000001
-```
-#### Get and Set the timezone to be used when no zone is specified.    
+Get and Set the timezone to be used when no zone is specified.
 Without this setting, UTC is used as the default.
 ```julia
 julia> using Dates, TimeZones, TimesDates
@@ -140,7 +121,7 @@ America/New_York (UTC-5/UTC-4)
 julia> tzdefault!(tz"Europe/London"); tzdefault()
 Europe/London (UTC+0/UTC+1)
 ```
-#### Use `localtime` and `uttime`.
+Use `localtime` and `utime`.
 ```julia
 julia> using Dates, TimeZones, TimesDates
 
@@ -150,13 +131,13 @@ America/New_York (UTC-5/UTC-4)
 julia> localtime()
 2018-03-15T14:50:28.719-04:00
 
-julia> uttime()
+julia> utime()
 2018-03-15T18:50:30.282+00:00
 
 julia> localtime(TimeDate), localtime(TimeDateZone)
 (2018-03-15T14:50:30.291, 2018-03-15T14:50:30.294-04:00)
 
-julia> uttime(TimeDate), uttime(TimeDateZone)
+julia> utime(TimeDate), utime(TimeDateZone)
 (2018-03-15T18:50:30.484, 2018-03-15T18:50:30.489+00:00)
 
 julia> dtm = now() - Month(7) - Minute(55)
@@ -165,11 +146,10 @@ julia> dtm = now() - Month(7) - Minute(55)
 julia> localtime(dtm)
 2017-08-15T13:55:30.491-04:00
 
-julia> uttime(dtm)
+julia> utime(dtm)
 2017-08-15T17:55:30.491+00:00
 ```
 
-----
 
 ## The Design
 
@@ -209,21 +189,6 @@ julia> slowtime = highrestime - fasttime
 The general approach is separate the date, slowtime, fasttime, and timezone (if appropriate), then use the date, slowtime and timezone (if appropriate) to obtain a coarse result using the facilities provided by the `Date` and `TimeZones` packages.  We refine the coarse result by adding or subtracting the fasttime, as appropriate.
 
 tbd [About TimesDates](https://jeffreysarnoff.github.io/TimesDates.jl/)
-
-
-## Setup
-
-```julia
-using Pkg3
-add TimesDates
-```
-or
-```julia
-using Pkg
-add("TimesDates")
-```
-
-
 
 ## Acknowledgements
 
