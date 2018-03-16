@@ -15,8 +15,8 @@ function stringwithzone(tdz::TimeDateZone)
 end
 
 function string(tdz::TimeDateZone)
-    on_date = tdz.on_date
-    at_time = tdz.at_time
+    on_date = ondate(tdz)
+    at_time = attime(tdz)
     fast_time = fasttime(at_time)
     slow_time = at_time - fast_time
     slow_datetime = on_date + slow_time
@@ -75,75 +75,6 @@ function TimeDateZone(str::String)
     end   
 end
 
-#=
-    if contains(str, "+")
-        timedatestr, tzoffsetstr = splitstring(str, "+")
-        timedate = TimeDate(timedatestr)
-        tm = Time(timedate)
-        dt = Date(timedate)
-        tzstr = string("UTC+",tzoffsetstr)
-        tz = TimeZone(tzstr)
-        return TimeDateZone(tm, dt, tz)
-    else
-        
-    end
-    
-    timedatestr = str[1:end-6]
-    timedate = TimeDate(timedatestr)
-    
-    tzoffsetstr   = str[end-5:end]
-    tzoffsetstr = string(tzoffsetstr[2:end], ":00")
-    tzoffset = parse(Time,tzoffsetstr)
-    tz = TimeZone(string("UTC",tzoffsetstr))
-    return TimeDateZone(timedate, tz)
-end
-=#
-
-#=
-        tzoffset
-        tzoffsetstr = string("+", tzoffsetstr)
-        
-    datepart, rest = splitstring(str, "T")
-    if contains(rest, " ")
-        timepart, zonepart = splitstring(rest, " ")
-    elseif contains(rest, "+")
-        timepart, zonepart = splitstring(rest, "+")
-        zonepart = string("+", zonepart)
-    elseif contains(rest, "-")
-        timepart, zonepart = splitstring(rest, "-")
-        zonepart = string(DASHSTR, zonepart)
-    elseif contains(rest, DASHSTR)
-        timepart, zonepart = splitstring(rest, DASHSTR)
-        zonepart = string(DASHSTR, zonepart)
-    else
-        throw(ErrorException("\"$str\" is not recognized as a TimeDateZone"))
-    end
-
-    if contains(timepart,".")
-        inttimepart, fractimepart = splitstring(timepart, ".")
-    else
-        inttimepart = timepart
-        fractimepart = ""
-    end
-
-    zdtstr = string(datepart,"T",inttimepart,".000")
-    if contains(rest, " ")
-        tz = TimeZone(zonepart)
-        zdt = ZonedDateTime(DateTime(zdtstr), tz)
-        zdtstr = string(zdt)
-    else
-        zdtstr = string(zdtstr, zonepart)
-    end
-
-    zdt = ZonedDateTime(zdtstr)
-    tdz = TimeDateZone(zdt)
-    tm, dt = Time(tdz), Date(tdz)
-    tm = fractionaltime(tm, fractimepart)
-    tdz = TimeDateZone(tm, dt, tdz.in_zone)
-
-    return tdz
-end
-=#
 function fractionaltime(at_time::Time, fractimepart::String)
     n = length(fractimepart)
     if n > 0
