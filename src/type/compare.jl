@@ -37,12 +37,12 @@ isless(atd::TimeDate, btd::TimeDate) = atd < btd
 
 function (==)(atd::TimeDateZone, btd::TimeDateZone)
     delta = atd - btd
-    isempty(delta) && atd.at_zone === btd.at_zone
+    isempty(delta) && atd.at_zone.offset === btd.at_zone.offset
 end
 
 function (!=)(atd::TimeDateZone, btd::TimeDateZone)
     delta = atd - btd
-    !isempty(delta) || atd.at_zone !== btd.at_zone
+    !isempty(delta) || atd.at_zone.offset !== btd.at_zone.offset
 end
 
 function (<)(atd::TimeDateZone, btd::TimeDateZone)
@@ -55,7 +55,7 @@ function (<=)(atd::TimeDateZone, btd::TimeDateZone)
     if !isempty(delta)
         signbit(delta.periods[1].value)
     else
-        atd.at_zone === btd.at_zone
+        atd.at_zone.offset === btd.at_zone.offset
     end
 end
 
