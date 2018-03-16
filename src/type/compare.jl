@@ -59,8 +59,8 @@ function (<=)(atd::TimeDateZone, btd::TimeDateZone)
     end
 end
 
-(>)(atd::TimeDateZone, btd::TimeDateZone) = (<)(bdt, atd)
-(>=)(atd::TimeDateZone, btd::TimeDateZone) = (<=)(bdt, atd)
+(>)(atd::TimeDateZone, btd::TimeDateZone) = (<)(btd, atd)
+(>=)(atd::TimeDateZone, btd::TimeDateZone) = (<=)(btd, atd)
 
 isequal(atd::TimeDateZone, btd::TimeDateZone) = atd == btd
 
