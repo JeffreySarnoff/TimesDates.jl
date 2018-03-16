@@ -22,21 +22,21 @@ end
 TimeDate(x::TimeDate) = x
 
 
-mutable struct TimeDateZone{Z} <: NanosecondBasis
+mutable struct TimeDateZone <: NanosecondBasis
     at_time::Time
     on_date::Date
-    in_zone::Z               # Z is one of {FixedTimeZone, VariableTimeZone}
+    in_zone::AkoTimeZone               # one of {FixedTimeZone, VariableTimeZone}
     at_zone::FixedTimeZone
 
     # ensure other constructors will be give explictly
     
-    function TimeDateZone{Z}(at_time::Time, on_date::Date, at_zone::FixedTimeZone)
+    function TimeDateZone(at_time::Time, on_date::Date, at_zone::FixedTimeZone)
         return new{Z}(at_time, on_date, at_zone, at_zone)
     end
-    function TimeDateZone{Z}(at_time::Time, on_date::Date, in_zone::FixedTimeZone, at_zone::FixedTimeZone)
+    function TimeDateZone(at_time::Time, on_date::Date, in_zone::FixedTimeZone, at_zone::FixedTimeZone)
         return new{Z}(at_time, on_date, in_zone, at_zone)
     end
-    function TimeDateZone{Z}(at_time::Time, on_date::Date, in_zone::VariableTimeZone, at_zone::FixedTimeZone)
+    function TimeDateZone(at_time::Time, on_date::Date, in_zone::VariableTimeZone, at_zone::FixedTimeZone)
         return new{Z}(at_time, on_date, in_zone, at_zone)
     end
 end
