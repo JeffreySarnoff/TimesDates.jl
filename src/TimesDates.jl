@@ -21,8 +21,9 @@ import Dates: Time, Date, DateTime,
               year, month, day, hour, minute, second,
               millisecond, microsecond, nanosecond
 
-using Dates: AbstractTime, CompoundPeriod
+using Dates: AbstractTime
 using Dates
+import Dates: CompoundPeriod
 
 import TimeZones: @tz_str, ZonedDateTime, TimeZone,
     localzone, astimezone, FixedTimeZone, VariableTimeZone,
@@ -53,3 +54,4 @@ include("type/string_show.jl")
 
 
 end # TimesDates
+
