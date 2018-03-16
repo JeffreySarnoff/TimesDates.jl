@@ -1,5 +1,3 @@
-
-
 for P in (:Nanosecond, :Microsecond, :Millisecond, :Second, :Minute, :Hour)
   @eval begin
 
