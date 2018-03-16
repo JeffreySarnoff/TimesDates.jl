@@ -24,7 +24,7 @@
 
 - ### [interconvert](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#interconvert)
 
-- ### [parse times with timezones](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#parse-times-with-timezones)
+- ### [parse times with timezones](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#parse-times-with-timezones-1)
 
 - ### [adjust accurately](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#adjust-with-precision)
 
