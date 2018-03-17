@@ -55,7 +55,6 @@ include("timezone/astimezone.jl")
 
 include("type/constructor.jl")
 include("type/compound.jl")
-include("type/convert_into_others.jl")
 
 include("type/selector.jl")
 include("type/compare.jl")
