@@ -264,3 +264,8 @@ While both are collaborative works, a few people deserve mention:
 ## Comments and Pull Requests are welcomed
 
 http://github.com/JeffreySarnoff/TimesDates.jl
+
+
+```math
+3x + 5y = cos(x+y)
+```
