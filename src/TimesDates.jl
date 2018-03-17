@@ -36,7 +36,9 @@ const AkoTimeZone = Union{FixedTimeZone, VariableTimeZone}
 
 # ======================================= #
 
+include("support/typesof.jl")
 include("timesupport/ctime.jl")
+
 include("type/nanotime.jl")
 
 include("timesupport/utime_localtime.jl")
