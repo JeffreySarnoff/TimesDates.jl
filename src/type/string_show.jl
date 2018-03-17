@@ -15,8 +15,8 @@ function stringwithzone(tdz::TimeDateZone)
 end
 
 function string(tdz::TimeDateZone)
-    on_date = ondate(tdz)
-    at_time = attime(tdz)
+    on_date = on_date(tdz)
+    at_time = at_time(tdz)
     fast_time = fasttime(at_time)
     slow_time = at_time - fast_time
     slow_datetime = on_date + slow_time

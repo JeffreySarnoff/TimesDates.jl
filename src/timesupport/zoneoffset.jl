@@ -4,7 +4,7 @@
 
 offset_from_ut(tz::FixedTimeZone) = tz.offset
 offset_from_ut(zdt::ZonedDateTime) = zdt.zone.offset
-offset_from_ut(tdz::TimeDateZone) = atzone(tdz)
+offset_from_ut(tdz::TimeDateZone) = at_zone(tdz)
 
 offset_seconds_from_ut(offset::UTCOffset) = offset.std.value + offset.dst.valuea
 offset_Seconds_from_ut(offset::UTCOffset) = Second(offset_seconds_from_ut(offset))

@@ -16,8 +16,8 @@ struct TimeDate <: NanosecondBasis
     end
 end
 
-@inline attime(x::TimeDate) = x.at_time
-@inline ondate(x::TimeDate) = x.on_date
+@inline at_time(x::TimeDate) = x.at_time
+@inline on_date(x::TimeDate) = x.on_date
 
 TimeDate(x::TimeDate) = x
 
@@ -41,9 +41,9 @@ struct TimeDateZone <: NanosecondBasis
     end
 end
 
-@inline attime(x::TimeDateZone) = x.at_time
-@inline ondate(x::TimeDateZone) = x.on_date
+@inline at_time(x::TimeDateZone) = x.at_time
+@inline on_date(x::TimeDateZone) = x.on_date
 @inline inzone(x::TimeDateZone) = x.in_zone
-@inline atzone(x::TimeDateZone) = x.at_zone
+@inline at_zone(x::TimeDateZone) = x.at_zone
 
 TimeDateZone(x::TimeDateZone) = x

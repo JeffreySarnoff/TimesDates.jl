@@ -100,8 +100,8 @@ end
 (+)(cperiod::CompoundPeriod, tdz::TimeDateZone) = tdz + cperiod
 
 function (-)(atd::TimeDate, btd::TimeDate)
-    atime, adate = attime(atd), ondate(atd)
-    btime, bdate = attime(btd), ondate(btd)
+    atime, adate = at_time(atd), on_date(atd)
+    btime, bdate = at_time(btd), on_date(btd)
     dtime = atime - btime
     ddate = adate - bdate
     delta = canonical(CompoundPeriod(ddate, dtime))

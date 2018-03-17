@@ -1,7 +1,7 @@
 
-Date(td::TimeDate) = ondate(td)
+Date(td::TimeDate) = on_date(td)
 
-Time(td::TimeDate) = attime(td)
+Time(td::TimeDate) = at_time(td)
 
 DateTime(td::TimeDate) = td.on_date + slowtime(td.at_time)
 
@@ -11,9 +11,9 @@ DateTime(tm::Time) = tzdefault() === tz"UTC" ?
 
 
 
-Date(tdz::TimeDateZone) = ondate(tdz)
+Date(tdz::TimeDateZone) = on_date(tdz)
 
-Time(tdz::TimeDateZone) = attime(tdz)
+Time(tdz::TimeDateZone) = at_time(tdz)
 
 DateTime(tdz::TimeDateZone) = tdz.on_date + slowtime(tdz.at_time)
 

@@ -50,10 +50,10 @@ end
 
 
 function TimeDateZone(td::TimeDate)
-    at_time = attime(td) # utc time
+    at_time = at_time(td) # utc time
     fast_time = fasttime(at_time)
     slow_time = at_time - fast_time
-    on_date = ondate(td)  # utc date
+    on_date = on_date(td)  # utc date
     in_zone = tzdefault()
     # when the default timezone is other than UT
     # this becomes the timezone to apply
@@ -67,8 +67,8 @@ function TimeDateZone(td::TimeDate)
 end
 
 function TimeDateZone(td::TimeDate, tz::Z) where {Z<:AkoTimeZone}
-   at_time = attime(td)
-   on_date = ondate(td)
+   at_time = at_time(td)
+   on_date = on_date(td)
    in_zone = tz
    return TimeDateZone(at_time, on_date, in_zone)
 end  
