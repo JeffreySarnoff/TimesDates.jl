@@ -1,9 +1,12 @@
 #=
      ctime.jl
 
-     Copyright &copr; 2015-2018 by Jeffrey Sarnoff.
-     This material is released under the MIT License.
+     Julia software.  Copyright © 2015-2018 by Jeffrey Sarnoff.
 
+     
+     This material is available for use under the MIT Licesed.
+
+    
 =#
 
 #=
