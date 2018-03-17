@@ -7,8 +7,6 @@ Time(td::TimeDate) = td.at_time
 
 TimeDate(zdt::ZonedDateTime) = TimeDate(zdt.utc_datetime)
 ZonedDateTime(td::TimeDate, tz::TimeZone) = ZonedDateTime(DateTime(td), tz)
-TimeDateZone(zdt::ZonedDateTime) = 
-    TimeDateZone(Time(zdt.utc_datetime), Date(zdt.utc_datetime), zdt.timezone, zdt.zone)
 
 function TimeDateZone(zdt::ZonedDateTime)
     at_time, on_date = Time(zdt.utc_datetime), Date(zdt.utc_datetime)
@@ -25,7 +23,7 @@ function TimeDateZone2(zdt::ZonedDateTime)
 end
 
 
-function ZonedDateTime(tdz::TimeZoneDate)
+function ZonedDateTime(tdz::TimeDateZone)
     datetime = tdz.on_date + slowtime(tdz.at_time)
     ZonedDateTime(datetime, tdz.in_zone)
 end
