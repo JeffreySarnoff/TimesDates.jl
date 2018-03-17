@@ -67,8 +67,8 @@ function TimeDateZone(td::TimeDate)
 end
 
 function TimeDateZone(td::TimeDate, tz::Z) where {Z<:AkoTimeZone}
-   at_time = at_time(td)
-   on_date = on_date(td)
+   at_time = td.at_time
+   on_date = td.on_date
    in_zone = tz
    return TimeDateZone(at_time, on_date, in_zone)
 end  
