@@ -67,8 +67,8 @@ function TimeDateZone(str::String)
         timedatestr = str[1:end-6]
         tzoffsetstr = str[end-5:end]
         timedate = TimeDate(timedatestr)
-        tm = Time(timedate)
-        dt = Date(timedate)
+        tm = timedate.at_time
+        dt = timedate.on_date
         tzstr = string("UTC",tzoffsetstr)
         tz = TimeZone(tzstr)
         TimeDateZone(tm, dt, tz)
