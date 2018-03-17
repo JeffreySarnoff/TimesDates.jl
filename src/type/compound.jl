@@ -1,7 +1,7 @@
 # CompoundPeriod becomes iterable through .periods
 
 start(x::Array{Period,1}) = 1
-done(x::Array{Period,1}, state) = state > length(x.periods)
+done(x::Array{Period,1}, state) = state > length(x)
 function next(x::Array{Period,1}, state)
     value = x[state]
     state += 1; 
