@@ -9,19 +9,19 @@ offset_from_ut(tdz::TimeDateZone) = atzone(tdz)
 offset_seconds_from_ut(offset::UTCOffset) = offset.std.value + offset.dst.valuea
 offset_Seconds_from_ut(offset::UTCOffset) = Second(offset_seconds_from_ut(offset))
 
-function offset_minutes_seconds_from_ut(offset::UTC0ffset)
+function offset_minutes_seconds_from_ut(offset::UTCOffset)
     secs = offset_seconds_from_ut(offset)
     mins, secs = fldmod(secs, SECONDS_PER_MINUTE)
     return Minute(mins), Second(secs)
 end
 
-function offset_minutes_from_ut(offset::UTC0ffset)
+function offset_minutes_from_ut(offset::UTCOffset)
     secs = offset_seconds_from_ut(offset)
     mins, secs = fldmod(secs, SECONDS_PER_MINUTE)
     return Minute(mins)
 end
 
-function offset_minutes_hours_from_ut(offset::UTC0ffset)
+function offset_minutes_hours_from_ut(offset::UTCOffset)
     mins = offset_minutes_from_ut(offset)
     hours, mins = fldmod(mins, MINUTES_PER_HOUR)
     return Hour(hours) + Minute(mins)
