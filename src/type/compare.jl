@@ -37,7 +37,7 @@ isless(atd::TimeDate, btd::TimeDate) = atd < btd
 
 function (==)(atd::TimeDateZone, btd::TimeDateZone)
     delta = atd - btd
-    isempty(delta) && atd.at_zone.offset === btd.at_zone.offset
+    isempty(delta) && atzone(atd).offset === atzone(btd).offset
 end
 
 function (!=)(atd::TimeDateZone, btd::TimeDateZone)
