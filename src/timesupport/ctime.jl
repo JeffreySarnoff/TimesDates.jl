@@ -1,3 +1,37 @@
+#=
+
+Some of that file does copy Libc.TmStruct (the structure and initialization).
+
+I duplicated that part so the more substantive contribution
+    would continue to work even in the event that access to Libc changes or ... come what may.
+
+I wrote the code over a period of six months, and it took that long
+    to formulate the generally easy-to-do 
+    universal_time to local_time and local_time to universal_time transformations.
+
+As you know, there are some very strange combinations of state and environment 
+    that arise and often befuddle the intent of these mappings. In addition to
+    the problem of gapped transitions, there are a dozen or so issues relating
+    to C library implementations, thread ignorance, and more that I recall as
+    non-specific dark places to avoid.
+
+That file is the only implementation I trust to be well-behaved and predictable
+universaltime --> localtime --> universaltime --> localtime.
+
+Some third party hardware paired with central clocks are good, too. This is free.
+
+-------------------------------
+
+N.B.
+
+There are two additions that need to be introduced when its best for Julia.
+They are not yet present because a design requirement is to avoid writing C.
+This transformative property (universal_time mapsto local_time ...) must be
+multinstantiable , shardable , and each thread of it invisible to the others.
+
+=#
+
+
 import Base: promote_rule, convert,
     show, string,
     (==), (!=), (<), (<=), (>=), (>),
