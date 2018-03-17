@@ -1,24 +1,47 @@
+TimeDate(dt::DateTime) = TimeDate(Time(dtm), Date(dtm))
+DateTime(td::TimeDate) = DateTime(td.on_date + slowtime(td.at_time))
 
-TimeDate(dtm::DateTime) = TimeDate(Time(dtm), Date(dtm))
 TimeDate(dt::Date) = TimeDate(Time(0), dt)
+Date(td::TimeDate) = td.on_date
+Time(td::TimeDate) = td.at_time
+
+TimeDate(zdt::ZonedDateTime) = TimeDate(zdt.utc_datetime)
+ZonedDateTime(td::TimeDate, tz::TimeZone) = ZonedDateTime(DateTime(td), tz)
+TimeDateZone(zdt::ZonedDateTime) = 
+    TimeDateZone(Time(zdt.utc_datetime), Date(zdt.utc_datetime), zdt.timezone, zdt.zone)
+
+function TimeDateZone(zdt::ZonedDateTime)
+    at_time, on_date = Time(zdt.utc_datetime), Date(zdt.utc_datetime)
+    TimeDateZone(at_time, on_date, zdt.in_zone)
+end
+
+function TimeDateZone1(zdt::ZonedDateTime)
+    at_time, on_date = Time(zdt.utc_datetime), Date(zdt.utc_datetime)
+    TimeDateZone(at_time, on_date, zdt.at_zone)
+end
+function TimeDateZone2(zdt::ZonedDateTime)
+    at_time, on_date = Time(zdt.utc_datetime), Date(zdt.utc_datetime)
+    TimeDateZone(at_time, on_date, zdt.in_zone, zdt.at_zone)
+end
+
+
+function ZonedDateTime(tdz::TimeZoneDate)
+    datetime = tdz.on_date + slowtime(tdz.at_time)
+    ZonedDateTime(datetime, tdz.in_zone)
+end
+
+#=
+TimeDate(tm:Time) = TimeDate(tm, Date(Time(0), dt)
+Date(td::TimeDate) = td.on_date
+
+
 TimeDate(tm::Time) = tzdefault() === tz"UTC" ?
                         TimeDate(tm, Date(now(Dates.UTC))) :
                         TimeDate(tm, Date(now()))
 
-function TimeDate(tdz::TimeDateZone)
-    at_time = tdz.at_time  # utc time
-    on_date = tdz.on_date  # utc date
-    # when the default timezone is other than UT
-    # adjusting the time, date enriches locative moment
-    if tzdefault() !== TZ_UT
-        # convert the (tm, dt) from its UT reference into the localzone
-        at_time, on_date = localtime_from_utime(at_time, on_date)
-    end
-    return TimeDate(at_time, on_date)
-end
+TimeDate(tdz::TimeDateZone) = TimeDate(tdz.at_time, tdz.on_date)
 
-     
-TimeDate(zdt::ZonedDateTime) = TimeDate(TimeDateZone(zdt))
+TimeDate(zdt::ZonedDateTime) = TimeDate(zdt.utc_timezone)
 
 
 TimeDateZone(on_date::Date, at_time::Time, in_zone::FixedTimeZone, at_zone::FixedTimeZone) =
@@ -72,13 +95,20 @@ function TimeDateZone(td::TimeDate, tz::Z) where {Z<:AkoTimeZone}
    in_zone = tz
    return TimeDateZone(at_time, on_date, in_zone)
 end  
-  
-function TimeDateZone(zdt::ZonedDateTime)
-    datetime = zdt.utc_datetime
-    at_time = Time(datetime)
-    on_date = Date(datetime)
-    in_zone = zdt.timezone
-    at_zone = zdt.zone
-    return TimeDateZone(at_time, on_date, in_zone, at_zone)
+=#
+
+#=
+
+function TimeDate(tdz::TimeDateZone)
+    at_time = tdz.at_time  # utc time
+    on_date = tdz.on_date  # utc date
+    # when the default timezone is other than UT
+    # adjusting the time, date enriches locative moment
+    if tzdefault() !== TZ_UT
+        # convert the (tm, dt) from its UT reference into the localzone
+        at_time, on_date = localtime_from_utime(at_time, on_date)
+    end
+    return TimeDate(at_time, on_date)
 end
 
+=#
