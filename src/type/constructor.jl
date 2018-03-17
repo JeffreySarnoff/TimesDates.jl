@@ -19,13 +19,11 @@ Time(td::TimeDate) = td.at_time
 function TimeDateZone(td::TimeDate, tz::FixedTimeZone)
     TimeDateZone(td.at_time, td.on_date, tz, tz)
 end
-function TimeDateZone(tm::Time, dt::Date, tz::FixedTimeZone)
-    TimeDateZone(td.at_time, td.on_date, tz, tz)
-end
 
 function TimeDateZone(td::TimeDate, tz::VariableTimeZone)
     TimeDateZone(td.at_time, td.on_date, tz)
 end
+
 function TimeDateZone(tm::Time, dt::Date, tz::VariableTimeZone)
     fast_time = fasttime(tm)
     datetime  = dt + (tm - fast_time)
