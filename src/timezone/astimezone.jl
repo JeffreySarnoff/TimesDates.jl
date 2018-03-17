@@ -6,8 +6,8 @@ function astimezone(x::TimeDateZone, tz::FixedTimeZone)
     fast_time = fasttime(at_time)
     old_zone = atzone(x)
     
-    old_offset_from_ut = offset.zone.std + offset.zone.dst
-    new_offset_from_ut = offset.zone.std + offset.zone.dst
+    old_offset_from_ut = x.zone.offset.std + x.zone.offset.dst
+    new_offset_from_ut = tz.offset.zone.std + tz.offset.zone.dst
     
     zdt = ZonedDateTime(x)
     zdt = astimezone(zdt, tz)
