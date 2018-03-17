@@ -1,4 +1,3 @@
-timezone(x::TimeDate) = tzdefault()
 timezone(x::ZonedDateTime) = x.timezone
 
 function astimezone(x::TimeDateZone, tz::TimeZone)
