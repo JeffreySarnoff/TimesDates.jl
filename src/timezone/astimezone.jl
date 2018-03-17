@@ -1,15 +1,24 @@
 timezone(x::ZonedDateTime) = x.timezone
 
-function astimezone(x::TimeDateZone, tz::TimeZone)
-    on_date = x.on_date
-    at_time = x.at_time
+function astimezone(x::TimeDateZone, tz::FixedTimeZone)
+    on_date = atdate(x)
+    at_time = attime(x)
     fast_time = fasttime(at_time)
-    slow_time = at_time - fast_time
-    in_zone = x.in_zone
-    zdt = ZonedDateTime(on_date+slow_time, in_zone)
+    old_zone = atzone(x)
+    
+    old_offset_from_ut = offset_from_ut(x)
+    new_offset_from_ut = offset_from_tz(x)
+    
+    zdt = ZonedDateTime(x)
     zdt = astimezone(zdt, tz)
     tdz = TimeDateZone(zdt)
-    tdz = tdz + fast_time
+    
+    if old_offset_from_ut <= new_offset_from_ut
+        tdz = tdz + fast_time
+    else
+        tdz = tdz - fast_time
+    end
+    
     return tdz
 end
 
