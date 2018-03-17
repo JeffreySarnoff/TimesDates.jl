@@ -1,3 +1,27 @@
+# CompoundPeriod becomes iterable
+Base.start(x::CompoundPeriod) = 1
+Base.done(x::CompoundPeriod, state) = state > length(x.periods)
+function Base.next(x::CompoundPeriod, state)
+    value = x.periods[state]
+    state += 1; 
+    return value, state
+end
+
+Base.typemax(::Type{CompoundPeriod}) = Year
+Base.typemin(::Type{CompoundPeriod}) = Nanosecond
+
+# the extremal Periods with nonzero value
+Base.typemax(x::CompoundPeriod) = typeof(x.periods[1])
+Base.typemin(x::CompoundPeriod) = typeof(x.periods[end])
+Base.typeminmax(x::CompoundPeriod) = typeof(x.periods[end]), typeof(x.periods[1])
+
+Base.max(x::CompoundPeriod) = typeof(x.periods[1])
+Base.min(x::CompoundPeriod) = typeof(x.periods[end])
+Base.minmax(x::CompoundPeriod) = typeof(x.periods[end]), typeof(x.periods[1])
+
+Base.sum(x::CompoundPeriod) = reduce(+, x)
+
+
 """
     YearMonthDay(::Date)
 
