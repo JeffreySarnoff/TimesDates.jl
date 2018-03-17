@@ -121,5 +121,5 @@ end
 (-)(adt::DateTime, atd::TimeDate) = (-)(TimeDate(adt), atd)
 (-)(atdz::TimeDateZone, adt::DateTime) = (-)(atdz, TimeDateZone(adt))
 (-)(adt::DateTime, atdz::TimeDateZone) = (-)(TimeDateZone(adt), atdz)
-(-)(atdz::TimeDateZone, adzt::ZonedDateTime) = (-)(atdz, TimeDateZone(azdt))
+(-)(atdz::TimeDateZone, adzt::ZonedDateTime) = (-)(atdz, TimeDateZone(adzt))
 (-)(azdt::ZonedDateTime, atdz::TimeDateZone) = (-)(TimeDateZone(azdt), atdz)
