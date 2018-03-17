@@ -38,7 +38,7 @@ end
 
 offset_hours_from_ut(offset::UTCOffset)   = div(offset_hours_from_ut, HOURS_PER_DAY)
 
-function minutes_to_hours_minutes(x::Minutes)
+function minutes_to_hours_minutes(x::Minute)
     hours, mins = fldmod(x.value, MINUTES_PER_HOUR)
     return Hour(hours) + Minute(mins)
 end
