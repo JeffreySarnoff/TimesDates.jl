@@ -1,4 +1,12 @@
 #=
+     ctime.jl
+
+     Copyright &copr; 2015-2018 by Jeffrey Sarnoff.
+     This material is released under the MIT License.
+
+=#
+
+#=
 
 Some of that file does copy Libc.TmStruct (the structure and initialization).
 
