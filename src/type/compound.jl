@@ -20,6 +20,8 @@ next(x::CompoundPeriod, state) = next(x.periods, state)
 eltype(x::CompoundPeriod) = Period
 length(x::CompoundPeriod) = length(x.periods)
 
+typesof(x::P) where {P<:Period} = (P,)
+typesof(x::CompoundPeriod) = map(typeof, x.periods)
 
 typemax(::Type{CompoundPeriod}) = Year
 typemin(::Type{CompoundPeriod}) = Nanosecond
