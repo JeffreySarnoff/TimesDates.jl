@@ -31,6 +31,9 @@ import TimeZones: @tz_str, ZonedDateTime, TimeZone,
     localzone, astimezone, UTCOffset, FixedTimeZone, VariableTimeZone,
     all_timezones, timezone_names
 
+import TimeZones.value # value(offset::UTCOffset) = value(offset.std + offset.dst)
+
+
 const AkoTimeZone = Union{FixedTimeZone, VariableTimeZone}
 
 
