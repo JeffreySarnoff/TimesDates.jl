@@ -39,9 +39,6 @@ struct TimeDateZone <: NanosecondBasis
     function TimeDateZone(at_time::Time, on_date::Date, in_zone::VariableTimeZone, at_zone::FixedTimeZone)
         return new(at_time, on_date, in_zone, at_zone)
     end
-    function TimeDateZone(at_time::Time, on_date::Date, in_zone::VariableTimeZone)
-        return new(at_time, on_date, in_zone, at_zone)
-    end
 end
 
 @inline at_time(x::TimeDateZone) = x.at_time
