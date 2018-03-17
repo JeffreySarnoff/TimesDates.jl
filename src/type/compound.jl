@@ -9,7 +9,6 @@ function next(x::Array{Period,1}, state)
 end
 
 eltype(x::Array{Period,1}) = Period
-length(x::Array{Period,1}) = length(x)
 
 # CompoundPeriod becomes iterable
 
