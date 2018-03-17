@@ -1,8 +1,19 @@
 # CompoundPeriod becomes iterable
+
 Base.start(x::CompoundPeriod) = 1
 Base.done(x::CompoundPeriod, state) = state > length(x.periods)
 function Base.next(x::CompoundPeriod, state)
     value = x.periods[state]
+    state += 1; 
+    return value, state
+end
+
+# CompoundPeriod becomes iterable through .periods
+
+Base.start(x::Array{Period,1}) = 1
+Base.done(x::Array{Period,1}, state) = state > length(x.periods)
+function Base.next(x::Array{Period,1}, state)
+    value = x[state]
     state += 1; 
     return value, state
 end
