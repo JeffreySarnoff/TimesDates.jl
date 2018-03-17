@@ -10,7 +10,9 @@ export TimeDate, TimeDateZone,
 
 import Base: promote_rule, convert, string, show, showcompact,
              (==), (!=), (<=), (<), (>), (>=), isless, isequal,
-             isempty, time
+             isempty, time, min, max, minmax,
+
+import Base: start, done, next  # custom iteratorables
 
 import Base.Math: (+), (-), (*), (/),
                   fld, cld, div, rem, mod, round
