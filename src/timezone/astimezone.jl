@@ -1,7 +1,7 @@
 timezone(x::ZonedDateTime) = x.timezone
 
 function astimezone(x::TimeDateZone, tz::FixedTimeZone)
-    on_date = atdate(x)
+    on_date = ondate(x)
     at_time = attime(x)
     fast_time = fasttime(at_time)
     old_zone = atzone(x)
