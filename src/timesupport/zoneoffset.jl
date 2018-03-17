@@ -42,7 +42,13 @@ function minutes_to_hours_minutes(x::Minute)
     hours, mins = fldmod(x.value, MINUTES_PER_HOUR)
     return Hour(hours) + Minute(mins)
 end
-    
+
+
+minutes_offset_from_ut(offset::UTCOffset) = Minute(seconds_offset_from_ut(offset))
+hours_offset_from_ut(offset::UTCOffset) = Hour(seconds_offset_from_ut(offset))
+
+
+#=
 function offset_qrtrhours_from_ut(offset::UTCOffset)
     secs = offset_seconds_from_ut(offset)
     mins, secs = fldmod(secs)
@@ -59,8 +65,4 @@ offset_Seconds_from_ut(offset::UTCOffset) = Second(offset_seconds_from_ut(offset
 
 offset_seconds_from_ut(offset::UTCOffset) = offset.std.value + offset.dst.value
 offset_Seconds_from_ut(offset::UTCOffset) = Second(offset_seconds_from_ut(offset))
-
-
-minutes_offset_from_ut(offset::UTCOffset) = Minute(seconds_offset_from_ut(offset))
-hours_offset_from_ut(offset::UTCOffset) = Hour(seconds_offset_from_ut(offset))
-
+=#
