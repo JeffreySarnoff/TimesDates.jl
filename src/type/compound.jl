@@ -13,7 +13,6 @@ Base.typemin(::Type{CompoundPeriod}) = Nanosecond
 # the extremal Periods with nonzero value
 Base.typemax(x::CompoundPeriod) = typeof(x.periods[1])
 Base.typemin(x::CompoundPeriod) = typeof(x.periods[end])
-Base.typeminmax(x::CompoundPeriod) = typeof(x.periods[end]), typeof(x.periods[1])
 
 Base.max(x::CompoundPeriod) = typeof(x.periods[1])
 Base.min(x::CompoundPeriod) = typeof(x.periods[end])
