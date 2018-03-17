@@ -1,4 +1,4 @@
-timezone(x::ZonedDateTime) = x.timezone
+TimeZone(x::ZonedDateTime) = x.timezone
 
 function astimezone(x::TimeDateZone, tz::FixedTimeZone)
     on_date = x.on_date
@@ -21,7 +21,7 @@ function astimezone(x::TimeDateZone, tz::FixedTimeZone)
     return tdz
 end
 
-function astimezone(x::TimeDate, tz::TimeZone)
-    tdz = TimeDateZone(x)
-    return astimezone(tdz, tz)
+function astimezone(x::TimeDate, tz::FixedTimeZone)
+    tdz = TimeDateZone(x.at_time, x.on_date, tz, tz)
+    return tdz
 end
