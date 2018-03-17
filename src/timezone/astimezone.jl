@@ -4,16 +4,15 @@ function astimezone(x::TimeDateZone, tz::FixedTimeZone)
     on_date = ondate(x)
     at_time = attime(x)
     fast_time = fasttime(at_time)
-    old_zone = atzone(x)
-    
-    old_offset_from_ut = x.zone.offset.std + x.zone.offset.dst
-    new_offset_from_ut = tz.offset.zone.std + tz.offset.zone.dst
-    
+   
     zdt = ZonedDateTime(x)
+    zdt_offset = value(zdt.zone.offset)
+    tz_offset = value(tz.offset)
+    
     zdt = astimezone(zdt, tz)
     tdz = TimeDateZone(zdt)
     
-    if old_offset_from_ut <= new_offset_from_ut
+    if zdt_offset <= tz_offset
         tdz = tdz + fast_time
     else
         tdz = tdz - fast_time
