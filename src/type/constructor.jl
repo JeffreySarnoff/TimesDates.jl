@@ -17,7 +17,7 @@ end
 
 function TimeDateZone(zdt::ZonedDateTime)
     at_time, on_date = Time(zdt.utc_datetime), Date(zdt.utc_datetime)
-    TimeDateZone(at_time, on_date, zdt.in_zone)
+    TimeDateZone(at_time, on_date, zdt.timezone, zdt.zone)
 end
 
 function TimeDateZone1(zdt::ZonedDateTime)
