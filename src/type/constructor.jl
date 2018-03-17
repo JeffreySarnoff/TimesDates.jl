@@ -5,7 +5,7 @@ TimeDate(tm::Time) = throw(ErrorException("TimeDate(::Time) is not used"))
 
 TimeDateZone(zdt::ZonedDateTime) =
     TimeDateZone(Time(zdt.utc_datetime), Date(zdt.utc_datetime), zdt.timezone, zdt.zone)
-TimeDateZone(dtm::DateTime) = TimeDateZone(dtm, tzdefault()))
+TimeDateZone(dtm::DateTime) = TimeDateZone(dtm, tzdefault())
 TimeDateZone(dt::Date) = TimeDateZone(ZonedDateTime(DateTime(dt), tzdefault())
 TimeDateZone(tm::Time) = throw(ErrorException("TimeDateZone(::Time) is not used"))
 
