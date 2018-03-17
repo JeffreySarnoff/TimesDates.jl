@@ -28,7 +28,7 @@ using Dates
 import Dates: CompoundPeriod
 
 import TimeZones: @tz_str, ZonedDateTime, TimeZone,
-    localzone, astimezone, FixedTimeZone, VariableTimeZone,
+    localzone, astimezone, UTCOffset, FixedTimeZone, VariableTimeZone,
     all_timezones, timezone_names
 
 const AkoTimeZone = Union{FixedTimeZone, VariableTimeZone}
