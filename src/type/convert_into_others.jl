@@ -1,21 +1,21 @@
 
-Date(td::TimeDate) = on_date(td)
+Date(td::TimeDate) = td.on_date
 
-Time(td::TimeDate) = at_time(td)
+Time(td::TimeDate) = td.at_time
 
 DateTime(td::TimeDate) = td.on_date + slowtime(td.at_time)
 
-DateTime(tm::Time) = tzdefault() === tz"UTC" ?
-                        Date(now(Dates.UTC)) + slowtime(tm) :
-                        Date(now()) + slowtime(tm)
+DateTime(tm::Time) = Date(now()) + slowtime(tm)
 
 
+Date(tdz::TimeDateZone) = tdz.on_date
 
-Date(tdz::TimeDateZone) = on_date(tdz)
-
-Time(tdz::TimeDateZone) = at_time(tdz)
+Time(tdz::TimeDateZone) = tdz.at_time
 
 DateTime(tdz::TimeDateZone) = tdz.on_date + slowtime(tdz.at_time)
+
+ZonedDateTime(tdz::TimeDateZone) = ZonedDateTime(DateTime(tdz), tdz.timezone)
+
 
 function ZonedDateTime(tdz::TimeDateZone)
     datetime = tdz.on_date + slowtime(tdz.at_time)
