@@ -20,13 +20,9 @@ function TimeDateZone(zdt::ZonedDateTime)
     TimeDateZone(at_time, on_date, zdt.timezone, zdt.zone)
 end
 
-function TimeDateZone1(zdt::ZonedDateTime)
-    at_time, on_date = Time(zdt.utc_datetime), Date(zdt.utc_datetime)
-    TimeDateZone(at_time, on_date, zdt.at_zone)
-end
-function TimeDateZone2(zdt::ZonedDateTime)
-    at_time, on_date = Time(zdt.utc_datetime), Date(zdt.utc_datetime)
-    TimeDateZone(at_time, on_date, zdt.in_zone, zdt.at_zone)
+function TimeDateZone(dtm::DateTime, tz::TimeZone)
+    at_time, on_date = Time(dtm), Date(dtm)
+    TimeDateZone(at_time, on_date, tz)
 end
 
 
