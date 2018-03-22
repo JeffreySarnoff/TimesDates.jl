@@ -1,6 +1,6 @@
 __this will be the repository__
   
-  simplifying, restructuring at JeffreySarnoff/NanoTimes.jl
+  ### simplifying, restructuring at JeffreySarnoff/NanoTimes.jl
   
 __that will be used to replace specifics here__  
 
