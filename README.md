@@ -2,7 +2,8 @@
 
 >>> __this will be the repository__
   
->>  at the moment, I am simplifying, restructuring in JeffreySarnoff/NanoTimes.jl
+>>>  at the moment, I am simplifying, restructuring in JeffreySarnoff/NanoTimes.jl
+
 >>>   __that will be used to replace specifics here__  
 
 -----
