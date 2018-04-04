@@ -27,6 +27,8 @@ using Dates: AbstractTime
 using Dates
 import Dates: CompoundPeriod
 
+using CompoundPeriods
+
 import TimeZones: @tz_str, ZonedDateTime, TimeZone,
     localzone, astimezone, UTCOffset, FixedTimeZone, VariableTimeZone,
     all_timezones, timezone_names
@@ -53,7 +55,7 @@ include("timezone/tzdefault.jl")
 
 include("timezone/astimezone.jl")
 include("type/constructor.jl")
-include("type/compound.jl")
+#include("type/compound.jl")
 
 include("type/selector.jl")
 include("type/compare.jl")
