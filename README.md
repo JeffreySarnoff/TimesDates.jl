@@ -83,16 +83,16 @@ julia> td2018 - td2017
 ```julia
 julia> using Dates, TimeZones, TimesDates
 
-julia-0.7> zdt = ZonedDateTime(DateTime(2012,1,21,15,25,45), tz"America/Chicago")
+julia> zdt = ZonedDateTime(DateTime(2012,1,21,15,25,45), tz"America/Chicago")
 2012-01-21T15:25:45-06:00
 
-julia-0.7> tdz = TimeDateZone(zdt)
+julia> tdz = TimeDateZone(zdt)
 2012-01-21T21:25:45-06:00
 
-julia-0.7> tdz += Nanosecond(123456)
+julia> tdz += Nanosecond(123456)
 2012-01-21T21:25:45.000123456-06:00
 
-julia-0.7> ZonedDateTime(tdz)
+julia> ZonedDateTime(tdz)
 2012-01-21T15:25:45-06:00
 ```
 
@@ -124,7 +124,8 @@ julia> timedate = TimeDate(date); timedate, Date(timedate)
 julia> datetime = DateTime("2011-02-05T11:22:33")
 2011-02-05T11:22:33
 
-julia> timedate = TimeDate(datetime); timedate, DateTime(timedate)
+julia> timedate = TimeDate(datetime); 
+julia> timedate, DateTime(timedate)
 (2011-02-05T11:22:33, 2011-02-05T11:22:33)
 ```
 #### parse times with timezones
@@ -136,22 +137,23 @@ julia> zdt = ZonedDateTime(datetime, tz"Australia/Sydney")
 2011-05-08T12:11:15.05+10:00
 
 julia> tdz = TimeDateZone(zdt)
-2011-05-08T12:11:15.05+10:00
+2011-05-08T02:11:15.05+10:00
 
 julia> tdz += Microsecond(11)
-2011-05-08T12:11:15.050011+10:00
+2011-05-08T02:11:15.050011+10:00
 
 julia> string(tdz)
-"2011-05-08T12:11:15.050011+10:00"
+"2011-05-08T02:11:15.050011+10:00"
 
 julia> TimeDateZone(string(tdz))
-2011-05-08T12:11:15.050011+10:00
+2011-05-08T02:11:15.050011+10:00
 
-julia> stringwithzone(tdz)
-"2011-05-08T12:11:15.050011 Australia/Sydney"
+julia> string(tdz, tzname=true)
+"2011-05-08T02:11:15.050011 Australia/Sydney"
 
-julia> TimeDateZone(stringwithzone(tdz))
-2011-05-08T12:11:15.050011+10:00
+julia> TimeDateZone(string(tdz, tzname=true))
+2011-05-07T16:11:15.050011+10:00
+
 ```
 
 #### adjust with precision
@@ -161,8 +163,9 @@ julia> using Dates, TimesDates
 julia> datetime = DateTime("2001-05-10T23:59:59.999")
 2001-05-10T23:59:59.999
 
-julia> timedate = TimeDate(datetime)
+julia-> timedate = TimeDate(datetime)
 2001-05-10T23:59:59.999
+
 
 julia> timedate = TimeDate(datetime, Millisecond(1)+Nanosecond(1))
 2001-05-10T00:00:00.000000001
@@ -185,23 +188,25 @@ Europe/London (UTC+0/UTC+1)
 ```julia
 julia> using Dates, TimeZones, TimesDates
 
-julia> tzdefault!(localzone())
+julia-0.7> tzdefault!(localzone())
 America/New_York (UTC-5/UTC-4)
 
-julia> localtime()
-2018-03-15T14:50:28.719-04:00
+julia-0.7> localtime()
+2018-04-04T13:00:30.525-04:00
 
-julia> utime()
-2018-03-15T18:50:30.282+00:00
+julia-0.7> utime()
+2018-04-04T13:00:30.545Z
 
-julia> localtime(TimeDate), localtime(TimeDateZone)
-(2018-03-15T14:50:30.291, 2018-03-15T14:50:30.294-04:00)
+julia-0.7> localtime(TimeDate), localtime(TimeDateZone)
+(2018-04-04T09:00:30.549, 2018-04-04T13:00:30.549-04:00)
 
-julia> utime(TimeDate), utime(TimeDateZone)
-(2018-03-15T18:50:30.484, 2018-03-15T18:50:30.489+00:00)
+julia-0.7> utime(TimeDate), utime(TimeDateZone)
+(2018-04-04T13:00:30.659, 2018-04-04T13:00:30.659Z)
 
-julia> dtm = now() - Month(7) - Minute(55)
-2017-08-15T13:55:30.491
+julia-0.7> dtm = now() - Month(7) - Minute(55)
+2017-09-04T08:05:30.66
+
+
 
 julia> localtime(dtm)
 2017-08-15T13:55:30.491-04:00
