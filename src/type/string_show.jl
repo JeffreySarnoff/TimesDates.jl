@@ -7,6 +7,8 @@ else
     const StdOut = Base.STDOUT
 end
 
+
+
 function splitstring(str::AbstractString, splitat::AbstractString)
     a, z = split(str, splitat)
     return String(a), String(z)
@@ -26,6 +28,9 @@ end
 
 function stringwithoffset(tdz::TimeDateZone)
     offset = string(ZonedDateTime(tdz))[end-5:end]
+    if offset[2:end] == "00:00"
+        offset = "Z"
+    end
     return string(tdz.on_date,"T",tdz.at_time,offset)
 end
 
@@ -66,13 +71,17 @@ function TimeDateZone(str::String)
         tz          = TimeZone(tzname)
         TimeDateZone(timedate, tz)
     else
-        timedatestr = str[1:end-6]
-        tzoffsetstr = str[end-5:end]
+        if str[end] == "Z"
+            timedatestr = str[1:end-1]
+            tz = tz"UTC"
+        else
+            timedatestr = str[1:end-6]
+            tzoffsetstr = str[end-5:end]
+            tz = TimeZone(tzoffsetstr)
+        end
         timedate = TimeDate(timedatestr)
         tm = timedate.at_time
         dt = timedate.on_date
-        tzstr = string("UTC",tzoffsetstr)
-        tz = TimeZone(tzstr)
         TimeDateZone(tm, dt, tz)
     end   
 end
