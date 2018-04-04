@@ -1,9 +1,11 @@
 
 localtime(::Type{TimeDate}) = TimeDate(now())
 localtime(::Type{TimeDateZone}) = TimeDateZone(now(), TZ_LOCAL)
+localtime() = localtime(TimeDateZone)
 
 utime(::Type{TimeDate}) = TimeDate(now(Dates.UTC))
 utime(::Type{TimeDateZone}) = TimeDateZone(now(Dates.UTC), TZ_UT)
+utime() = utime(TimeDateZone)
 
 localtime(x::TimeDate) = astimezone(TimeDateZone(x), TZ_LOCAL)
 utime(x::TimeDate) = astimezone(TimeDateZone(x), TZ_UT)
