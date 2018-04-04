@@ -40,9 +40,6 @@ function univtime(tdz::TimeDateZone)
     return tdz
 end
 
-localtime(x::TimeDateZone) = astimezone(x, TZ_LOCAL)
-univtime(x::TimeDateZone) = astimezone(x, TZ_UT)
-
 
 localtime(x::DateTime) = TimeDateZone(ZonedDateTime(x, localzone()))
 univtime(x::DateTime) = TimeDateZone(ZonedDateTime(x, tz"UTC"))
