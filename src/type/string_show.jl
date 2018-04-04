@@ -6,6 +6,10 @@ function splitstring(str::AbstractString, splitat::AbstractString)
     return String(a), String(z)
 end
 
+timezonename(tdz::TimeDateZone) = string(tdz.in_zone)
+timezonename(zdt::ZonedDateTime) = string(zdt.timezone)
+timezonename(tz::TimeZone) = string(tz)
+
 function string(td::TimeDate)
     return string(td.on_date,"T",td.at_time)
 end
