@@ -18,20 +18,8 @@ function stringwithzone(tdz::TimeDateZone)
 end
 
 function stringwithoffset(tdz::TimeDateZone)
-    on_date = tdz.on_date
-    at_time = tdz.at_time
-    fast_time = fasttime(at_time)
-    slow_time = at_time - fast_time
-    slow_datetime = on_date + slow_time
-    in_zone = tdz.in_zone
-    zdt = ZonedDateTime(slow_datetime, in_zone)
-    zdtstr = string(zdt)
-    offset = zdtstr[end-5:end]
-    datetime = zdtstr[1:end-6]
-    timedate = TimeDate(DateTime(datetime))
-    timedate = timedate + fast_time
-    str = string(timedate, offset)
-    return str
+    offset = string(ZonedDateTime(tdz))[end-5:end]
+    return string(tdz.on_date,"T",tdz.at_time,offset)
 end
 
 show(io::IO, td::TimeDate) = print(io, string(td))
