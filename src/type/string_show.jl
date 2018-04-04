@@ -20,7 +20,7 @@ function string(td::TimeDate)
 end
 
 show(io::IO, td::TimeDate) = print(io, string(td))
-show(td::TimeDate) = print(StdOut, string(td))
+# show(td::TimeDate) = print(StdOut, string(td))
 
 
 timezonename(tdz::TimeDateZone) = string(tdz.in_zone)
@@ -48,21 +48,23 @@ function showwithoffset(io::IO, tdz::TimeDateZone)
     str = stringwithoffset(tdz)
     print(io, str)
 end
+#=
 function showwithoffset(tdz::TimeDateZone)
     str = stringwithoffset(tdz)
     print(StdOut, str)
 end
- 
+=#
 
 function showwithzone(io::IO, tdz::TimeDateZone)
     str = stringwithzone(tdz)
     print(io, str)
 end
+#=
 function showwithzone(tdz::TimeDateZone)
     str = stringwithzone(tdz)
     print(StdOut, str)
 end
-  
+=#
 
 show(io::IO, tdz::TimeDateZone; tzname::Bool=false) =
     tzname ? showwithzone(io, tdz) : showwithoffset(io,tdz)
