@@ -19,9 +19,15 @@ function string(td::TimeDate)
     return string(td.on_date,"T",td.at_time)
 end
 
-show(io::IO, td::TimeDate) = print(io, string(td))
-# show(td::TimeDate) = print(StdOut, string(td))
+function show(io::IO, td::TimeDate)
+    str = string(td)
+    print(io, str)
+end
 
+function show(td::TimeDate)
+    str = string(td)
+    print(str)
+end
 
 timezonename(tdz::TimeDateZone) = string(tdz.in_zone)
 timezonename(zdt::ZonedDateTime) = string(zdt.timezone)
@@ -48,23 +54,22 @@ function showwithoffset(io::IO, tdz::TimeDateZone)
     str = stringwithoffset(tdz)
     print(io, str)
 end
-#=
+
 function showwithoffset(tdz::TimeDateZone)
     str = stringwithoffset(tdz)
-    print(StdOut, str)
+    print(str)
 end
-=#
 
 function showwithzone(io::IO, tdz::TimeDateZone)
     str = stringwithzone(tdz)
     print(io, str)
 end
-#=
+
 function showwithzone(tdz::TimeDateZone)
     str = stringwithzone(tdz)
-    print(StdOut, str)
+    print(str)
 end
-=#
+
 
 show(io::IO, tdz::TimeDateZone; tzname::Bool=false) =
     tzname ? showwithzone(io, tdz) : showwithoffset(io,tdz)
