@@ -83,16 +83,16 @@ julia> td2018 - td2017
 ```julia
 julia> using Dates, TimeZones, TimesDates
 
-julia> zdt = ZonedDateTime(DateTime(2012,1,21,15,25,45), tz"America/Chicago")
+julia-0.7> zdt = ZonedDateTime(DateTime(2012,1,21,15,25,45), tz"America/Chicago")
 2012-01-21T15:25:45-06:00
 
-julia> tdz = TimeDateZone(zdt)
-2012-01-21T15:25:45-06:00
+julia-0.7> tdz = TimeDateZone(zdt)
+2012-01-21T21:25:45-06:00
 
-julia> tdz += Nanosecond(123456)
-2012-01-21T15:25:45-06:00
+julia-0.7> tdz += Nanosecond(123456)
+2012-01-21T21:25:45.000123456-06:00
 
-julia> ZonedDateTime(tdz)
+julia-0.7> ZonedDateTime(tdz)
 2012-01-21T15:25:45-06:00
 ```
 
