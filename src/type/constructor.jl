@@ -38,6 +38,7 @@ TimeDateZone(zdt::ZonedDateTime) =
 TimeDateZone(dtm::DateTime) = TimeDateZone(dtm, tzdefault())
 TimeDateZone(dt::Date) = TimeDateZone(ZonedDateTime(DateTime(dt), tzdefault()))
 TimeDateZone(tm::Time) = throw(ErrorException("TimeDateZone(::Time) is not used"))
+TimeDateZone(td::TimeDate) = TimeDateZone(td, tzdefault())
 
 
 DateTime(td::TimeDate) = DateTime(td.on_date + slowtime(td.at_time))
