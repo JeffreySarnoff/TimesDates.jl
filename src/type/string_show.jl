@@ -44,10 +44,25 @@ function stringwithoffset(tdz::TimeDateZone)
 end
 
 
-showwithoffset(io::IO, tdz::TimeDateZone) = print(io, stringwithoffset(tdz))
-showwithoffset(tdz::TimeDateZone) = print(StdOut, stringwithoffset(tdz))
-showwithzone(io::IO, tdz::TimeDateZone) = print(io, stringwithzone(tdz))
-showwithzone(tdz::TimeDateZone) = print(StdOut, stringwithzone(tdz))
+function showwithoffset(io::IO, tdz::TimeDateZone)
+    str = stringwithoffset(tdz)
+    print(io, str)
+end
+function showwithoffset(tdz::TimeDateZone)
+    str = stringwithoffset(tdz)
+    print(StdOut, str)
+end
+ 
+
+function showwithzone(io::IO, tdz::TimeDateZone)
+    str = stringwithzone(tdz)
+    print(io, str)
+end
+function showwithzone(tdz::TimeDateZone)
+    str = stringwithzone(tdz)
+    print(StdOut, str)
+end
+  
 
 show(io::IO, tdz::TimeDateZone; tzname::Bool=false) =
     tzname ? showwithzone(io, tdz) : showwithoffset(io,tdz)
