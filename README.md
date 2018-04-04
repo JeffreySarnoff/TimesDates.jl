@@ -187,22 +187,22 @@ Europe/London (UTC+0/UTC+1)
 ```julia
 julia> using Dates, TimeZones, TimesDates
 
-julia-0.7> tzdefault!(localzone())
+julia> tzdefault!(localzone())
 America/New_York (UTC-5/UTC-4)
 
-julia-0.7> localtime()
+julia> localtime()
 2018-04-04T13:00:30.525-04:00
 
-julia-0.7> utime()
+julia> utime()
 2018-04-04T13:00:30.545Z
 
-julia-0.7> localtime(TimeDate), localtime(TimeDateZone)
+julia> localtime(TimeDate), localtime(TimeDateZone)
 (2018-04-04T09:00:30.549, 2018-04-04T13:00:30.549-04:00)
 
-julia-0.7> utime(TimeDate), utime(TimeDateZone)
+julia> utime(TimeDate), utime(TimeDateZone)
 (2018-04-04T13:00:30.659, 2018-04-04T13:00:30.659Z)
 
-julia-0.7> dtm = now() - Month(7) - Minute(55)
+julia> dtm = localtime() - Month(7) - Minute(55)
 2017-09-04T08:05:30.66
 
 
