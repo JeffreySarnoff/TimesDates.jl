@@ -1,6 +1,12 @@
 const DASH = '-'
 const DASHSTR = "-"
 
+if isdefined(:STDOUT)
+    const StdOut = Base.STDOUT
+else
+    const StdOut = Base.stdout
+end
+
 function splitstring(str::AbstractString, splitat::AbstractString)
     a, z = split(str, splitat)
     return String(a), String(z)
@@ -23,12 +29,12 @@ function stringwithoffset(tdz::TimeDateZone)
 end
 
 show(io::IO, td::TimeDate) = print(io, string(td))
-show(td::TimeDate) = print(Base.STDOUT, string(td))
+show(td::TimeDate) = print(StdOut, string(td))
 
 showwithoffset(io::IO, tdz::TimeDateZone) = print(io, stringwithoffset(tdz))
-showwithoffset(tdz::TimeDateZone) = print(Base.STDOUT, stringwithoffset(tdz))
+showwithoffset(tdz::TimeDateZone) = print(StdOut, stringwithoffset(tdz))
 showwithzone(io::IO, tdz::TimeDateZone) = print(io, stringwithzone(tdz))
-showwithzone(tdz::TimeDateZone) = print(Base.STDOUT, stringwithzone(tdz))
+showwithzone(tdz::TimeDateZone) = print(StdOut, stringwithzone(tdz))
 
 show(io::IO, tdz::TimeDateZone; tzname::Bool=false) =
     tzname ? showwithzone(io, tdz) : showwithoffset(io,tdz)
