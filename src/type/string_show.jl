@@ -10,7 +10,7 @@ timezonename(tdz::TimeDateZone) = string(tdz.in_zone)
 timezonename(zdt::ZonedDateTime) = string(zdt.timezone)
 timezonename(tz::TimeZone) = string(tz)
 
-string(tdz::TimeDateZone; tzname::Bool=false) =
+string(tdz::TimeDateZone; tzname::Bool) =
     tzname ? stringwithzone(tdz) : string(tdz)
     
 function stringwithzone(tdz::TimeDateZone)
@@ -42,9 +42,9 @@ show(tdz::TimeDateZone) = print(Base.STDOUT, string(tdz))
 showwithzone(io::IO, tdz::TimeDateZone) = print(io, stringwithzone(tdz))
 showwithzone(tdz::TimeDateZone) = print(Base.STDOUT, stringwithzone(tdz))
 
-show(io::IO, tdz::TimeDateZone; tzname::Bool=false) =
+show(io::IO, tdz::TimeDateZone; tzname::Bool) =
     tzname ? showwithzone(io, tdz) : show(io,tdz)
-show(tdz::TimeDateZone; tzname::Bool=false) =
+show(tdz::TimeDateZone; tzname::Bool) =
     tzname ? showwithzone(tdz) : show(tdz)
 
 
