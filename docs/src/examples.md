@@ -43,7 +43,7 @@ America/New_York (UTC-5/UTC-4)
 julia> tzdefault!(tz"Europe/London"); tzdefault()
 Europe/London (UTC+0/UTC+1)
 ```
-Use `localtime` and `utime`.
+Use `localtime` and `univtime`.
 ```julia
 julia> using Dates, TimeZones, TimesDates
 
@@ -53,13 +53,13 @@ America/New_York (UTC-5/UTC-4)
 julia> localtime()
 2018-03-15T14:50:28.719-04:00
 
-julia> utime()
+julia> univtime()
 2018-03-15T18:50:30.282+00:00
 
 julia> localtime(TimeDate), localtime(TimeDateZone)
 (2018-03-15T14:50:30.291, 2018-03-15T14:50:30.294-04:00)
 
-julia> utime(TimeDate), utime(TimeDateZone)
+julia> univtime(TimeDate), univtime(TimeDateZone)
 (2018-03-15T18:50:30.484, 2018-03-15T18:50:30.489+00:00)
 
 julia> dtm = now() - Month(7) - Minute(55)
@@ -68,7 +68,7 @@ julia> dtm = now() - Month(7) - Minute(55)
 julia> localtime(dtm)
 2017-08-15T13:55:30.491-04:00
 
-julia> utime(dtm)
+julia> univtime(dtm)
 2017-08-15T17:55:30.491+00:00
 ```
 
