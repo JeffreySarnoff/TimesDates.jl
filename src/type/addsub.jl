@@ -50,8 +50,22 @@ for P in (:Day, :Month, :Year)
   @eval begin
     (+)(td::TimeDate, period::$P) = TimeDate(td.at_time, td.on_date+period)
     (-)(td::TimeDate, period::$P) = TimeDate(td.at_time, td.on_date-period)
-    (+)(tdz::TimeDateZone, period::$P) = TimeDateZone(tdz.at_time, tdz.on_date+period, tdz.in_zone)
-    (-)(tdz::TimeDateZone, period::$P) = TimeDateZone(tdz.at_time, tdz.on_date-period, tdz.in_zone)
+    function (+)(tdz::TimeDateZone, period::$P)
+        fast_time = fasttime(tdz)
+        zdt = ZonedDateTime(tdz)
+        zdt = zdt + period
+        tdz = TimeDateZone(zdt)
+        tdz += fast_time
+        return tdz
+    end
+    function (-)(tdz::TimeDateZone, period::$P)
+        fast_time = fasttime(tdz)
+        zdt = ZonedDateTime(tdz)
+        zdt = zdt - period
+        tdz = TimeDateZone(zdt)
+        tdz += fast_time
+        return tdz
+    end
   end
 end
 
@@ -78,24 +92,32 @@ function (-)(td::TimeDate, cperiod::CompoundPeriod)
 end
 
 function (+)(tdz::TimeDateZone, cperiod::CompoundPeriod)
-    td = TimeDate(tdz)
-    td = td + cperiod
-    return TimeDateZone(td.at_time, td.on_date, tdz.in_zone)
+    fast_time = fasttime(tdz)
+    zdt = ZonedDateTime(tdz)
+    zdt = zdt + cperiod
+    tdz = TimeDateZone(zdt)
+    tdz += fast_time
+    return tdz
 end
 
 function (-)(tdz::TimeDateZone, cperiod::CompoundPeriod)
-    td = TimeDate(tdz)
-    td = td - cperiod
-    return TimeDateZone(td.at_time, td.on_date, tdz.in_zone)
+    fast_time = fasttime(tdz)
+    zdt = ZonedDateTime(tdz)
+    zdt = zdt - cperiod
+    tdz = TimeDateZone(zdt)
+    tdz += fast_time
+    return tdz
 end
 
 function (-)(tdz1::TimeDateZone, tdz2::TimeDateZone)
-    tdz1 = astimezone(tdz1, tz"UTC")
-    tdz2 = astimezone(tdz1, tz"UTC")
-    ddate = tdz1.on_date - tdz2.on_date
-    dtime = tdz1.at_time - tdz2.at_time
-    delta = canonical(ddate + dtime)
-    return delta
+    fast_time1 = fasttime(tdz1)
+    fast_time2 = fasttime(tdz2)
+    fast_time  = fast_time1 - fast_time2
+    zdt1 = ZonedDateTime(tdz1)
+    zdt2 = ZonedDateTime(tdz2)
+    zdelta = zdt1 - zdt2
+    tdelta = zdelta + fast_time
+    return tdelta
 end
 
 (+)(period::Period, td::TimeDate) = td + period
