@@ -46,10 +46,14 @@ for P in (:Nanosecond, :Microsecond, :Millisecond, :Second, :Minute, :Hour)
   end
 end
 
-(+)(td::TimeDate, dy::Day) = TimeDate(td.at_time, td.on_date+dy)
-(-)(td::TimeDate, dy::Day) = TimeDate(td.at_time, td.on_date-dy)
-(+)(tdz::TimeDateZone, dy::Day) = TimeDateZone(tdz.at_time, tdz.on_date+dy, tdz.in_zone)
-(-)(tdz::TimeDateZone, dy::Day) = TimeDateZone(tdz.at_time, tdz.on_date-dy, tdz.in_zone)
+for P in (:Day, :Month, :Year)
+  @eval begin
+    (+)(td::TimeDate, period::$P) = TimeDate(td.at_time, td.on_date+period)
+    (-)(td::TimeDate, period::$P) = TimeDate(td.at_time, td.on_date-period)
+    (+)(tdz::TimeDateZone, period::$P) = TimeDate(tdz.at_time, tdz.on_date+period, tdz.in_zone)
+    (-)(tdz::TimeDateZone, period::$P) = TimeDate(tdz.at_time, tdz.on_date-period, tdz.in_zone)
+  end
+end
 
 function (+)(td::TimeDate, cperiod::CompoundPeriod)
     on_date = td.on_date
