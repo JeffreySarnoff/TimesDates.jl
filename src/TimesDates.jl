@@ -3,7 +3,7 @@ __precompile__()
 module TimesDates
 
 export TimeDate, TimeDateZone,
-    TimeZone,
+    TimeZone, timezonename,
     timezone, time, date, tzdefault, tzdefault!,
     localtime, utime, astimezone, TZ_LOCAL, TZ_UT,
     stringwithzone, typesof
