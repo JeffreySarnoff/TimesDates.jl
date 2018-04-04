@@ -5,7 +5,7 @@ module TimesDates
 export TimeDate, TimeDateZone,
     TimeZone, timezonename,
     timezone, time, date, tzdefault, tzdefault!,
-    localtime, utime, astimezone, TZ_LOCAL, TZ_UT,
+    localtime, univtime, astimezone, TZ_LOCAL, TZ_UT,
     stringwithzone, typesof
 
 import Base: promote_rule, convert, string, show, showcompact,
@@ -47,7 +47,7 @@ include("support/ctime.jl")
 include("type/nanotime.jl")
 
 include("timesupport/zoneoffset.jl")
-include("timesupport/utime_localtime.jl")
+include("timesupport/univtime_localtime.jl")
 include("timesupport/slow_fast.jl")
 
 include("timezone/timezones.jl")
