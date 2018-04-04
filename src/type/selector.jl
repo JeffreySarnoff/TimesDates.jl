@@ -131,6 +131,7 @@ function canonical(x::CompoundPeriod)
     return compound
 end
 
+#=
 function Dates.Day(cp::CompoundPeriod)
     periods = cp.periods
     isempty(periods) && return Dates.Day(0)
@@ -138,6 +139,7 @@ function Dates.Day(cp::CompoundPeriod)
     !isa(firstperiod, Day) && return Dates.Day(0)
     return firstperiod
 end
+=#
 
 function Dates.Time(cp::CompoundPeriod)
     cperiods = canonical(cp)
