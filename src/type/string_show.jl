@@ -71,7 +71,7 @@ function TimeDateZone(str::String)
         tz          = TimeZone(tzname)
         TimeDateZone(timedate, tz)
     else
-        if str[end] == "Z"
+        if str[end] == 'Z'
             timedatestr = str[1:end-1]
             tz = tz"UTC"
         else
