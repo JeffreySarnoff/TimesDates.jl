@@ -20,7 +20,8 @@ string(tdz::TimeDateZone; tzname::Bool=false) =
     tzname ? stringwithzone(tdz) : stringwithoffset(tdz)
     
 function stringwithzone(tdz::TimeDateZone)
-    return string(tdz.on_date,"T",tdz.at_time," ",tdz.in_zone)
+    tzname = timezonename(tdz.in_zone)
+    return string(tdz.on_date,"T",tdz.at_time," ",tzname)
 end
 
 function stringwithoffset(tdz::TimeDateZone)
