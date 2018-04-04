@@ -11,13 +11,13 @@ timezonename(zdt::ZonedDateTime) = string(zdt.timezone)
 timezonename(tz::TimeZone) = string(tz)
 
 string(tdz::TimeDateZone; tzname::Bool) =
-    tzname ? stringwithzone(tdz) : string(tdz)
+    tzname ? stringwithzone(tdz) : stringwithoffset(tdz)
     
 function stringwithzone(tdz::TimeDateZone)
     return string(tdz.on_date,"T",tdz.at_time," ",tdz.in_zone)
 end
 
-function string(tdz::TimeDateZone)
+function stringwithoffset(tdz::TimeDateZone)
     on_date = tdz.on_date
     at_time = tdz.at_time
     fast_time = fasttime(at_time)
@@ -35,17 +35,17 @@ function string(tdz::TimeDateZone)
 end
 
 show(io::IO, td::TimeDate) = print(io, string(td))
-show(io::IO, tdz::TimeDateZone) = print(io, string(tdz))
+showwithoffset(io::IO, tdz::TimeDateZone) = print(io, string(tdz))
 show(td::TimeDate) = print(Base.STDOUT, string(td))
-show(tdz::TimeDateZone) = print(Base.STDOUT, string(tdz))
+showwithoffset(tdz::TimeDateZone) = print(Base.STDOUT, string(tdz))
 
 showwithzone(io::IO, tdz::TimeDateZone) = print(io, stringwithzone(tdz))
 showwithzone(tdz::TimeDateZone) = print(Base.STDOUT, stringwithzone(tdz))
 
 show(io::IO, tdz::TimeDateZone; tzname::Bool) =
-    tzname ? showwithzone(io, tdz) : show(io,tdz)
+    tzname ? showwithzone(io, tdz) : showwithoffset(io,tdz)
 show(tdz::TimeDateZone; tzname::Bool) =
-    tzname ? showwithzone(tdz) : show(tdz)
+    tzname ? showwithzone(tdz) : showwithoffset(tdz)
 
 
 splitstring(str::String, splitat::String) = map(String, split(str, splitat))
