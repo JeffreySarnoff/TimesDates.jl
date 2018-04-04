@@ -1,10 +1,10 @@
 const DASH = '-'
 const DASHSTR = "-"
 
-if isdefined(:STDOUT)
-    const StdOut = Base.STDOUT
-else
+if @isdefined :stdout
     const StdOut = Base.stdout
+else
+    const StdOut = Base.STDOUT
 end
 
 function splitstring(str::AbstractString, splitat::AbstractString)
