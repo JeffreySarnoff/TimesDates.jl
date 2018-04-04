@@ -1,7 +1,7 @@
 const DASH = '-'
 const DASHSTR = "-"
 
-if @isdefined :stdout
+if @isdefined stdout
     const StdOut = Base.stdout
 else
     const StdOut = Base.STDOUT
