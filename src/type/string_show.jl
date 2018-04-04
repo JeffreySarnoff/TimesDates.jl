@@ -34,11 +34,11 @@ function stringwithoffset(tdz::TimeDateZone)
     return str
 end
 
-show(io::IO, td::TimeDate) = print(io, string(td))
-showwithoffset(io::IO, tdz::TimeDateZone) = print(io, string(tdz))
+show(io::IO, td::TimeDate) = print(io, stringw(td))
 show(td::TimeDate) = print(Base.STDOUT, string(td))
-showwithoffset(tdz::TimeDateZone) = print(Base.STDOUT, string(tdz))
 
+showwithoffset(io::IO, tdz::TimeDateZone) = print(io, stringwithoffset(tdz))
+showwithoffset(tdz::TimeDateZone) = print(Base.STDOUT, stringwithoffset(tdz))
 showwithzone(io::IO, tdz::TimeDateZone) = print(io, stringwithzone(tdz))
 showwithzone(tdz::TimeDateZone) = print(Base.STDOUT, stringwithzone(tdz))
 
