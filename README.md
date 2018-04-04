@@ -42,7 +42,7 @@
 
 - ### [set the default timezone](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-and-set-the-default-timezone)
 
-- ### [localtime() and utime()](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#use-localtime-and-utime)
+- ### [localtime() and univtime()](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#use-localtime-and-univtime)
 ----
 
 
@@ -183,7 +183,7 @@ America/New_York (UTC-5/UTC-4)
 julia> tzdefault!(tz"Europe/London"); tzdefault()
 Europe/London (UTC+0/UTC+1)
 ```
-#### use `localtime` and `utime`
+#### use `localtime` and `univtime`
 ```julia
 julia> using Dates, TimeZones, TimesDates
 
@@ -193,13 +193,13 @@ America/New_York (UTC-5/UTC-4)
 julia> localtime()
 2018-04-04T13:00:30.525-04:00
 
-julia> utime()
+julia> univtime()
 2018-04-04T13:00:30.545Z
 
 julia> localtime(TimeDate), localtime(TimeDateZone)
 (2018-04-04T09:00:30.549, 2018-04-04T13:00:30.549-04:00)
 
-julia> utime(TimeDate), utime(TimeDateZone)
+julia> univtime(TimeDate), univtime(TimeDateZone)
 (2018-04-04T13:00:30.659, 2018-04-04T13:00:30.659Z)
 
 julia> dtm = localtime() - Month(7) - Minute(55)
@@ -210,7 +210,7 @@ julia> dtm = localtime() - Month(7) - Minute(55)
 julia> localtime(dtm)
 2017-08-15T13:55:30.491-04:00
 
-julia> utime(dtm)
+julia> univtime(dtm)
 2017-08-15T17:55:30.491+00:00
 ```
 
