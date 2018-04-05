@@ -1,4 +1,7 @@
-tzdefault() = localzone()
+const TZ_UT    = tz"UTC"
+const TZ_LOCAL = localzone()
+
+tzdefault() = TZ_LOCAL
 
 TimeZone(tz::FixedTimeZone) = tz
 TimeZone(tz::VariableTimeZone) = tz
@@ -15,8 +18,3 @@ function astimezone(x::TimeDateZone, tz::T) where
     tdz = tdz + fast_time
     return tdz
 end
-
-
-#const TZ_UT = tz"UTC"
-#const TZ_LOCAL = localzone()
-
