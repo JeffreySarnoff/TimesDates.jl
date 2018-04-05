@@ -51,7 +51,6 @@ include("timesupport/univtime_localtime.jl")
 include("timesupport/slow_fast.jl")
 
 include("timezone/timezones.jl")
-include("timezone/tzdefault.jl")
 
 include("type/constructor.jl")
 #include("type/compound.jl")
