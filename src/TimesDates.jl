@@ -2,11 +2,11 @@ __precompile__()
 
 module TimesDates
 
-export TimeDate, TimeDateZone,
-    TimeZone, timezonename,
-    timezone, time, date, tzdefault, tzdefault!,
-    localtime, univtime, astimezone, TZ_LOCAL, TZ_UT,
-    stringwithzone, typesof
+export TimeDate, TimeDateZone, 
+       TimeZone, timezonename, astimezone,
+       localtime, univtime,
+       time, date, 
+       typesof
 
 import Base: promote_rule, convert, string, show, showcompact,
              (==), (!=), (<=), (<), (>), (>=), isless, isequal,
