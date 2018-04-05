@@ -53,7 +53,6 @@ include("timesupport/slow_fast.jl")
 include("timezone/timezones.jl")
 include("timezone/tzdefault.jl")
 
-include("timezone/astimezone.jl")
 include("type/constructor.jl")
 #include("type/compound.jl")
 
