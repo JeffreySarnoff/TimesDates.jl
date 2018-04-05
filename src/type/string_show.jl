@@ -80,7 +80,7 @@ show(tdz::TimeDateZone; tzname::Bool=false) =
 splitstring(str::String, splitat::String) = map(String, split(str, splitat))
 
 function TimeDate(str::String)
-    !in("T", str) && throw(ErrorException("\"$str\" is not recognized as a TimeDate"))
+    !occursin("T", str) && throw(ErrorException("\"$str\" is not recognized as a TimeDate"))
 
     datepart, inttimepart, fractimepart = datetimeparts(str)
 
@@ -92,9 +92,9 @@ function TimeDate(str::String)
 end
 
 function TimeDateZone(str::String)
-    !in("T", str) && throw(ErrorException("\"$str\" is not recognized as a TimeDateZone"))
+    !occursin("T", str) && throw(ErrorException("\"$str\" is not recognized as a TimeDateZone"))
 
-    if in(" ", str)
+    if occursin(" ", str)
         timedatestr, tzname = splitstring(str, " ")
         timedate    = TimeDate(timedatestr)
         tz          = TimeZone(tzname)
@@ -138,7 +138,7 @@ end
 
 function datetimeparts(str::String)
     datepart, timepart = splitstring(str, "T")
-    if in(".", timepart)
+    if occursin(".", timepart)
         inttimepart, fractimepart = splitstring(timepart, ".")
     else
         inttimepart = timepart
