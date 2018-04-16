@@ -30,8 +30,6 @@ tdz2 = TimeDateZone(td1, tz"America/New_York")
 @test Minute(td1 + Minute(1)) == Minute(td1) + Minute(1)
 @test Microsecond(td3 - Microsecond(1)) == Microsecond(td3) - Microsecond(1)
 
-@test tz"UTC" == tzdefault()
-
 @test TimeDateZone(dtz1) == tdz1
 @test TimeDateZone(dtz2) == tdz2
 
