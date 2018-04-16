@@ -30,15 +30,17 @@ struct TimeDateZone <: NanosecondBasis
 
     # ensure other constructors will be give explictly
 
-    function TimeDateZone(at_time::Time, on_date::Date, at_zone::FixedTimeZone)
-        return new(at_time, on_date, at_zone, at_zone)
-    end
+
     function TimeDateZone(at_time::Time, on_date::Date, in_zone::FixedTimeZone, at_zone::FixedTimeZone)
         return new(at_time, on_date, in_zone, at_zone)
     end
     function TimeDateZone(at_time::Time, on_date::Date, in_zone::VariableTimeZone, at_zone::FixedTimeZone)
         return new(at_time, on_date, in_zone, at_zone)
     end
+end
+
+function TimeDateZone(at_time::Time, on_date::Date, at_zone::FixedTimeZone)
+    return TimeDateZone(at_time, on_date, at_zone, at_zone)
 end
 
 @inline at_time(x::TimeDateZone) = x.at_time
