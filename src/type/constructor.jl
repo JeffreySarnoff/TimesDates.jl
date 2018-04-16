@@ -43,7 +43,7 @@ end
 function TimeDateZone(td::TimeDate, tz::Z) where {Z<:TimeZone}
     dt = on_date(td)
     tm = at_time(td)
-    tzd = TimeDateZone(tm, dt, tz)
+    tdz = TimeDateZone(tm, dt, tz)
     return tdz
 end
 
