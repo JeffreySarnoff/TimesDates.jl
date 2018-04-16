@@ -68,12 +68,10 @@ function TimeDateZone(tm::Time, dt::Date, tz::VariableTimeZone)
     fast_time = fasttime(tm)
     datetime  = dt + (tm - fast_time)
     zdt = ZonedDateTime(datetime, tz)
-   
+
     tdz = TimeDateZone(Time(zdt.utc_datetime) + fast_time, Date(zdt.utc_datetime),
                        zdt.timezone, zdt.zone)
     return tdz
 end
 
 TimeDateZone(dt::DateTime, tz::VariableTimeZone) = TimeDateZone(TimeDate(dt), tz)
-
-
