@@ -55,5 +55,3 @@ tdz2000_ny = TimeDateZone(str2000ns_ny)
 zdt = ZonedDateTime(DateTime("2011-05-08T12:11:15.050"), tz"Australia/Sydney")
 tdz = TimeDateZone(zdt)
 tdz += Microsecond(11)
-
-@test TimeDateZone(string(tdz)) == TimeDateZone(stringwithzone(tdz))
