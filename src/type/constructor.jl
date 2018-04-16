@@ -41,11 +41,12 @@ function TimeDateZone(dtm::DateTime, tz::Z) where {Z<:TimeZone}
 end
 
 function TimeDateZone(td::TimeDate, tz::Z) where {Z<:TimeZone}
-    dtm = on_date(td) + slowtime(at_time(td))
-    fast_time = fasttime(at_time(td))
-    tdz = TimeDateZone(dtm, tz)
-    return tdz + fast_time
+    dt = on_date(td)
+    tm = at_time(td)
+    tzd = TimeDateZone(tm, dt, tz)
+    return tdz
 end
+
 
 function TimeDateZone(zdt::ZonedDateTime)
     dttm = DateTime(zdt)
