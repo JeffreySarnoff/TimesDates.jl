@@ -33,19 +33,8 @@ function TimeDate(tdz::TimeDateZone)
     return timedate
 end
 
-TimeDateZone(dtm::DateTime, tz::Z) where {Z<:TimeZone} =
-    TimeDateZone(ZonedDateTime(dtm, tz))
-TimeDateZone(tm::Time, dt::Date, tz::Z) where {Z<:TimeZone} =
-    TimeDateZone(ZonedDateTime(dt+slowtime(tm), tz))
-TimeDateZone(tm::Time, dt::Date, tz::Z) where {Z<:TimeZone} =
-    TimeDateZone(ZonedDateTime(slowtime(dt+tm), tz))
-TimeDateZone(dt::Date, tz::Z) where {Z<:TimeZone} =
-    TimeDateZone(ZonedDateTime(dt+Time(0), tz))
 
-function TimeDateZone(zdt::ZonedDateTime)
-    dtm = zdt.utc_datetime
-    tz  = zdt.timezone
-    
+
 function TimeDateZone(zdt::ZonedDateTime)
     dtm = zdt.utc_datetime
     tz  = zdt.timezone
@@ -53,12 +42,22 @@ function TimeDateZone(zdt::ZonedDateTime)
     tdz = TimeDateZone(dtm, tz) - uctoffset
     return tdz
 end
-    tdz = TimeDateZone(dtm, tz) - uctoffset
-    return tdz
+
+function TimeDateZone(td::TimeDate, tz::Z) where {Z<:TimeZone}
+    dtm = slowtime(td)
+    zdt = ZonedDateTime(dtm, tz)
+    return TimeDateZone(zdt)
 end
 
-TimeDateZone(td::TimeDate, tz::Z) where {Z<:TimeZone} =
-    TimeDateZone(Time(td), Date(td), tz)
+
+TimeDateZone(dtm::DateTime, tz::Z) where {Z<:TimeZone} =
+    TimeDateZone(ZonedDateTime(dtm, tz))
+TimeDateZone(dt::Date, tm::Time, tz::Z) where {Z<:TimeZone} =
+    TimeDateZone(ZonedDateTime(dt+slowtime(tm), tz))
+TimeDateZone(tm::Time, dt::Date, tz::Z) where {Z<:TimeZone} =
+    TimeDateZone(dt+slowtime(tm), tz)
+TimeDateZone(dt::Date, tz::Z) where {Z<:TimeZone} =
+    TimeDateZone(ZonedDateTime(dt+Time(0), tz))
 
 TimeDateZone(tm::Time) = throw(ErrorException("TimeDateZone(::Time) is not used"))
 
