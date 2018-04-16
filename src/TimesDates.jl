@@ -6,9 +6,7 @@ export TimeDate, TimeDateZone,
        TimeZone, timezonename, astimezone,
        localtime, univtime,
        at_time, on_date, in_zone, at_zone, 
-       typesof,
-       stringwithzone, stringwithoffset,
-       showwithzone, showwithoffset
+       typesof
 
 import Base: promote_rule, convert, string, show, showcompact,
              (==), (!=), (<=), (<), (>), (>=), isless, isequal,
