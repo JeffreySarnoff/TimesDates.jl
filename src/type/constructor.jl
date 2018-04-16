@@ -35,8 +35,8 @@ end
 
 TimeDateZone(dtm::DateTime, tz::Z) where {Z<:TimeZone} =
     TimeDateZone(ZonedDateTime(dtm, tz))
-TimeDateZone(dt::Date, tm::Time, tz::Z) where {Z<:TimeZone} =
-    TimeDateZone(ZonedDateTime(slowtime(dt+tm), tz))
+TimeDateZone(tm::Time, dt::Date, tz::Z) where {Z<:TimeZone} =
+    TimeDateZone(ZonedDateTime(dt+slowtime(tm), tz))
 TimeDateZone(tm::Time, dt::Date, tz::Z) where {Z<:TimeZone} =
     TimeDateZone(ZonedDateTime(slowtime(dt+tm), tz))
 TimeDateZone(dt::Date, tz::Z) where {Z<:TimeZone} =
