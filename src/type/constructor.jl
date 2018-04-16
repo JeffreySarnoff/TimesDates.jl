@@ -27,31 +27,37 @@ end
 
 
 function TimeDate(tdz::TimeDateZone)
-    timedate = TimeDate(tdz.at_time, tdz.on_date)
-    offset = tdz.at_zone.offset.std + tdz.at_zone.offset.dst
-    timedate += offset
-    return timedate
+    slow_time = slowtime(at_time(tdz))
+    fast_time = fasttime(at_time(tdz))
+    zdt = ZonedDateTime(on_date(tdz)+slow_time, tdz.in_zone)
+    dttm = DateTime(zdt)
+    tmdt = TimeDate(Time(dttm), Date(dttm)) + fast_time
+    return tmdt
 end
 
-
-
-function TimeDateZone(zdt::ZonedDateTime)
-    dtm = zdt.utc_datetime
-    tz  = zdt.timezone
-    utcoffset = offset_Seconds_from_ut(zdt.zone.offset)
-    tdz = TimeDateZone(dtm, tz) - uctoffset
-    return tdz
-end
-
-function TimeDateZone(td::TimeDate, tz::Z) where {Z<:TimeZone}
-    dtm = slowtime(td)
+function TimeDateZone(dtm::DateTime, tz::Z) where {Z<:TimeZone}
     zdt = ZonedDateTime(dtm, tz)
     return TimeDateZone(zdt)
 end
 
+function TimeDateZone(td::TimeDate, tz::Z) where {Z<:TimeZone}
+    dtm = on_date(td) + slowtime(at_time(td))
+    fast_time = fasttime(at_time(td))
+    tdz = TimeDateZone(dtm, tz)
+    return tdz + fast_time
+end
 
-TimeDateZone(dtm::DateTime, tz::Z) where {Z<:TimeZone} =
-    TimeDateZone(ZonedDateTime(dtm, tz))
+function TimeDateZone(zdt::ZonedDateTime)
+    dttm = DateTime(zdt)
+    dt = Date(dttm)
+    tm = Time(dttm)
+    #utcoffset = offset_Seconds_from_ut(zdt.zone.offset)
+    tdz = TimeDateZone(tm, dt, zdt.timezone, zdt.zone)
+    return tdz
+end
+
+
+
 TimeDateZone(dt::Date, tm::Time, tz::Z) where {Z<:TimeZone} =
     TimeDateZone(ZonedDateTime(dt+slowtime(tm), tz))
 TimeDateZone(tm::Time, dt::Date, tz::Z) where {Z<:TimeZone} =
@@ -68,7 +74,7 @@ Time(td::TimeDate) = td.at_time
 DateTime(tdz::TimeDateZone) = DateTime(TimeDate(tdz))
 
 function ZonedDateTime(td::TimeDate, tz::TimeZone)
-    datetime = td.on_date + slowtime(td.at_time)
+    datetime = on_date(td) + slowtime(at_time(td))
     zdt = ZonedDateTime(datetime, tz)
     return zdt
 end
