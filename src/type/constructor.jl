@@ -45,7 +45,14 @@ TimeDateZone(dt::Date, tz::Z) where {Z<:TimeZone} =
 function TimeDateZone(zdt::ZonedDateTime)
     dtm = zdt.utc_datetime
     tz  = zdt.timezone
-    utcoffset = offset_Seconds_from_ut(tz.offset)
+    
+function TimeDateZone(zdt::ZonedDateTime)
+    dtm = zdt.utc_datetime
+    tz  = zdt.timezone
+    utcoffset = offset_Seconds_from_ut(zdt.zone.offset)
+    tdz = TimeDateZone(dtm, tz) - uctoffset
+    return tdz
+end
     tdz = TimeDateZone(dtm, tz) - uctoffset
     return tdz
 end
