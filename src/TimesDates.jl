@@ -2,10 +2,10 @@ __precompile__()
 
 module TimesDates
 
-export TimeDate, TimeDateZone, 
+export TimeDate, TimeDateZone,
        TimeZone, timezonename, astimezone,
        localtime, univtime,
-       time, date, 
+       at_time, on_date, in_zone, at_zone, 
        typesof
 
 import Base: promote_rule, convert, string, show, showcompact,
@@ -64,4 +64,3 @@ include("type/string_show.jl")
 
 
 end # TimesDates
-
