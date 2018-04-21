@@ -1,10 +1,10 @@
 -----
 
 >>> __this will be the repository__
-  
+
 >>>  at the moment, I am simplifying, restructuring in JeffreySarnoff/NanoTimes.jl
 
->>>   __that will be used to replace specifics here__  
+>>>   __that will be used to replace specifics here__
 
 -----
 -----
@@ -39,8 +39,6 @@
 - ### [parse times with timezones](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#parse-times-with-timezones-1)
 
 - ### [adjust with precision](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#adjust-with-precision)
-
-- ### [set the default timezone](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-and-set-the-default-timezone)
 
 - ### [localtime() and univtime()](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#use-localtime-and-univtime)
 ----
@@ -99,6 +97,7 @@ julia> ZonedDateTime(tdz)
 ### Additional Examples
 
 #### get components
+
 ```julia
 julia> using Dates, TimesDates
 
@@ -111,7 +110,9 @@ julia> Month(timedate), Microsecond(timedate)
 julia> month(timedate), microsecond(timedate)
 (3, 968)
 ```
+
 #### interconvert
+
 ```julia
 julia> using Dates, TimesDates
 
@@ -124,11 +125,13 @@ julia> timedate = TimeDate(date); timedate, Date(timedate)
 julia> datetime = DateTime("2011-02-05T11:22:33")
 2011-02-05T11:22:33
 
-julia> timedate = TimeDate(datetime); 
+julia> timedate = TimeDate(datetime);
 julia> timedate, DateTime(timedate)
 (2011-02-05T11:22:33, 2011-02-05T11:22:33)
 ```
+
 #### parse times with timezones
+
 ```julia
 julia> using TimesDates, TimeZones, Dates
 
@@ -157,6 +160,7 @@ julia> TimeDateZone(string(tdz, tzname=true))
 ```
 
 #### adjust with precision
+
 ```julia
 julia> using Dates, TimesDates
 
@@ -169,21 +173,9 @@ julia-> timedate = TimeDate(datetime)
 julia> timedate = TimeDate(datetime, Millisecond(1)+Nanosecond(1))
 2001-05-10T00:00:00.000000001
 ```
-#### get and set the default timezone
-Without this setting, UTC is used as the default.
-```julia
-julia> using Dates, TimeZones, TimesDates
 
-julia> tzdefault()
-UTC
-
-julia> tzdefault!(localzone()); tzdefault()
-America/New_York (UTC-5/UTC-4)
-
-julia> tzdefault!(tz"Europe/London"); tzdefault()
-Europe/London (UTC+0/UTC+1)
-```
 #### use `localtime` and `univtime`
+
 ```julia
 julia> using Dates, TimeZones, TimesDates
 
@@ -202,10 +194,7 @@ julia> localtime(TimeDate), localtime(TimeDateZone)
 julia> univtime(TimeDate), univtime(TimeDateZone)
 (2018-04-04T13:00:30.659, 2018-04-04T13:00:30.659Z)
 
-julia> dtm = localtime() - Month(7) - Minute(55)
-2017-09-04T08:05:30.66
-
-
+julia> dtm = localtime() - Mon#### get components
 
 julia> localtime(dtm)
 2017-08-15T13:55:30.491-04:00
@@ -218,7 +207,7 @@ julia> univtime(dtm)
 
 ## The Design
 
-This package provides `TimeDate` to hold the date and time of day given in nanoseconds (or more coarsely).  And provides`TimeDateZone` to holds the the date and time of day in nanoseconds with a timezone. This work relies heavily on `Dates` and `TimeZones`; most of the attention to detail plays through. 
+This package provides `TimeDate` to hold the date and time of day given in nanoseconds (or more coarsely).  And provides`TimeDateZone` to holds the the date and time of day in nanoseconds with a timezone. This work relies heavily on `Dates` and `TimeZones`; most of the attention to detail plays through.
 
 `Dates` has a `Time` type that has nanosecond resolution; it is not well supported, even within `Dates`.  This `Time` type recognizes strings only if they are limited to millisecond resolution. Only millisecond resolved times are relevant to `DateTime`s.  While at present limited by this millisecond barrier, `TimeZones` is a laudable package with active support.  I expect an eventual melding of what's best.
 
@@ -280,5 +269,3 @@ While both are collaborative works, a few people deserve mention:
 ## Comments and Pull Requests are welcomed
 
 http://github.com/JeffreySarnoff/TimesDates.jl
-
-

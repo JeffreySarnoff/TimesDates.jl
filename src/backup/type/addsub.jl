@@ -1,3 +1,6 @@
+(+)(td::TimeDate) = td
+(+)(tdz::TimeDateZone) = tdz
+
 for P in (:Nanosecond, :Microsecond, :Millisecond, :Second, :Minute, :Hour)
   @eval begin
 
@@ -30,10 +33,27 @@ for P in (:Nanosecond, :Microsecond, :Millisecond, :Second, :Minute, :Hour)
      end
 
      function (+)(tdz::TimeDateZone, tp::$P)
-        td = TimeDate(tdz)
-        td = td + tp
+        date = Date(tdz)
+        zone = inzone(tdz)
+        fast_time, slow_time = fastslowtimes(tdz)
+        fast_tp, slow_tp = fastslowtimes(tp)
+        fast_time = fast_time + fast_tp
+        fast_time2 = Nanosecond(fast_time) + Microsecond(fast_time)
+        slow_time2 = slow_time + Milliseconds(fast_time - fast_time2)
+        if slow_time2 < slow_time
+           date += Day(1)
+        end
+        datetime = date + slow_time2
+        zdt = ZonedDateTime(datetime, zone)
+        tm = Time(zdt)
+        timeofday = tm + fast_time2
+        if timeofday < tm
+            datetime += Day(1)
+        end
+        timedate = TimeDate(datetime) + timeofday
+        tdz = TimeDateZone(timedate, zdt.timezone)
 
-        return TimeDateZone(td.at_time, td.on_date, tdz.in_zone)
+        return tdz
      end
 
      function (-)(tdz::TimeDateZone, tp::$P)
@@ -68,6 +88,7 @@ for P in (:Day, :Month, :Year)
     end
   end
 end
+
 
 function (+)(td::TimeDate, cperiod::CompoundPeriod)
     on_date = td.on_date
@@ -149,3 +170,8 @@ end
 (-)(adt::DateTime, atdz::TimeDateZone) = (-)(TimeDateZone(adt), atdz)
 (-)(atdz::TimeDateZone, adzt::ZonedDateTime) = (-)(atdz, TimeDateZone(adzt))
 (-)(azdt::ZonedDateTime, atdz::TimeDateZone) = (-)(TimeDateZone(azdt), atdz)
+
+
+CompoundPeriod(tm::Time) = Hour(tm)+Minute(tm)+Second(tm)+Millisecond(tm)+Microsecond(tm)+Nanosecond(tm)
+CompoundPeriod(dt::Date) = Year(dt)+Month(dt)+Day(dt)
+CompoundPeriod(dtm::DateTime) = CompoundPeriod(Date(dtm)) + CompoundPeriod(Time(dtm))

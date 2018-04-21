@@ -91,6 +91,7 @@ function canonical(x::Nanosecond)
         Millisecond(millis), Microsecond(micros), Nanosecond(nanos))
 end
 =#
+#=
 function canonical(days::Day, hours::Hour=Hour(0), minutes::Minute=Minute(0), seconds::Second=Second(0), millisecs::Millisecond=Millisecond(0), microsecs::Microsecond=Microsecond(0), nanosecs::Nanosecond=Nanosecond(0))
     CompoundPeriod(Day(days), Hour(hours), minutes, seconds, millisecs, microsecs, nanosecs)
 end
@@ -130,7 +131,7 @@ function canonical(x::CompoundPeriod)
     compound = isempty(periods) ? CompoundPeriod() : reduce(+, periods)
     return compound
 end
-
+=#
 #=
 function Dates.Day(cp::CompoundPeriod)
     periods = cp.periods
@@ -139,7 +140,7 @@ function Dates.Day(cp::CompoundPeriod)
     !isa(firstperiod, Day) && return Dates.Day(0)
     return firstperiod
 end
-=#
+
 
 function Dates.Time(cp::CompoundPeriod)
     cperiods = canonical(cp)
@@ -153,3 +154,4 @@ function isolate_days(cp::CompoundPeriod)
     cp = cp - days
     return days, cp
 end
+=#
