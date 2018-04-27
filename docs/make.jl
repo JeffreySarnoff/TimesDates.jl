@@ -14,6 +14,7 @@ makedocs(
 )
 
 deploydocs(
+    julia = "nightly",
     repo = "github.com/JeffreySarnoff/TimesDates.jl.git",
     target = "build",
     deps = nothing,
