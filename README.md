@@ -1,15 +1,3 @@
------
-
->>> __this will be the repository__
-
->>>  at the moment, I am simplifying, restructuring in JeffreySarnoff/NanoTimes.jl
-
->>>   __that will be used to replace specifics here__
-
------
------
-
-
 # TimesDates
 ### Nanosecond Resolvable Times with Dates, or Times with Dates in TimeZones.
 #### Released under the MIT License. Copyright &copy; 2018 by Jeffrey Sarnoff.
