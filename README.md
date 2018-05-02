@@ -78,8 +78,8 @@ julia> ZonedDateTime(tdz)
 
 -----
 
->>
->> |  Examples of Use   |
+
+|  __Examples of Use__   |
 |--------------------|
 | [get component periods](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-components) |
 | [interconvert temporal types](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#interconvert) |
