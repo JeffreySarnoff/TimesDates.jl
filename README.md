@@ -32,19 +32,11 @@ add("TimesDates")
 ```
 -----
 
-## the nanosecond resolved types
-
 ### TimeDate
 - nanoseconds and microseconds are understood
 - omits the flexible formatting of DateTime
 - timestamps with nanosecond resolution
 
-### TimeDateZone
-- nanoseconds and microseconds are understood
-- intrazone and interzone relationships hold
-- ISO timestamps and Zoned timestamps available
-
-#### `TimeDate`
 ```julia
 julia> using TimesDates, Dates
 
@@ -61,9 +53,10 @@ julia> td2018 - td2017
 2 nanoseconds
 ```
 
-----
-
-#### `TimeDateZone`
+### TimeDateZone
+- nanoseconds and microseconds are understood
+- intrazone and interzone relationships hold
+- ISO timestamps and Zoned timestamps available
 
 ```julia
 julia> using Dates, TimeZones, TimesDates
