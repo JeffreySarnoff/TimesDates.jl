@@ -85,7 +85,16 @@ julia> ZonedDateTime(tdz)
 
 -----
 
-### [Examples of use](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#additional-examples)
+|  Using This Work   |
+|--------------------|
+| [get components](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-components) |
+| [interconvert](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#interconvert) |
+| [parse zoned times](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#parse-times-with-timezones) |
+| [adjust precisely](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#adjust-with-precision) |
+| [localtime, univtime](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#use-localtime-and-univtime) |
+
+
+-----
 
 ### [How it works](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design)
 
@@ -127,7 +136,7 @@ julia> timedate, DateTime(timedate)
 (2011-02-05T11:22:33, 2011-02-05T11:22:33)
 ```
 
-#### parse times with timezones
+#### parse zoned times
 
 ```julia
 julia> using TimesDates, TimeZones, Dates
@@ -153,10 +162,10 @@ julia> string(tdz, tzname=true)
 
 julia> TimeDateZone(string(tdz, tzname=true))
 2011-05-07T16:11:15.050011+10:00
-
+https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#adjust-with-precision
 ```
 
-#### adjust with precision
+#### adjust precisely
 
 ```julia
 julia> using Dates, TimesDates
