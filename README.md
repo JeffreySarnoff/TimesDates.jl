@@ -59,7 +59,7 @@ julia> td2018 - td2017
 - ISO timestamps and Zoned timestamps available
 
 ```julia
-julia> using Dates, TimeZones, TimesDates
+julia> using TimesDates, TimeZones, Dates
 
 julia> zdt = ZonedDateTime(DateTime(2012,1,21,15,25,45), tz"America/Chicago")
 2012-01-21T15:25:45-06:00
@@ -98,7 +98,7 @@ julia> ZonedDateTime(tdz)
 #### get components
 
 ```julia
-julia> using Dates, TimesDates
+julia> using TimesDates, Dates
 
 julia> timedate = TimeDate("2018-03-09T18:29:34.04296875")
 2018-03-09T18:29:34.04296875
@@ -113,7 +113,7 @@ julia> month(timedate), microsecond(timedate)
 #### interconvert
 
 ```julia
-julia> using Dates, TimesDates
+julia> using TimesDates, Dates
 
 julia> date = Date("2011-02-05")
 2011-02-05
@@ -161,7 +161,7 @@ https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#adjust-wit
 #### manage temporal data more precisely
 
 ```julia
-julia> using Dates, TimesDates
+julia> using TimesDates, Dates
 
 julia> datetime = DateTime("2001-05-10T23:59:59.999")
 2001-05-10T23:59:59.999
@@ -176,7 +176,7 @@ julia> timedate = TimeDate(datetime, Millisecond(1)+Nanosecond(1))
 #### use `localtime` and `univtime`
 
 ```julia
-julia> using Dates, TimeZones, TimesDates
+julia> using TimesDates, TimeZones,  Dates,
 
 julia> tzdefault!(localzone())
 America/New_York (UTC-5/UTC-4)
