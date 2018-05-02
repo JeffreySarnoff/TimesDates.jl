@@ -31,6 +31,9 @@ using Pkg
 add("TimesDates")
 ```
 
+
+[How it works](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design)
+
 ----
 
 ## In Use
