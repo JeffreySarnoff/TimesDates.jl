@@ -81,10 +81,10 @@ julia> ZonedDateTime(tdz)
 
 |  __Examples of Use__   |
 |--------------------|
-| [get component periods](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-components) |
-| [interconvert temporal types](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#interconvert) |
-| [parse zoned times and dates](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#parse-times-with-timezones) |
-| [manage temporal data more precisely](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#adjust-with-precision) |
+| [get component periods](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-component-periods) |
+| [interconvert temporal types](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#interconvert-temporal-types) |
+| [parse zoned times and dates](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#parse-zoned-times-and-dates) |
+| [manage temporal data more precisely](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#manage-temporal-data-more-precisely) |
 | [use localtime and univtime](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#use-localtime-and-univtime) |
 
 
