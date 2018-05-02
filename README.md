@@ -85,6 +85,8 @@ julia> ZonedDateTime(tdz)
 
 -----
 
+### [Examples of use](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#additional-examples)
+
 ### [How it works](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design)
 
 ----
