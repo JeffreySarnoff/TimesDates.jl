@@ -85,13 +85,13 @@ julia> ZonedDateTime(tdz)
 
 -----
 
-|  Using This Work   |
+|  Examples of Use   |
 |--------------------|
 | [get components](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-components) |
-| [interconvert](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#interconvert) |
+| [interconvert times, dates](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#interconvert) |
 | [parse zoned times](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#parse-times-with-timezones) |
-| [adjust precisely](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#adjust-with-precision) |
-| [localtime, univtime](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#use-localtime-and-univtime) |
+| [manage temporal data more precisely](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#adjust-with-precision) |
+| [localtime and univtime](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#use-localtime-and-univtime) |
 
 
 -----
@@ -165,7 +165,7 @@ julia> TimeDateZone(string(tdz, tzname=true))
 https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#adjust-with-precision
 ```
 
-#### adjust precisely
+#### manage temporal data more precisely
 
 ```julia
 julia> using Dates, TimesDates
