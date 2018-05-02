@@ -30,16 +30,21 @@ or use the pre-Pkg3 way
 using Pkg
 add("TimesDates")
 ```
+-----
 
+## the nanosecond resolved types
 
-[How it works](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design)
+### TimeDate
+- nanoseconds and microseconds are understood
+- omits the flexible formatting of DateTime
+- timestamps with nanosecond resolution
 
-----
+### TimeDateZone
+- nanoseconds and microseconds are understood
+- intrazone and interzone relationships hold
+- ISO timestamps and Zoned timestamps available
 
-## In Use
-
-#### `TimeDate` is nanosecond resolved
-
+#### `TimeDate`
 ```julia
 julia> using TimesDates, Dates
 
@@ -58,7 +63,7 @@ julia> td2018 - td2017
 
 ----
 
-#### `TimeDateZone` is nanosecond resolved and zone situated
+#### `TimeDateZone`
 
 ```julia
 julia> using Dates, TimeZones, TimesDates
@@ -75,6 +80,14 @@ julia> tdz += Nanosecond(123456)
 julia> ZonedDateTime(tdz)
 2012-01-21T15:25:45-06:00
 ```
+
+
+
+-----
+
+### [How it works](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design)
+
+----
 
 ### Additional Examples
 
