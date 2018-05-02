@@ -19,6 +19,18 @@
 ----
 
 
+## Setup
+
+add this to a Pkg3 project
+```julia
+pkg> add TimesDates
+```
+or use the pre-Pkg3 way
+```julia
+using Pkg
+add("TimesDates")
+```
+
 ----
 
 ## In Use
@@ -208,20 +220,6 @@ julia> slowtime = highrestime - fasttime
 
 The general approach is separate the date, slowtime, fasttime, and timezone (if appropriate), then use the date, slowtime and timezone (if appropriate) to obtain a coarse result using the facilities provided by the `Date` and `TimeZones` packages.  We refine the coarse result by adding or subtracting the fasttime, as appropriate.
 
-tbd [About TimesDates](https://jeffreysarnoff.github.io/TimesDates.jl/)
-
-
-## Setup
-
-```julia
-using Pkg3
-add TimesDates
-```
-or
-```julia
-using Pkg
-add("TimesDates")
-```
 
 
 
