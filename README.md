@@ -18,35 +18,6 @@
 
 ----
 
-## Types
-
-- ### [`TimeDate`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedate-is-nanosecond-resolved)
-
-- ### [`TimeDateZone`](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#timedatezone-is-nanosecond-resolved-and-zone-situated)
-
-----
-
-## Examples
-
-- ### [get components](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-components-1)
-
-- ### [interconvert](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#interconvert-1)
-
-- ### [parse times with timezones](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#parse-times-with-timezones-1)
-
-- ### [adjust with precision](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#adjust-with-precision)
-
-- ### [localtime() and univtime()](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#use-localtime-and-univtime)
-----
-
-
-----
-
-## [design notes](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design)
-
-### [Setup](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#setup)
-
-### [Acknowledgments](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#acknowledgements)
 
 ----
 
@@ -265,3 +236,4 @@ While both are collaborative works, a few people deserve mention:
 ## Comments and Pull Requests are welcomed
 
 http://github.com/JeffreySarnoff/TimesDates.jl
+
