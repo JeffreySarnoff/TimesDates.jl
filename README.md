@@ -78,13 +78,14 @@ julia> ZonedDateTime(tdz)
 
 -----
 
-|  Examples of Use   |
+>>
+>> |  Examples of Use   |
 |--------------------|
-| [get components](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-components) |
-| [interconvert times, dates](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#interconvert) |
-| [parse zoned times](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#parse-times-with-timezones) |
+| [get component periods](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-components) |
+| [interconvert temporal types](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#interconvert) |
+| [parse zoned times and dates](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#parse-times-with-timezones) |
 | [manage temporal data more precisely](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#adjust-with-precision) |
-| [localtime and univtime](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#use-localtime-and-univtime) |
+| [use localtime and univtime](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#use-localtime-and-univtime) |
 
 
 -----
@@ -95,7 +96,7 @@ julia> ZonedDateTime(tdz)
 
 ### Additional Examples
 
-#### get components
+#### get component periods
 
 ```julia
 julia> using TimesDates, Dates
@@ -110,7 +111,7 @@ julia> month(timedate), microsecond(timedate)
 (3, 968)
 ```
 
-#### interconvert
+#### interconvert temporal types
 
 ```julia
 julia> using TimesDates, Dates
@@ -176,7 +177,7 @@ julia> timedate = TimeDate(datetime, Millisecond(1)+Nanosecond(1))
 #### use `localtime` and `univtime`
 
 ```julia
-julia> using TimesDates, TimeZones,  Dates,
+julia> using TimesDates, TimeZones,  Dates
 
 julia> tzdefault!(localzone())
 America/New_York (UTC-5/UTC-4)
