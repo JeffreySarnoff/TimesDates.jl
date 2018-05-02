@@ -130,7 +130,7 @@ julia> timedate, DateTime(timedate)
 (2011-02-05T11:22:33, 2011-02-05T11:22:33)
 ```
 
-#### parse zoned times
+#### parse zoned times and dates
 
 ```julia
 julia> using TimesDates, TimeZones, Dates
