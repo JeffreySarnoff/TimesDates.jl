@@ -44,7 +44,6 @@ Date(x::Date) = x
 Time(x::Time) = x
 DateTime(x::DateTime) = x
 ZonedDateTime(x::ZonedDateTime) = x
-TimeDateZone(x::TimeDateZone) = x
 
 
 include("TimeDate.jl")
