@@ -1,9 +1,9 @@
 # TimesDates
 ### Nanosecond Resolvable Times with Dates, or Times with Dates in TimeZones.
 
-#### 
+##### 
 
-| Copyright © 2018 by Jeffrey Sarnoff.  | This material is released under The MIT License. |
+| Copyright © 2018 by Jeffrey Sarnoff.  | You may use this in accord with The MIT License. |
 |:--------------------------------------|:------------------------------------------------:|
 
 
@@ -14,7 +14,7 @@
 ### _This package requires Julia v0.7.0-._
  
 -----
-
+12.96
 
 - the type `TimeDate` works with DateTime, Date & Time (Dates.jl)
 
