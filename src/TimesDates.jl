@@ -40,6 +40,13 @@ import TimeZones.value # value(offset::UTCOffset) = value(offset.std + offset.ds
 const AkoTimeZone = Union{FixedTimeZone, VariableTimeZone}
 
 
+Date(x::Date) = x
+Time(x::Time) = x
+DateTime(x::DateTime) = x
+ZonedDateTime(x::ZonedDateTime) = x
+TimeDateZone(x::TimeDateZone) = x
+
+
 include("TimeDate.jl")
 include("TimeDateZone.jl")
 include("timeconsts.jl")
