@@ -38,11 +38,12 @@ import TimeZones: @tz_str, ZonedDateTime, TimeZone,
 import TimeZones.value # value(offset::UTCOffset) = value(offset.std + offset.dst)
 
 
+const AkoTimeZone = Union{FixedTimeZone, VariableTimeZone}
+
 include("TimeDate.jl")
 include("TimeDateZone.jl")
 include("timeconsts.jl")
 
-const AkoTimeZone = Union{FixedTimeZone, VariableTimeZone}
 
 Date(x::Date) = x
 Time(x::Time) = x
