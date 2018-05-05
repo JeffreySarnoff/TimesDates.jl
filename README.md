@@ -15,8 +15,7 @@
 -----
 12.96
 
-- the type `TimeDate` works with DateTime, Date & Time (Dates.jl)
-
+- the type `TimeDate`     works with DateTime, Date & Time
 - the type `TimeDateZone` works with ZonedDateTime, TimeZone (TimeZones.jl)
 
 ----
