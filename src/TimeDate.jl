@@ -73,6 +73,8 @@ end
     return dat + tim
 end
 
+#=
+
 function TimeDate(y::Int64, m::Int64=1, d::Int64=1,
                   h::Int64=0, mi::Int64=0, s::Int64=0, ms::Int64=0,
                   us::Int64=0, ns::Int64=0)
@@ -96,6 +98,8 @@ function TimeDate(y::Int64, m::Int64=1, d::Int64=1,
   td = TimeDate(dt, tm) 
   return td
 end
+
+=#
 
 @inline function ZonedDateTime(tmdt::TimeDate, tz::T) where {T<:AkoTimeZone}
     dtm = DateTime(tmdt)
