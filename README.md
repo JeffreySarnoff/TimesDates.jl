@@ -3,7 +3,7 @@
 
 #### Copyright © 2018 by Jeffrey Sarnoff. 
 
-###### Use this Julia software in accord with The MIT License.
+###### This Julia software is released under The MIT License.
 
 -----
 
