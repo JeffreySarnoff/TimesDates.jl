@@ -32,8 +32,6 @@ TimeDate(x::DateTime) = TimeDate(at_time(x), on_date(x))
 TimeDate(x::Date) = TimeDate(at_time(x), on_date(x))
 TimeDate(x::Time) = TimeDate(x, on_date(Dates.now()))
 
-TimeDate(tm::Time, dt::Date) = TimeDate(tm, dt)
-TimeDate(dt::Date, tm::Time) = TimeDate(tm, dt)
 
 @inline function TimeDate(x::ZonedDateTime)
     datetime = DateTime(x)
