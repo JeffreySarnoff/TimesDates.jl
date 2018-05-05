@@ -71,23 +71,22 @@ end
     return dat + tim
 end
 
-#=
 
 function TimeDate(y::Int64, m::Int64=1, d::Int64=1,
                   h::Int64=0, mi::Int64=0, s::Int64=0, ms::Int64=0,
                   us::Int64=0, ns::Int64=0)
-  uns, ns = fldmod(ns, NANOSECONDS_PER_MICROSECOND)
-  us += uns
-  ums, us = fldmod(us, MICROSECONDS_PER_MILLISECOND)
-  ms += ums
-  sms, ms = fldmod(ms, MILLISECONDS_PER_SECOND)
-  s += sms
-  umi, s = fldmod(s, SECONDS_PER_MINUTE)
-  mi += umi
-  uh, mi = fldmod(mi, MINUTES_PER_HOUR)
-  h += uh
-  ud, h = fldmod(h, HOURS_PER_DAY)
-  d += ud
+  fl, ns = fldmod(ns, NANOSECONDS_PER_MICROSECOND)
+  us += fl
+  fl, us = fldmod(us, MICROSECONDS_PER_MILLISECOND)
+  ms += fl
+  fl, ms = fldmod(ms, MILLISECONDS_PER_SECOND)
+  s += fl
+  fl, s = fldmod(s, SECONDS_PER_MINUTE)
+  mi += fl
+  fl, mi = fldmod(mi, MINUTES_PER_HOUR)
+  h += fl
+  fl, h = fldmod(h, HOURS_PER_DAY)
+  d += fl
   my, m = fldmod(m, MONTHS_PER_YEAR)
   y += my
     
@@ -97,7 +96,6 @@ function TimeDate(y::Int64, m::Int64=1, d::Int64=1,
   return td
 end
 
-=#
 
 @inline function ZonedDateTime(tmdt::TimeDate, tz::T) where {T<:AkoTimeZone}
     dtm = DateTime(tmdt)
