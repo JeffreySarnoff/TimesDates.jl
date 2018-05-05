@@ -51,6 +51,10 @@ true
 
 julia> td2018 - td2017
 2 nanoseconds
+
+julia> TimeDate(2003,4,5,9,8,7,6,5,4)
+2003-04-05T09:08:07.006005004
+
 ```
 
 ### TimeDateZone
