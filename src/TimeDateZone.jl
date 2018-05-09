@@ -31,7 +31,9 @@ end
 @inline timestamp(x::DateTime) = x
 @inline timestamp(x::Date) = x + Time(0)
 
-
+@inline timedate(x::TimeDateZone) = timedate(timestamp(x))
+@inline timedate(x::ZonedTimeDate) = timedate(DateTime(x))
+    
 TimeDateZone(x::TimeDateZone) = x
 TimeDate(x::TimeDateZone) = x.timestamp
 
