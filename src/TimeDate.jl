@@ -32,6 +32,10 @@ TimeDate(x::DateTime) = TimeDate(at_time(x), on_date(x))
 TimeDate(x::Date) = TimeDate(at_time(x), on_date(x))
 TimeDate(x::Time) = TimeDate(x, on_date(Dates.now()))
 
+timedate(x::TimeDate) = at_time(x), on_date(x)
+timedate(x::DateTime) = at_time(x), on_date(x)
+timedate(x::Date) = at_time(x), on_date(x)
+
 
 @inline function TimeDate(x::ZonedDateTime)
     datetime = DateTime(x)
@@ -56,14 +60,6 @@ end
 end
 @inline slowpart(x::TimeDate) = slowpart(at_time(x))
 
-timedate(x::TimeDate) = at_time(x), on_date(x)
-timedate(x::DateTime) = at_time(x), on_date(x)
-timedate(x::Date) = at_time(x), on_date(x)
-
-@inline function timedate(x::ZonedDateTime)
-    datetime = DateTime(x)
-    return at_time(datetime), on_date(datetime)
-end
 
 @inline function DateTime(x::TimeDate)
     tim, dat = at_time(x), on_date(x)
