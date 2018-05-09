@@ -115,12 +115,9 @@ tdz_explicit_day_hour = (TimeDateZone(spring, warsaw) + Day(1)) + Hour(24)
 
 zdt_implicit_hourday  = ZonedDateTime(2015, 3, 31, 0, warsaw)
 tdz_implicit_hourday = TimeDateZone(zdt_implicit_hourday)
-tdz_implicit_hour_day = TimeDateZone(spring, warsaw) + Hour(24) + Day(1)
+tdz_implicit_hour_day = TimeDateZone(spring, warsaw) + (Hour(24) + Day(1))
 @test zdt_implicit_hourday == ZonedDateTime(tdz_implicit_hourday)
-#
-#!!FIXME!! this fails -- why????                                   !!FIXME!!
-#
-#@test tdz_implicit_hourday == tdz_implicit_hour_day
+@test tdz_implicit_hourday == tdz_implicit_hour_day
 
 zdt_implicit_dayhour = ZonedDateTime(2015, 3, 31, 0, warsaw)
 tdz_implicit_dayhour  = TimeDateZone(zdt_implicit_dayhour)
