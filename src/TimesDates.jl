@@ -61,5 +61,6 @@ include("select.jl")
 include("arith.jl")
 include("compare.jl")
 include("showstring.jl")
+include("passthru.jl")
 
 end
