@@ -33,7 +33,7 @@ end
 
 
 TimeDateZone(x::TimeDateZone) = x
-
+TimeDate(x::TimeDateZone) = x.timestamp
 
 function TimeDateZone(attime::Time, ondate::Date, atzone::FixedTimeZone)
     return TimeDateZone(attime, ondate, atzone, atzone)
