@@ -30,9 +30,11 @@ tdz2 = TimeDateZone(td1, tz"America/New_York")
 @test Minute(td1 + Minute(1)) == Minute(td1) + Minute(1)
 @test Microsecond(td3 - Microsecond(1)) == Microsecond(td3) - Microsecond(1)
 
-
 @test TimeDateZone(dtz1) == tdz1
 @test TimeDateZone(dtz2) == tdz2
+
+@test yearmonthday(td1) == yearmonthday(dt1)
+@test lastdayofmonth(td1) == lastdayofmonth(dt1)
 
 str2000ms    = "2000-01-01T00:00:00.123"
 str2000ms_ut = string(str2000ms, "+00:00")
