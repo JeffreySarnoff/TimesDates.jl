@@ -38,7 +38,7 @@ add("TimesDates")
 - omits the flexible formatting of DateTime
 - timestamps with nanosecond resolution
 
-```julia
+```
 julia> using TimesDates, Dates
 
 julia> td2018 = TimeDate("2018-01-01T00:00:00.000000001")
@@ -63,7 +63,7 @@ julia> TimeDate(2003,4,5,9,8,7,6,5,4)
 - intrazone and interzone relationships hold
 - ISO timestamps and Zoned timestamps available
 
-```julia
+```
 julia> using TimesDates, TimeZones, Dates
 
 julia> zdt = ZonedDateTime(DateTime(2012,1,21,15,25,45), tz"America/Chicago")
@@ -87,6 +87,7 @@ julia> ZonedDateTime(tdz)
 |  __Examples of Use__   |
 |--------------------|
 | [get component periods](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-component-periods) |
+| [get relative dates](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#get-relative-dates) |
 | [interconvert temporal types](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#interconvert-temporal-types) |
 | [parse zoned times and dates](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#parse-zoned-times-and-dates) |
 | [manage temporal data more precisely](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#manage-temporal-data-more-precisely) |
@@ -103,7 +104,7 @@ julia> ZonedDateTime(tdz)
 
 #### get component periods
 
-```julia
+```
 julia> using TimesDates, Dates
 
 julia> timedate = TimeDate("2018-03-09T18:29:34.04296875")
@@ -114,11 +115,29 @@ julia> Month(timedate), Microsecond(timedate)
 
 julia> month(timedate), microsecond(timedate)
 (3, 968)
+
+julia> yearmonthday(timedate)
+(2018, 3, 9)
+```
+
+#### get relative dates
+
+```
+julia> using TimesDates, Dates
+
+julia> timedate = TimeDate("2018-03-09T18:29:34.04296875")
+2018-03-09T18:29:34.04296875
+
+julia>firstdayofweek(timedate)
+2018-03-05
+
+julia> lastdayofmonth(timedate)
+2018-03-31
 ```
 
 #### interconvert temporal types
 
-```julia
+```
 julia> using TimesDates, Dates
 
 julia> date = Date("2011-02-05")
@@ -137,7 +156,7 @@ julia> timedate, DateTime(timedate)
 
 #### parse zoned times and dates
 
-```julia
+```
 julia> using TimesDates, TimeZones, Dates
 
 julia> datetime = DateTime("2011-05-08T12:11:15.050");
@@ -166,7 +185,7 @@ https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#adjust-wit
 
 #### manage temporal data more precisely
 
-```julia
+```
 julia> using TimesDates, Dates
 
 julia> datetime = DateTime("2001-05-10T23:59:59.999")
@@ -181,7 +200,7 @@ julia> timedate = TimeDate(datetime, Millisecond(1)+Nanosecond(1))
 
 #### use `localtime` and `univtime`
 
-```julia
+```
 julia> using TimesDates, TimeZones,  Dates
 
 julia> tzdefault!(localzone())
@@ -219,7 +238,7 @@ This package provides `TimeDate` to hold the date and time of day given in nanos
 
 Here, the inner dynamics rely upon the `Period` types (`Year` .. `Day`, `Hour`, .., `Nanosecond`) and `CompoundPeriod` all provided by `Dates`.  We distinguish _slowtime_, which is millisecond resolved, from a nanosecond resolved _fasttime_.
 
-```julia
+```
 julia> using Dates, TimesDates
 
 julia> datetime = now()
@@ -255,7 +274,7 @@ This work is built atop `Dates` and `TimeZones`.
 While both are collaborative works, a few people deserve mention:
 - `Dates`: Jacob Quinn and Stefan Karpinski
 - `TimeZones`: Curtis Vogt
-
+- early work on timezones:  Avik Sengupta
 
 ## Comments and Pull Requests are welcomed
 
