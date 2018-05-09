@@ -5,5 +5,5 @@ for fn in (:yearmonthday, :yearmonth, :monthday, :dayofmonth,
            :firstdayofweek, :lastdayofweek, :firstdayofmonth, :lastdayofmonth,
            :firstdayofyear, :lastdayofyear, :firstdayofquarter, :lastdayofquarter)
     @eval $fn(td::TimeDate) = $fn(Date(td))
-    @eval $fn(tdz::TimeDateZone) = $fn(Date(td))
+    @eval $fn(tdz::TimeDateZone) = $fn(Date(tdz))
 end
