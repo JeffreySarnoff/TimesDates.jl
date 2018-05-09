@@ -61,3 +61,53 @@ for P in (:Hour, :Minute, :Second, :Millisecond, :Microsecond, :Nanosecond)
         end
     end
 end
+
+function(+)(tdz::TimeDateZone, p1::Period, p2::Period)
+    p = p1 + p2
+    return tdz + p
+end
+
+function(-)(tdz::TimeDateZone, p1::Period, p2::Period)
+    p = p1 + p2
+    return tdz - p
+end
+
+function(+)(tdz::TimeDateZone, p1::Period, p2::Period, p3::Period)
+    p = p1 + p2 + p3
+    return tdz + p
+end
+
+function(-)(tdz::TimeDateZone, p1::Period, p2::Period, p3::Period)
+    p = p1 + p2 + p3
+    return tdz - p
+end
+
+function(+)(tdz::TimeDateZone, p1::Period, p2::Period, p3::Period, p4::Period)
+    p = p1 + p2 + p3 + p4
+    return tdz + p
+end
+
+function(-)(tdz::TimeDateZone, p1::Period, p2::Period, p3::Period, p4::Period)
+    p = p1 + p2 + p3 + p4
+    return tdz - p
+end
+
+function(+)(tdz::TimeDateZone, p1::Period, p2::Period, p3::Period, p4::Period, p5::Period)
+    p = p1 + p2 + p3 + p4 + p5
+    return tdz + p
+end
+
+function(-)(tdz::TimeDateZone, p1::Period, p2::Period, p3::Period, p4::Period, p5::Period)
+    p = p1 + p2 + p3 + p4 + p5
+    return tdz - p
+end
+
+function(+)(tdz::TimeDateZone, p1::Period, p2::Period, p3::Period, p4::Period, p5::Period, p6::Period)
+    p = p1 + p2 + p3 + p4 + p5 + p6
+    return tdz + p
+end
+
+function(-)(tdz::TimeDateZone, p1::Period, p2::Period, p3::Period, p4::Period, p5::Period, p6::Period)
+    p = p1 + p2 + p3 + p4 + p5 + p6
+    return tdz - p
+end
