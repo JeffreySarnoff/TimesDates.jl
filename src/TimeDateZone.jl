@@ -32,8 +32,11 @@ end
 @inline timestamp(x::Date) = x + Time(0)
 
 @inline timedate(x::TimeDateZone) = timedate(timestamp(x))
-@inline timedate(x::ZonedTimeDate) = timedate(DateTime(x))
-    
+@inline function timedate(x::ZonedDateTime)
+    datetime = DateTime(x)
+    return at_time(datetime), on_date(datetime)
+end
+
 TimeDateZone(x::TimeDateZone) = x
 TimeDate(x::TimeDateZone) = x.timestamp
 
