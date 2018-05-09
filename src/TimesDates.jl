@@ -27,6 +27,12 @@ import Dates: Time, Date, DateTime,
 
 import Dates: Period, CompoundPeriod, AbstractTime
 
+import Dates: yearmonthday, yearmonth, monthday, dayofmonth,
+              dayofweek, isleapyear, daysinmonth, daysinyear,
+              dayofyear, dayname, dayabbr,
+              dayofweekofmonth, daysofweekinmonth, monthname, monthabbr,
+              quarterofyear, dayofquarter
+
 
 using CompoundPeriods
 import CompoundPeriods: isolate_days, canonical
