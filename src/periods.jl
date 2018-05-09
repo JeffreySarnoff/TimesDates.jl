@@ -55,8 +55,8 @@ function (+)(x::TimeDate, y::Period)
     fasttime, lessfast = fastslow(fasttime + fastperiod)
     slowtime = slowtime + lessfast
     datetime = dat + slowtime
-    timedate = TimeDate(datetime)
-    timedate = timedate + fasttime
+    td = TimeDate(datetime)
+    td = td + fasttime
     return timedate
 end
 
