@@ -34,7 +34,7 @@ function (-)(td::TimeDate, tm::Time)
     return TimeDate(tm, dt_td)
 end
 
-
+#=
 function (+)(td::TimeDate, p::Period)
     cperiod = CompoundPeriod(td) + p
     return TimeDate(cperiod)
@@ -52,13 +52,13 @@ function (+)(tdz::TimeDateZone, p::Period)
     return TimeDateZone(td, tz)
 end
 
-
 function (-)(tdz::TimeDateZone, p::Period)
     tz = in_zone(tdz)
     td = timestamp(tdz)
     td = td - p
     return TimeDateZone(td, tz)
 end
+=#
 
 (+)(td::TimeDate, p1::Period, p2::Period) = td + (p1 + p2)
 (-)(td::TimeDate, p1::Period, p2::Period) = td - (p1 + p2)
