@@ -123,16 +123,19 @@ julia> yearmonthday(timedate)
 #### get relative dates
 
 ```
-julia> using TimesDates, Dates
+julia> using TimesDates, TimeZones, Dates
 
-julia> timedate = TimeDate("2018-03-09T18:29:34.04296875")
-2018-03-09T18:29:34.04296875
+julia> td = TimeDate("2018-05-06T08:09:10.123456789")
+2018-05-06T08:09:10.123456789
 
-julia>firstdayofweek(timedate)
-2018-03-05
+julia> tdz = TimeDateZone(td, tz"America/New_York")
+2018-05-06T08:09:10.123456789-04:00
+
+julia> firstdayofweek(td), firstdayofweek(tdz)
+(2018-04-30, 2018-04-30)
 
 julia> lastdayofmonth(timedate)
-2018-03-31
+(2018-05-31, 2018-05-31)
 ```
 
 #### interconvert temporal types
