@@ -56,8 +56,13 @@ for P in (:Hour, :Minute, :Second, :Millisecond, :Microsecond, :Nanosecond)
             return TimeDate(tim, dt)
         end
         function (-)(td::TimeDate, p::$P)
-            p = -p
-            return td + p
+            tm, dt = at_time(td), on_date(td)
+            cptm = canonical(CompoundPeriod(tm) - p)
+            extradays = Day(cptm)
+            cptm -= extradays
+            dt += extradays
+            tim = Time(cptm)
+            return TimeDate(tim, dt)
         end
     end
 end
