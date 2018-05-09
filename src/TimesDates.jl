@@ -31,7 +31,11 @@ import Dates: yearmonthday, yearmonth, monthday, dayofmonth,
               dayofweek, isleapyear, daysinmonth, daysinyear,
               dayofyear, dayname, dayabbr,
               dayofweekofmonth, daysofweekinmonth, monthname, monthabbr,
-              quarterofyear, dayofquarter
+              quarterofyear, dayofquarter,
+              firstdayofweek, lastdayofweek,
+              firstdayofmonth, lastdayofmonth,
+              firstdayofyear, lastdayofyear,
+              firstdayofquarter, lastdayofquarter
 
 
 using CompoundPeriods
