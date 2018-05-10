@@ -6,13 +6,13 @@
 
 ----
 
-| this type is like  |  a more finely resolved  |
-|:-------------------|:------------------------:|
-|                    |                          |
-| TimeDate           | Dates.DateTime           |
-|                    |                          |
-| TimeDateZone       | TimeZones.ZonedDateTime  |
-|                    |                          |
+|                     |                           |
+|:--------------------|:-------------------------:|
+| _this type is like_ |  _a more finely resolved_ |
+| TimeDate            | Dates.DateTime            |
+|                     |                           |
+| TimeDateZone        | TimeZones.ZonedDateTime   |
+|                     |                           |
 
 
 
