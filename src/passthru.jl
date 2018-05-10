@@ -14,39 +14,47 @@ end
 
 function tonext(td::TimeDate, dow::Int64)
    fast_time = Microsecond(td) + Nanosecond(td)
-   dtm = DateTime(td - fast_time)
+   dtm = DateTime(td)
    dtm = tonext(dtm, dow)
    tmdt = TimeDate(dtm)
-   tmdt += fast_time
+   if !isempty(fast_time)
+       tmdt += fast_time
+   end
    return tmdt
 end
 tonext(td::TimeDate, dow::Int32) = tonext(td, Int64(dow))
 
 function toprev(td::TimeDate, dow::Int64)
    fast_time = Microsecond(td) + Nanosecond(td)
-   dtm = DateTime(td - fast_time)
+   dtm = DateTime(td)
    dtm = toprev(dtm, dow)
    tmdt = TimeDate(dtm)
-   tmdt += fast_time
+   if !isempty(fast_time)
+       tmdt += fast_time
+   end
    return tmdt
 end
 toprev(td::TimeDate, dow::Int32) = toprev(td, Int64(dow))
 
 function tonext(fn::Function, td::TimeDate)
    fast_time = Microsecond(td) + Nanosecond(td)
-   dtm = DateTime(td - fast_time)
+   dtm = DateTime(td)
    dtm = tonext(fn, dtm)
    tmdt = TimeDate(dtm)
-   tmdt += fast_time
+   if !isempty(fast_time)
+       tmdt += fast_time
+   end
    return tmdt
 end
 
 function toprev(fn::Function, td::TimeDate)
    fast_time = Microsecond(td) + Nanosecond(td)
-   dtm = DateTime(td - fast_time)
+   dtm = DateTime(td)
    dtm = toprev(fn, dtm)
    tmdt = TimeDate(dtm)
-   tmdt += fast_time
+   if !isempty(fast_time)
+       tmdt += fast_time
+   end
    return tmdt
 end
 
