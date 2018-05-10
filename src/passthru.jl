@@ -51,3 +51,10 @@ function toprev(fn::Function, td::TimeDate)
 end
 
 
+canonical(x::Time) = x
+canonical(x::Date) = x
+canonical(x::DateTime) = x
+canonical(x::ZonedDateTime) = x
+canonical(x::TimeDate) = x
+canonical(x::TimeDateZone) = x
+
