@@ -8,23 +8,25 @@
 -----
 
 [![Build Status](https://travis-ci.org/JeffreySarnoff/TimesDates.jl.svg?branch=master)](https://travis-ci.org/JeffreySarnoff/TimesDates.jl)
-
-##### _this package requires Julia v0.7-_
  
 ----
 
 
 ## Setup
 
-add this to a Pkg3 project
+#### install
+
+This package requires Julia v0.7-, please run Pkg.update() first.
 ```
-pkg> add TimesDates
+using Pkg; Pkg.add("TimesDates")
+````
+
+#### use
+
 ```
-or use the pre-Pkg3 way
-```
-using Pkg
-add("TimesDates")
-```
+using TimesDates, TimeZones, Dates
+````
+
 -----
 
 ### TimeDate
