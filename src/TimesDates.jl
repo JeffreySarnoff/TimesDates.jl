@@ -39,7 +39,7 @@ import Dates: yearmonthday, yearmonth, monthday, dayofmonth,
 
 
 using CompoundPeriods
-import CompoundPeriods: isolate_days, canonical
+import CompoundPeriods: canonical
 
 import TimeZones: @tz_str, ZonedDateTime, TimeZone,
     localzone, astimezone, UTCOffset, FixedTimeZone, VariableTimeZone,
