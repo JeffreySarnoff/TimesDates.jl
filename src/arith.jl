@@ -2,12 +2,12 @@
 (+)(tdz::TimeDateZone) = tdz
 
 function (-)(td1::TimeDate, td2::TimeDate)
-    tm1, dt1 = at_time(td1), on_date(td1)
-    tm2, dt2 = at_time(td1), on_date(td2)
-    tm = canonical(CompoundPeriod(tm1) - CompoundPeriod(tm2))
-    dt = canonical(CompoundPeriod(dt1) - CompoundPeriod(dt2))
-    dttm = dt + tm
-    return canonical(dttm)
+    dtm1 = DateTime(td1)
+    dtm2 = DateTime(td2)
+    dtm0 = canonical(Microsecond(td1) - Microsecond(td2) + Nanosecond(td1) - Nanosecond(td2))
+    dtm = dtm1 - dtm2
+    dtm += dtm0
+    return sum(fldmod(dtm))
 end
 
 (-)(td::TimeDate, dt::DateTime) = td - TimeDate(dt)
