@@ -144,3 +144,11 @@ function (-)(x::TimeDateZone, y::CompoundPeriod)
 end
 
 (+)(y::CompoundPeriod, x::TimeDateZone) = x + y
+
+
+for P in (:Hour, :Minute, :Second, :Millisecond, :Microsecond, :Nanosecond)
+   @eval begin
+       (+)(dt::Date, period::$P) = TimeDate(dt) + period
+       (-)(dt::Date, period::$P) = TimeDate(dt) - period
+   end
+end
