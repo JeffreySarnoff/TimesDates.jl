@@ -133,8 +133,17 @@ julia> tdz = TimeDateZone(td, tz"America/New_York")
 julia> firstdayofweek(td), firstdayofweek(tdz)
 (2018-04-30, 2018-04-30)
 
-julia> lastdayofmonth(timedate)
-(2018-05-31, 2018-05-31)
+julia> dayname(td)
+"Sunday"
+
+julia> td_midnight = TimeDate(Date(td))
+2018-05-06T00:00:00
+
+julia> tonext(td_midnight, Friday)
+2018-05-11T00:00:00
+
+julia> dayname(ans)
+"Friday"
 ```
 
 #### interconvert temporal types
