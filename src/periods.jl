@@ -68,19 +68,19 @@ end
 
 function (+)(x::TimeDate, z::CompoundPeriod)
     result = x
+    z = canonical(z)
     for period in z
         result += period
     end
-    result = canonical(result)
     return result
 end
 
 function (-)(x::TimeDate, z::CompoundPeriod)
     result = x
+    z = canonical(z)
     for period in z
         result -= period
     end
-    result = canonical(result)
     return result
 end
 
