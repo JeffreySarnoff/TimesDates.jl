@@ -1,12 +1,6 @@
 (+)(td::TimeDate) = td
 (+)(tdz::TimeDateZone) = tdz
 
-function TimeDate(cperiod::CompoundPeriod)
-    cperiod = canonical(cperiod)
-    periods = map(x->x.value, cperiod)
-    return TimeDate(periods...,)
-end
-
 function (-)(td1::TimeDate, td2::TimeDate)
     tm1, dt1 = at_time(td1), on_date(td1)
     tm2, dt2 = at_time(td1), on_date(td2)
@@ -34,53 +28,86 @@ function (-)(td::TimeDate, tm::Time)
     return TimeDate(tm, dt_td)
 end
 
-#=
-function (+)(td::TimeDate, p::Period)
-    cperiod = CompoundPeriod(td) + p
-    return TimeDate(cperiod)
+
+
+for P in (:Year, :Month, :Day)
+    @eval begin
+        function (+)(td::TimeDate, p::$P)
+            tm, dt = at_time(td), on_date(td)
+            dt = dt + p
+            return TimeDate(tm, dt)
+        end
+        function (-)(td::TimeDate, p::$P)
+            p = -p
+            return td + p
+        end
+    end
 end
 
-function (-)(td::TimeDate, p::Period)
-    cperiod = CompoundPeriod(td) - p
-    return TimeDate(cperiod)
+for P in (:Hour, :Minute, :Second, :Millisecond, :Microsecond, :Nanosecond)
+    @eval begin
+        function (+)(td::TimeDate, p::$P)
+            tm, dt = at_time(td), on_date(td)
+            cptm = canonical(CompoundPeriod(tm) + p)
+            extradays = Day(cptm)
+            cptm -= extradays
+            dt += extradays
+            tim = Time(cptm)
+            return TimeDate(tim, dt)
+        end
+        function (-)(td::TimeDate, p::$P)
+            p = -p
+            return td + p
+        end
+    end
 end
 
-function (+)(tdz::TimeDateZone, p::Period)
-    tz = in_zone(tdz)
-    td = timestamp(tdz)
-    td = td + p
-    return TimeDateZone(td, tz)
+function(+)(tdz::TimeDateZone, p1::Period, p2::Period)
+    p = p1 + p2
+    return tdz + p
 end
 
-function (-)(tdz::TimeDateZone, p::Period)
-    tz = in_zone(tdz)
-    td = timestamp(tdz)
-    td = td - p
-    return TimeDateZone(td, tz)
+function(-)(tdz::TimeDateZone, p1::Period, p2::Period)
+    p = p1 + p2
+    return tdz - p
 end
-=#
 
-(+)(td::TimeDate, p1::Period, p2::Period) = td + (p1 + p2)
-(-)(td::TimeDate, p1::Period, p2::Period) = td - (p1 + p2)
-(+)(tdz::TimeDateZone, p1::Period, p2::Period) = tdz + (p1 + p2)
-(-)(tdz::TimeDateZone, p1::Period, p2::Period) = tdz - (p1 + p2)
+function(+)(tdz::TimeDateZone, p1::Period, p2::Period, p3::Period)
+    p = p1 + p2 + p3
+    return tdz + p
+end
 
-(+)(td::TimeDate, p1::Period, p2::Period, p3::Period) = td + (p1 + p2 + p3)
-(-)(td::TimeDate, p1::Period, p2::Period, p3::Period) = td - (p1 + p2 + p3)
-(+)(tdz::TimeDateZone, p1::Period, p2::Period, p3::Period) = tdz + (p1 + p2 + p3)
-(-)(tdz::TimeDateZone, p1::Period, p2::Period, p3::Period) = tdz - (p1 + p2 + p3)
+function(-)(tdz::TimeDateZone, p1::Period, p2::Period, p3::Period)
+    p = p1 + p2 + p3
+    return tdz - p
+end
 
-(+)(td::TimeDate, p1::Period, p2::Period, p3::Period, p4::Period) = td + (p1 + p2 + p3 + p4)
-(-)(td::TimeDate, p1::Period, p2::Period, p3::Period, p4::Period) = td - (p1 + p2 + p3 + p4)
-(+)(tdz::TimeDateZone, p1::Period, p2::Period, p3::Period, p4::Period) = tdz + (p1 + p2 + p3 + p4)
-(-)(tdz::TimeDateZone, p1::Period, p2::Period, p3::Period, p4::Period) = tdz - (p1 + p2 + p3 + p4)
+function(+)(tdz::TimeDateZone, p1::Period, p2::Period, p3::Period, p4::Period)
+    p = p1 + p2 + p3 + p4
+    return tdz + p
+end
 
-(+)(td::TimeDate, p1::Period, p2::Period, p3::Period, p4::Period, p5::Period) = td + (p1 + p2 + p3 + p4 + p5)
-(-)(td::TimeDate, p1::Period, p2::Period, p3::Period, p4::Period, p5::Period) = td - (p1 + p2 + p3 + p4 + p5)
-(+)(tdz::TimeDateZone, p1::Period, p2::Period, p3::Period, p4::Period, p5::Period) = tdz + (p1 + p2 + p3 + p4 + p5)
-(-)(tdz::TimeDateZone, p1::Period, p2::Period, p3::Period, p4::Period, p5::Period) = tdz - (p1 + p2 + p3 + p4 + p5)
+function(-)(tdz::TimeDateZone, p1::Period, p2::Period, p3::Period, p4::Period)
+    p = p1 + p2 + p3 + p4
+    return tdz - p
+end
 
-(+)(td::TimeDate, p1::Period, p2::Period, p3::Period, p4::Period, p5::Period, p6::Period) = td + (p1 + p2 + p3 + p4 + p5 + p6)
-(-)(td::TimeDate, p1::Period, p2::Period, p3::Period, p4::Period, p5::Period, p6::Period) = td - (p1 + p2 + p3 + p4 + p5 + p6)
-(+)(tdz::TimeDateZone, p1::Period, p2::Period, p3::Period, p4::Period, p5::Period, p6::Period) = tdz + (p1 + p2 + p3 + p4 + p5 + p6)
-(-)(tdz::TimeDateZone, p1::Period, p2::Period, p3::Period, p4::Period, p5::Period, p6::Period) = tdz - (p1 + p2 + p3 + p4 + p5 + p6)
+function(+)(tdz::TimeDateZone, p1::Period, p2::Period, p3::Period, p4::Period, p5::Period)
+    p = p1 + p2 + p3 + p4 + p5
+    return tdz + p
+end
+
+function(-)(tdz::TimeDateZone, p1::Period, p2::Period, p3::Period, p4::Period, p5::Period)
+    p = p1 + p2 + p3 + p4 + p5
+    return tdz - p
+end
+
+function(+)(tdz::TimeDateZone, p1::Period, p2::Period, p3::Period, p4::Period, p5::Period, p6::Period)
+    p = p1 + p2 + p3 + p4 + p5 + p6
+    return tdz + p
+end
+
+function(-)(tdz::TimeDateZone, p1::Period, p2::Period, p3::Period, p4::Period, p5::Period, p6::Period)
+    p = p1 + p2 + p3 + p4 + p5 + p6
+    return tdz - p
+end
