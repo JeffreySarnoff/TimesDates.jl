@@ -5,8 +5,7 @@ module TimesDates
 export TimeDate, TimeDateZone,
        TimeZone, timezonename, astimezone, @tz_str,
        localtime, univtime,
-       at_time, on_date, in_zone, at_zone,
-       typesof
+       at_time, on_date, in_zone, at_zone
 
 import Base: promote_type, promote_rule, convert, string, show, showcompact,
              (==), (!=), (<=), (<), (>), (>=), isless, isequal,
