@@ -183,7 +183,6 @@ julia> string(tdz, tzname=true)
 
 julia> TimeDateZone(string(tdz, tzname=true))
 2011-05-07T16:11:15.050011+10:00
-https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#adjust-with-precision
 ```
 
 #### manage temporal data more precisely
