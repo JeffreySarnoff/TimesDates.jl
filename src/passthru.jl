@@ -12,10 +12,42 @@ for fn in (:firstdayofweek, :lastdayofweek, :firstdayofmonth, :lastdayofmonth,
     @eval $fn(tdz::TimeDateZone) = TimeDateZone($fn(Date(tdz)),in_zone(tdz))
 end
 
-for P in (:Hour, :Minute, :Second, :Millisecond, :Microsecond, :Nanosecond)
-   @eval begin
-       (+)(dt::Date, period::$P) = TimeDate(dt) + period
-       (-)(dt::Date, period::$P) = TimeDate(dt) - period
-   end
+function tonext(td::TimeDate, dow::Int64)
+   fast_time = Microsecond(td) + Nanosecond(td)
+   dtm = DateTime(td - fast_time)
+   dtm = tonext(dtm, dow)
+   tmdt = TimeDate(dtm)
+   tmdt += fast_time
+   return tmdt
 end
+tonext(td::TimeDate, dow::Int32) = tonext(td, Int64(dow))
+
+function toprev(td::TimeDate, dow::Int64)
+   fast_time = Microsecond(td) + Nanosecond(td)
+   dtm = DateTime(td - fast_time)
+   dtm = toprev(dtm, dow)
+   tmdt = TimeDate(dtm)
+   tmdt += fast_time
+   return tmdt
+end
+toprev(td::TimeDate, dow::Int32) = toprev(td, Int64(dow))
+
+function tonext(fn::Function, td::TimeDate)
+   fast_time = Microsecond(td) + Nanosecond(td)
+   dtm = DateTime(td - fast_time)
+   dtm = tonext(fn, dtm)
+   tmdt = TimeDate(dtm)
+   tmdt += fast_time
+   return tmdt
+end
+
+function toprev(fn::Function, td::TimeDate)
+   fast_time = Microsecond(td) + Nanosecond(td)
+   dtm = DateTime(td - fast_time)
+   dtm = toprev(fn, dtm)
+   tmdt = TimeDate(dtm)
+   tmdt += fast_time
+   return tmdt
+end
+
 
