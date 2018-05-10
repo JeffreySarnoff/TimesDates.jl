@@ -11,12 +11,6 @@
 
 ### _This package requires Julia v0.7.0-._
  
------
-12.96
-
-- the type `TimeDate`     works with DateTime, Date & Time
-- the type `TimeDateZone` works with ZonedDateTime, TimeZone (TimeZones.jl)
-
 ----
 
 
