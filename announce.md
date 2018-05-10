@@ -15,6 +15,13 @@
 |                     |                           |
 
 
+#### install
+
+This package requires Julia v0.7-, please run Pkg.update() first.
+```
+using Pkg; Pkg.add("TimesDates")
+using TimesDates, TimeZones, Dates
+````
 
 ----
 
