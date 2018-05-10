@@ -9,7 +9,7 @@
 
 [![Build Status](https://travis-ci.org/JeffreySarnoff/TimesDates.jl.svg?branch=master)](https://travis-ci.org/JeffreySarnoff/TimesDates.jl)
 
-### _This package requires Julia v0.7.0-._
+##### _this package requires Julia v0.7-_
  
 ----
 
