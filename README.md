@@ -91,7 +91,6 @@ julia> ZonedDateTime(tdz)
 | [interconvert temporal types](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#interconvert-temporal-types) |
 | [parse zoned times and dates](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#parse-zoned-times-and-dates) |
 | [manage temporal data more precisely](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#manage-temporal-data-more-precisely) |
-| [use localtime and univtime](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#use-localtime-and-univtime) |
 
 
 -----
@@ -196,37 +195,8 @@ julia> datetime = DateTime("2001-05-10T23:59:59.999")
 julia-> timedate = TimeDate(datetime)
 2001-05-10T23:59:59.999
 
-julia> timedate = TimeDate(datetime, Millisecond(1)+Nanosecond(1))
+julia> timedate += Millisecond(1) + Nanosecond(1)
 2001-05-10T00:00:00.000000001
-```
-
-#### use `localtime` and `univtime`
-
-```
-julia> using TimesDates, TimeZones,  Dates
-
-julia> tzdefault!(localzone())
-America/New_York (UTC-5/UTC-4)
-
-julia> localtime()
-2018-04-04T13:00:30.525-04:00
-
-julia> univtime()
-2018-04-04T13:00:30.545Z
-
-julia> localtime(TimeDate), localtime(TimeDateZone)
-(2018-04-04T09:00:30.549, 2018-04-04T13:00:30.549-04:00)
-
-julia> univtime(TimeDate), univtime(TimeDateZone)
-(2018-04-04T13:00:30.659, 2018-04-04T13:00:30.659Z)
-
-julia> dtm = localtime() - Mon#### get components
-
-julia> localtime(dtm)
-2017-08-15T13:55:30.491-04:00
-
-julia> univtime(dtm)
-2017-08-15T17:55:30.491+00:00
 ```
 
 ----
