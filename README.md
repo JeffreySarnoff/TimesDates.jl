@@ -23,11 +23,11 @@
 ## Setup
 
 add this to a Pkg3 project
-```julia
+```
 pkg> add TimesDates
 ```
 or use the pre-Pkg3 way
-```julia
+```
 using Pkg
 add("TimesDates")
 ```
