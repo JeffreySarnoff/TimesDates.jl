@@ -17,13 +17,13 @@
 #### install
 
 This package requires Julia v0.7-, please run Pkg.update() first.
-```
+```julia
 using Pkg; Pkg.add("TimesDates")
 ````
 
 #### use
 
-```
+```julia
 using TimesDates, TimeZones, Dates
 ````
 
@@ -34,7 +34,7 @@ using TimesDates, TimeZones, Dates
 - omits the flexible formatting of DateTime
 - timestamps with nanosecond resolution
 
-```
+```julia
 julia> using TimesDates, Dates
 
 julia> td2018 = TimeDate("2018-01-01T00:00:00.000000001")
@@ -59,7 +59,7 @@ julia> TimeDate(2003,4,5,9,8,7,6,5,4)
 - intrazone and interzone relationships hold
 - ISO timestamps and Zoned timestamps available
 
-```
+```julia
 julia> using TimesDates, TimeZones, Dates
 
 julia> zdt = ZonedDateTime(DateTime(2012,1,21,15,25,45), tz"America/Chicago")
@@ -99,7 +99,7 @@ julia> ZonedDateTime(tdz)
 
 #### get component periods
 
-```
+```julia
 julia> using TimesDates, Dates
 
 julia> timedate = TimeDate("2018-03-09T18:29:34.04296875")
@@ -117,7 +117,7 @@ julia> yearmonthday(timedate)
 
 #### get relative dates
 
-```
+```julia
 julia> using TimesDates, TimeZones, Dates
 
 julia> td = TimeDate("2018-05-06T08:09:10.123456789")
@@ -144,7 +144,7 @@ julia> dayname(ans)
 
 #### interconvert temporal types
 
-```
+```julia
 julia> using TimesDates, Dates
 
 julia> date = Date("2011-02-05")
@@ -163,7 +163,7 @@ julia> timedate, DateTime(timedate)
 
 #### parse zoned times and dates
 
-```
+```julia
 julia> using TimesDates, TimeZones, Dates
 
 julia> datetime = DateTime("2011-05-08T12:11:15.050");
@@ -191,7 +191,7 @@ julia> TimeDateZone(string(tdz, tzname=true))
 
 #### manage temporal data more precisely
 
-```
+```julia
 julia> using TimesDates, Dates
 
 julia> datetime = DateTime("2001-05-10T23:59:59.999")
@@ -215,7 +215,7 @@ This package provides `TimeDate` to hold the date and time of day given in nanos
 
 Here, the inner dynamics rely upon the `Period` types (`Year` .. `Day`, `Hour`, .., `Nanosecond`) and `CompoundPeriod` all provided by `Dates`.  We distinguish _slowtime_, which is millisecond resolved, from a nanosecond resolved _fasttime_.
 
-```
+```julia
 julia> using Dates, TimesDates
 
 julia> datetime = now()
