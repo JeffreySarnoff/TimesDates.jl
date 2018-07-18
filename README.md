@@ -1,8 +1,9 @@
 # TimesDates
 ### Nanosecond Resolvable Times with Dates, or Times with Dates in TimeZones.
 
-| Copyright © 2018 by Jeffrey Sarnoff.  | This work is made available under The MIT License. |
-|:--------------------------------------|:------------------------------------------------:|
+----
+
+Copyright ©&thinsp;2018 by Jeffrey Sarnoff. &nbsp;&nbsp; This work is made available under The MIT License.
 
 
 -----
