@@ -21,8 +21,7 @@ This package requires Julia v0.7.
 ```julia
 pkg> up
 pkg> add TimesDates
-pkg> resolve
-pkg> instantiate
+pkg> build TimesDates
 pkg> precompile
 ````
 
