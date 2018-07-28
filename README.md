@@ -17,9 +17,13 @@
 
 #### install
 
-This package requires Julia v0.7-, please run Pkg.update() first.
+This package requires Julia v0.7.
 ```julia
-using Pkg; Pkg.add("TimesDates")
+pkg> up
+pkg> add TimesDates
+pkg> resolve
+pkg> instantiate
+pkg> precompile
 ````
 
 #### use
