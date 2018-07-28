@@ -93,11 +93,6 @@ julia> ZonedDateTime(tdz)
 | [parse zoned times and dates](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#parse-zoned-times-and-dates) |
 | [manage temporal data more precisely](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#manage-temporal-data-more-precisely) |
 
-
------
-
-### [How it works](https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/README.md#the-design)
-
 ----
 
 ### Additional Examples
