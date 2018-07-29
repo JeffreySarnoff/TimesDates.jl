@@ -50,6 +50,13 @@ function TimeDateZone(attime::Time, ondate::Date, inzone::VariableTimeZone)
     return tdz
 end
 
+TimeDateZone(ondate::Date, attime::Time, inzone::VariableTimeZone) =
+    TimeDateZone(attime, ondate, inzone)
+
+TimeDateZone(ondate::Date, attime::Time, atzone::FixedTimeZone) =
+    TimeDateZone(attime, ondate, atzone, atzone)
+
+
 @inline function ZonedDateTime(tdz::TimeDateZone)
     datetime = DateTime(timestamp(tdz))
     inzone = in_zone(tdz)
