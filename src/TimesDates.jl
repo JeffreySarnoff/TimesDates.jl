@@ -3,7 +3,7 @@ __precompile__()
 module TimesDates
 
 export TimeDate, TimeDateZone,
-       TimeZone, timezonename, astimezone, @tz_str,
+       TimeZone, timezonename, astimezone, @tz_str, todayat,
        at_time, on_date, in_zone, at_zone
 
 import Base: promote_type, promote_rule, convert, string, show, showcompact,
