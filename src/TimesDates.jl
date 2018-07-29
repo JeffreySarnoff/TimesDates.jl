@@ -34,8 +34,7 @@ import Dates: yearmonthday, yearmonth, monthday, dayofmonth,
               firstdayofmonth, lastdayofmonth,
               firstdayofyear, lastdayofyear,
               firstdayofquarter, lastdayofquarter,
-              tonext, toprev,
-              now, today
+              tonext, toprev
 
 
 using CompoundPeriods
