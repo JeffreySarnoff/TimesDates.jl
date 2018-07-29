@@ -34,7 +34,8 @@ import Dates: yearmonthday, yearmonth, monthday, dayofmonth,
               firstdayofmonth, lastdayofmonth,
               firstdayofyear, lastdayofyear,
               firstdayofquarter, lastdayofquarter,
-              tonext, toprev
+              tonext, toprev,
+              now, today
 
 
 using CompoundPeriods
@@ -42,7 +43,7 @@ import CompoundPeriods: canonical
 
 import TimeZones: @tz_str, ZonedDateTime, TimeZone,
     localzone, astimezone, UTCOffset, FixedTimeZone, VariableTimeZone,
-    all_timezones, timezone_names
+    all_timezones, timezone_names, todayat
 
 import TimeZones.value # value(offset::UTCOffset) = value(offset.std + offset.dst)
 
