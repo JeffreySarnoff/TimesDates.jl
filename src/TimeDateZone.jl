@@ -88,7 +88,7 @@ TimeDateZone(dat::Date, inzone::T) where {T<:AkoTimeZone} =
 
 function astimezone(tdz::TimeDateZone, tzone::T) where {T<:AkoTimeZone}
     TimeDateZone(astimezone(ZonedDateTime(tdz), tz)) + fastpart(tdz)
-
+end
 
 """
     utcoffset(FixedTimeZone)
