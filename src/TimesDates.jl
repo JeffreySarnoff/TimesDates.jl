@@ -3,7 +3,7 @@ __precompile__()
 module TimesDates
 
 export TimeDate, TimeDateZone,
-       TimeZone, timezonename, astimezone, @tz_str, todayat,
+       TimeZone, timezonename, astimezone, @tz_str,
        at_time, on_date, in_zone, at_zone
 
 import Base: promote_type, promote_rule, convert, string, show, showcompact,
@@ -42,7 +42,7 @@ import CompoundPeriods: canonical
 
 import TimeZones: @tz_str, ZonedDateTime, TimeZone,
     localzone, astimezone, UTCOffset, FixedTimeZone, VariableTimeZone,
-    all_timezones, timezone_names, todayat
+    all_timezones, timezone_names
 
 import TimeZones.value # value(offset::UTCOffset) = value(offset.std + offset.dst)
 
