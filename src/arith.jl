@@ -62,14 +62,26 @@ for P in (:Hour, :Minute, :Second, :Millisecond, :Microsecond, :Nanosecond)
     end
 end
 
+
+@inline nonempty(x) = !isempty(x) ? x : Nanosecond(0)
+
 function (-)(x::TimeDateZone, y::TimeDateZone)
     xx = Microsecond(x) + Nanosecond(x)
+    xx = nonempty(xx)
     yy = Microsecond(y) + Nanosecond(y)
+    yy = nonempty(yy)
+    xy = xx - yy
+    xy = nonempty(xy)    
     zx = ZonedDateTime(x)
     zy = ZonedDateTime(y)
-    result = (zx - zy) + (xx - yy)
-    !isempty(result) ? result : Nanosecond(0)
+    zxy = zx - zy
+    zxy = nonempty(zxy)
+    result = zxy + xy
+    result = nonempty(result)
+    
+    return canonical(result)
 end
+
 (-)(x::TimeDateZone, y::ZonedDateTime) = x - TimeDateZone(y)
 (-)(x::ZonedDateTime, y::TimeDateZone) = TimeDateZone(y) - y
 
