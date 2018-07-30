@@ -136,8 +136,5 @@ end
 @inline fastpart(zdt::ZonedDateTime) = Nanosecond(0)
 @inline slowpart(zdt::ZonedDateTime) = Time(DateTime(zdt))
 
-todayat(tod::Time, tz::VariableTimeZone, amb::Union{Integer,Bool}) =
-   TimeDateZone(ZonedDateTime(tod, tz, amb))
-
 todayat(tod::Time, tz::TimeZone) = TimeDateZone(ZonedDateTime(tod, tz))
 todayat(tod::Time) = TimeDate(TimeDateZone(ZonedDateTime(tod, tz)))
