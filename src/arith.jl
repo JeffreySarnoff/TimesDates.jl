@@ -62,6 +62,17 @@ for P in (:Hour, :Minute, :Second, :Millisecond, :Microsecond, :Nanosecond)
     end
 end
 
+function (-)(x::TimeDateZone, y::TimeDateZone)
+    xx = Microsecond(x) + Nanosecond(x)
+    yy = Microsecond(y) + Nanosecond(y)
+    zx = ZonedDateTime(x)
+    zy = ZonedDateTime(y)
+    result = (zx - zy) + (xx - yy)
+    !isempty(result) ? result : Nanosecond(0)
+end
+(-)(x::TimeDateZone, y::ZonedDateTime) = x - TimeDateZone(y)
+(-)(x::ZonedDateTime, y::TimeDateZone) = TimeDateZone(y) - y
+
 function(+)(tdz::TimeDateZone, p1::Period, p2::Period)
     p = p1 + p2
     return tdz + p
