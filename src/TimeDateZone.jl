@@ -99,7 +99,7 @@ end
 
 @inline utcoffset(zdt::ZonedDateTime) = utcoffset(at_zone(zdt))
 @inline utcoffset(tdz::TimeDateZone) = utcoffset(at_zone(tdz))
-
+@inline utcoffset(tz::VariableTimeZone) = utcoffset(TimeZones.now(tz))
 
 TimeDateZone(cperiod::CompoundPeriod, tzone::T) where {T<:AkoTimeZone} =
     TimeDateZone(TimeDate(cperiod), tzone)
