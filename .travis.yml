@@ -22,7 +22,9 @@ jobs:
       script:
         - julia --project=docs -e 'using Pkg; Pkg.instantiate();
                                    Pkg.add(PackageSpec(path=pwd()));
+                                   import Pkg;
                                    Pkg.add("TimeZones");
-                                   Pkg.add("CompoundPeriods");'
+                                   Pkg.add("CompoundPeriods");
+                                   Pkg.add("TimesDates");'
         - julia --project=docs --color=yes docs/make.jl
 after_success: skip
