@@ -1,4 +1,5 @@
-### TimeDate
+## TimeDate type
+
 - nanoseconds and microseconds are understood
 - omits the flexible formatting of DateTime
 - timestamps with nanosecond resolution
