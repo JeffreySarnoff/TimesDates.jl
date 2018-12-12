@@ -20,7 +20,8 @@ jobs:
   include:
     - stage: "Documentation"
       script:
-        - julia --project=docs -e 'using Pkg; Pkg.instantiate();
+        - julia --project=docs -e 'import Pkg; Pkg.instantiate();
+                                   Pkg.add("CompoundPeriods");        
                                    Pkg.add(PackageSpec(path=pwd()))'
         - julia --project=docs --color=yes docs/make.jl
 after_success: skip
