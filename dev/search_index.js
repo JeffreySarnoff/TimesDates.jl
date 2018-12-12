@@ -77,6 +77,14 @@ var documenterSearchIndex = {"docs": [
     "page": "Get Component Periods",
     "title": "Get Component Periods",
     "category": "page",
+    "text": ""
+},
+
+{
+    "location": "getcomponentperiods/#Components-of-Time-Periods-1",
+    "page": "Get Component Periods",
+    "title": "Components of Time Periods",
+    "category": "section",
     "text": "julia> using TimesDates, Dates\n\njulia> timedate = TimeDate(\"2018-03-09T18:29:34.04296875\")\n2018-03-09T18:29:34.04296875\n\njulia> Month(timedate), Microsecond(timedate)\n(3 months, 968 microseconds)\n\njulia> month(timedate), microsecond(timedate)\n(3, 968)\n\njulia> yearmonthday(timedate)\n(2018, 3, 9)"
 },
 
