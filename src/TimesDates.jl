@@ -8,7 +8,7 @@ import Base: promote_type, promote_rule, convert, string, show, showcompact,
              (==), (!=), (<=), (<), (>), (>=), isless, isequal,
              isempty, time, min, max, minmax
 
-import Base: start, done, next, eltype, length, size
+import Base: iterate, eltype, length, size
 
 import Base.Math: (+), (-), (*), (/),
                   fld, cld, div, rem, mod, round
