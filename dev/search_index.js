@@ -25,35 +25,35 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "timedate/#",
-    "page": "TimeDate",
-    "title": "TimeDate",
+    "location": "timedate_zone/#",
+    "page": "Types",
+    "title": "Types",
     "category": "page",
     "text": ""
 },
 
 {
-    "location": "timedate/#TimeDate-type-1",
-    "page": "TimeDate",
-    "title": "TimeDate type",
+    "location": "timedate_zone/#Types-1",
+    "page": "Types",
+    "title": "Types",
+    "category": "section",
+    "text": ""
+},
+
+{
+    "location": "timedate_zone/#TimeDate-1",
+    "page": "Types",
+    "title": "TimeDate",
     "category": "section",
     "text": "nanoseconds and microseconds are understood\nomits the flexible formatting of DateTime\ntimestamps with nanosecond resolutionjulia> using TimesDates, Dates\n\njulia> td2018 = TimeDate(\"2018-01-01T00:00:00.000000001\")\n2018-01-01T00:00:00.000000001\n\njulia> td2017 = TimeDate(\"2018-01-01T00:00:00\") - Nanosecond(1)\n2017-12-31T23:59:59.999999999\n\njulia> td2017 < td2018\ntrue\n\njulia> td2018 - td2017\n2 nanoseconds\n\njulia> TimeDate(2003,4,5,9,8,7,6,5,4)\n2003-04-05T09:08:07.006005004\n"
 },
 
 {
-    "location": "timedatezone/#",
-    "page": "TimeDateZone",
+    "location": "timedate_zone/#TimeDateZone-1",
+    "page": "Types",
     "title": "TimeDateZone",
-    "category": "page",
-    "text": ""
-},
-
-{
-    "location": "timedatezone/#ZonedDateTime-type-1",
-    "page": "TimeDateZone",
-    "title": "ZonedDateTime type",
     "category": "section",
-    "text": "nanoseconds and microseconds are understood\nintrazone and interzone relationships hold\nISO timestamps and Zoned timestamps availablejulia> using TimesDates, TimeZones, Dates\n\njulia> zdt = ZonedDateTime(DateTime(2012,1,21,15,25,45), tz\"America/Chicago\")\n2012-01-21T15:25:45-06:00\n\njulia> tdz = TimeDateZone(zdt)\n2012-01-21T21:25:45-06:00\n\njulia> tdz += Nanosecond(123456)\n2012-01-21T21:25:45.000123456-06:00\n\njulia> ZonedDateTime(tdz)\n2012-01-21T15:25:45-06:00"
+    "text": "nanoseconds and microseconds are understood\nintrazone and interzone relationships hold\nISO timestamps and Zoned timestamps availablejulia> using TimesDates, TimeZones, Dates\n\n#            ZonedDateTime is exported by TimeZones.jl\njulia> zdt = ZonedDateTime(DateTime(2012,1,21,15,25,45), tz\"America/Chicago\")\n2012-01-21T15:25:45-06:00\n\njulia> tdz = TimeDateZone(zdt)\n2012-01-21T21:25:45-06:00\n\njulia> tdz += Nanosecond(123456)\n2012-01-21T21:25:45.000123456-06:00\n\njulia> ZonedDateTime(tdz)\n2012-01-21T15:25:45-06:00"
 },
 
 {
