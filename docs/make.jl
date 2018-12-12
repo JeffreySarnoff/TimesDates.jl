@@ -4,9 +4,18 @@ makedocs(
     modules = [TimesDates],
     sitename = "TimesDates",
     pages  = Any[
-        "Overview"                 => "index.md",
-        "References"               => "references.md",
-        "Index"                    => "documentindex.md"
+        "Overview"                     => "index.md",
+        "Setup"                        => "setup.md",
+        "TimeDate"                     => "timedate.md",
+        "TimeDateZone"                 => "timedatezone.md",
+        "Examples"                     => "exampleindex.md",
+        "Get Component Periods"        => "getcomponentperiods.md",
+        "Get Relative Dates"           => "getrelativedates.md",
+        "Interconvert Temporal Types"  => "interconverttemporaltypes.md",
+        "Parse Zoned Times and Dates"  => "parsezonedtimesanddates.md",
+        "Manage Precise Temporal Data" => "manageprecisetemporaldata.md",
+        "Design Notes"                 => "designnotes.md"
+        "Acknowledgements"             => "acknowledgements.md"
         ]
     )
 
