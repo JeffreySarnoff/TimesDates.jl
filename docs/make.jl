@@ -6,8 +6,7 @@ makedocs(
     pages  = Any[
         "Overview"                     => "index.md",
         "Setup"                        => "setup.md",
-        "TimeDate"                     => "timedate.md",
-        "TimeDateZone"                 => "timedatezone.md",
+        "Types"                        => "timedate_zone.md",
         "_Examples_"                   => "exampleindex.md",
         "Get Component Periods"        => "getcomponentperiods.md",
         "Get Relative Dates"           => "getrelativedates.md",
