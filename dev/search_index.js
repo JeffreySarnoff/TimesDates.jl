@@ -33,9 +33,9 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "timedate/#TimeDate-1",
+    "location": "timedate/#TimeDate-type-1",
     "page": "TimeDate",
-    "title": "TimeDate",
+    "title": "TimeDate type",
     "category": "section",
     "text": "nanoseconds and microseconds are understood\nomits the flexible formatting of DateTime\ntimestamps with nanosecond resolutionjulia> using TimesDates, Dates\n\njulia> td2018 = TimeDate(\"2018-01-01T00:00:00.000000001\")\n2018-01-01T00:00:00.000000001\n\njulia> td2017 = TimeDate(\"2018-01-01T00:00:00\") - Nanosecond(1)\n2017-12-31T23:59:59.999999999\n\njulia> td2017 < td2018\ntrue\n\njulia> td2018 - td2017\n2 nanoseconds\n\njulia> TimeDate(2003,4,5,9,8,7,6,5,4)\n2003-04-05T09:08:07.006005004\n"
 },
@@ -49,9 +49,9 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "timedatezone/#TimeDateZone-1",
+    "location": "timedatezone/#ZonedDateTime-type-1",
     "page": "TimeDateZone",
-    "title": "TimeDateZone",
+    "title": "ZonedDateTime type",
     "category": "section",
     "text": "nanoseconds and microseconds are understood\nintrazone and interzone relationships hold\nISO timestamps and Zoned timestamps availablejulia> using TimesDates, TimeZones, Dates\n\njulia> zdt = ZonedDateTime(DateTime(2012,1,21,15,25,45), tz\"America/Chicago\")\n2012-01-21T15:25:45-06:00\n\njulia> tdz = TimeDateZone(zdt)\n2012-01-21T21:25:45-06:00\n\njulia> tdz += Nanosecond(123456)\n2012-01-21T21:25:45.000123456-06:00\n\njulia> ZonedDateTime(tdz)\n2012-01-21T15:25:45-06:00"
 },
@@ -93,6 +93,14 @@ var documenterSearchIndex = {"docs": [
     "page": "Get Relative Dates",
     "title": "Get Relative Dates",
     "category": "page",
+    "text": ""
+},
+
+{
+    "location": "getrelativedates/#Relative-Dates-and-Days-1",
+    "page": "Get Relative Dates",
+    "title": "Relative Dates and Days",
+    "category": "section",
     "text": "julia> using TimesDates, TimeZones, Dates\n\njulia> td = TimeDate(\"2018-05-06T08:09:10.123456789\")\n2018-05-06T08:09:10.123456789\n\njulia> tdz = TimeDateZone(td, tz\"America/New_York\")\n2018-05-06T08:09:10.123456789-04:00\n\njulia> firstdayofweek(td), firstdayofweek(tdz)\n(2018-04-30, 2018-04-30)\n\njulia> dayname(td)\n\"Sunday\"\n\njulia> td_midnight = TimeDate(Date(td))\n2018-05-06T00:00:00\n\njulia> tonext(td_midnight, Friday)\n2018-05-11T00:00:00\n\njulia> dayname(ans)\n\"Friday\""
 },
 
@@ -101,6 +109,14 @@ var documenterSearchIndex = {"docs": [
     "page": "Interconvert Temporal Types",
     "title": "Interconvert Temporal Types",
     "category": "page",
+    "text": ""
+},
+
+{
+    "location": "interconverttemporaltypes/#Temporal-Type-Interconversion-1",
+    "page": "Interconvert Temporal Types",
+    "title": "Temporal Type Interconversion",
+    "category": "section",
     "text": "julia> using TimesDates, Dates\n\njulia> date = Date(\"2011-02-05\")\n2011-02-05\n\njulia> timedate = TimeDate(date); timedate, Date(timedate)\n(2011-02-05T00:00:00, 2011-02-05)\n\njulia> datetime = DateTime(\"2011-02-05T11:22:33\")\n2011-02-05T11:22:33\n\njulia> timedate = TimeDate(datetime);\njulia> timedate, DateTime(timedate)\n(2011-02-05T11:22:33, 2011-02-05T11:22:33)"
 },
 
@@ -109,6 +125,14 @@ var documenterSearchIndex = {"docs": [
     "page": "Parse Zoned Times and Dates",
     "title": "Parse Zoned Times and Dates",
     "category": "page",
+    "text": ""
+},
+
+{
+    "location": "parsezonedtimesanddates/#Parsing-Zoned-Dates-and-Times-1",
+    "page": "Parse Zoned Times and Dates",
+    "title": "Parsing Zoned Dates and Times",
+    "category": "section",
     "text": "julia> using TimesDates, TimeZones, Dates\n\njulia> datetime = DateTime(\"2011-05-08T12:11:15.050\");\njulia> zdt = ZonedDateTime(datetime, tz\"Australia/Sydney\")\n2011-05-08T12:11:15.05+10:00\n\njulia> tdz = TimeDateZone(zdt)\n2011-05-08T02:11:15.05+10:00\n\njulia> tdz += Microsecond(11)\n2011-05-08T02:11:15.050011+10:00\n\njulia> string(tdz)\n\"2011-05-08T02:11:15.050011+10:00\"\n\njulia> TimeDateZone(string(tdz))\n2011-05-08T02:11:15.050011+10:00\n\njulia> string(tdz, tzname=true)\n\"2011-05-08T02:11:15.050011 Australia/Sydney\"\n\njulia> TimeDateZone(string(tdz, tzname=true))\n2011-05-07T16:11:15.050011+10:00"
 },
 
@@ -117,6 +141,14 @@ var documenterSearchIndex = {"docs": [
     "page": "Manage Precise Temporal Data",
     "title": "Manage Precise Temporal Data",
     "category": "page",
+    "text": ""
+},
+
+{
+    "location": "manageprecisetemporaldata/#Precision-Time-Management-1",
+    "page": "Manage Precise Temporal Data",
+    "title": "Precision Time Management",
+    "category": "section",
     "text": "julia> using TimesDates, Dates\n\njulia> datetime = DateTime(\"2001-05-10T23:59:59.999\")\n2001-05-10T23:59:59.999\n\njulia-> timedate = TimeDate(datetime)\n2001-05-10T23:59:59.999\n\njulia> timedate += Millisecond(1) + Nanosecond(1)\n2001-05-10T00:00:00.000000001"
 },
 
