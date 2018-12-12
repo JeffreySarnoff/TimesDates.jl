@@ -21,7 +21,8 @@ jobs:
     - stage: "Documentation"
       script:
         - julia --project=docs -e 'import Pkg; Pkg.instantiate();
+                                   Pkg.add("TimeZones");
                                    Pkg.add("CompoundPeriods");        
-                                   Pkg.add(PackageSpec(path=pwd()))'
+                                   Pkg.add(PackageSpec(path=pwd()));'
         - julia --project=docs --color=yes docs/make.jl
 after_success: skip
