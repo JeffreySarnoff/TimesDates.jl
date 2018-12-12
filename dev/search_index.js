@@ -61,7 +61,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Examples",
     "title": "Examples",
     "category": "page",
-    "text": "Examples of Use\nget component periods\nget relative dates\ninterconvert temporal types\nparse zoned times and dates\nmanage temporal data more precisely"
+    "text": ""
 },
 
 {
