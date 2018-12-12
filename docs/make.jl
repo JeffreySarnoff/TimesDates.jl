@@ -14,7 +14,7 @@ makedocs(
         "Interconvert Temporal Types"  => "interconverttemporaltypes.md",
         "Parse Zoned Times and Dates"  => "parsezonedtimesanddates.md",
         "Manage Precise Temporal Data" => "manageprecisetemporaldata.md",
-        "Design Notes"                 => "designnotes.md"
+        "Design Notes"                 => "designnotes.md",
         "Acknowledgements"             => "acknowledgements.md"
         ]
     )
