@@ -1,4 +1,4 @@
-## Components of Time Periods
+## Comprised of Time Periods
 
 ```julia
 julia> using TimesDates, Dates
