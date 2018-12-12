@@ -2,10 +2,10 @@
 language: julia
 os:
   - linux
-  - osx
+  #- osx
 julia:
-  - 1.0
-  - nightly
+  #- 1.0
+  #- nightly
 notifications:
   email: false
 git:
