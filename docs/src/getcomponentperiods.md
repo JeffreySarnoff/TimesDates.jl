@@ -1,3 +1,5 @@
+## Components of Time Periods
+
 ```julia
 julia> using TimesDates, Dates
 
