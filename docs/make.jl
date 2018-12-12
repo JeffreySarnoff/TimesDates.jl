@@ -8,7 +8,7 @@ makedocs(
         "Setup"                        => "setup.md",
         "TimeDate"                     => "timedate.md",
         "TimeDateZone"                 => "timedatezone.md",
-        "Examples"                     => "exampleindex.md",
+        "_Examples_"                   => "exampleindex.md",
         "Get Component Periods"        => "getcomponentperiods.md",
         "Get Relative Dates"           => "getrelativedates.md",
         "Interconvert Temporal Types"  => "interconverttemporaltypes.md",
