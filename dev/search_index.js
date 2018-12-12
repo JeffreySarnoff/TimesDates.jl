@@ -65,6 +65,14 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "exampleindex/#Examples-1",
+    "page": "Examples",
+    "title": "Examples",
+    "category": "section",
+    "text": ""
+},
+
+{
     "location": "getcomponentperiods/#",
     "page": "Get Component Periods",
     "title": "Get Component Periods",
