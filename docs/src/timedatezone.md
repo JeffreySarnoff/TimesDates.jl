@@ -1,4 +1,4 @@
-### TimeDateZone
+## ZonedDateTime type
 
 - nanoseconds and microseconds are understood
 - intrazone and interzone relationships hold
