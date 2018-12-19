@@ -45,7 +45,7 @@ julia> tdz = TimeDateZone(td, tz"America/New_York")
 2018-05-06T08:09:10.123456789-04:00
 
 julia> firstdayofweek(td), firstdayofweek(tdz)
-(2018-04-30, 2018-04-30)
+(2018-04-30, 22018-04-30T00:00:00-04:00)
 
 julia> dayname(td)
 "Sunday"
