@@ -84,6 +84,12 @@ julia> timedate, DateTime(timedate)
 ```julia
 julia> using TimesDates, TimeZones, Dates
 
+julia> TimeDate("1963-03-15T11:55:33.123456789")
+1963-03-15T11:55:33.123456789
+
+julia> TimeDateZone("1963-03-15T11:55:33.123456789Z")
+1963-03-15T11:55:33.123456789Z
+
 julia> datetime = DateTime("2011-05-08T12:11:15.050");
 julia> zdt = ZonedDateTime(datetime, tz"Australia/Sydney")
 2011-05-08T12:11:15.05+10:00
