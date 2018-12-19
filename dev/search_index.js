@@ -101,7 +101,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Examples",
     "title": "Relative Dates and Days",
     "category": "section",
-    "text": "julia> using TimesDates, TimeZones, Dates\n\njulia> td = TimeDate(\"2018-05-06T08:09:10.123456789\")\n2018-05-06T08:09:10.123456789\n\njulia> tdz = TimeDateZone(td, tz\"America/New_York\")\n2018-05-06T08:09:10.123456789-04:00\n\njulia> firstdayofweek(td), firstdayofweek(tdz)\n(2018-04-30, 2018-04-30)\n\njulia> dayname(td)\n\"Sunday\"\n\njulia> td_midnight = TimeDate(Date(td))\n2018-05-06T00:00:00\n\njulia> tonext(td_midnight, Friday)\n2018-05-11T00:00:00\n\njulia> dayname(ans)\n\"Friday\""
+    "text": "julia> using TimesDates, TimeZones, Dates\n\njulia> td = TimeDate(\"2018-05-06T08:09:10.123456789\")\n2018-05-06T08:09:10.123456789\n\njulia> tdz = TimeDateZone(td, tz\"America/New_York\")\n2018-05-06T08:09:10.123456789-04:00\n\njulia> firstdayofweek(td), firstdayofweek(tdz)\n(2018-04-30, 22018-04-30T00:00:00-04:00)\n\njulia> dayname(td)\n\"Sunday\"\n\njulia> td_midnight = TimeDate(Date(td))\n2018-05-06T00:00:00\n\njulia> tonext(td_midnight, Friday)\n2018-05-11T00:00:00\n\njulia> dayname(ans)\n\"Friday\""
 },
 
 {
