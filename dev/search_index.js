@@ -65,7 +65,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "dydacticexamples/#",
+    "location": "examples/#",
     "page": "Examples",
     "title": "Examples",
     "category": "page",
@@ -73,7 +73,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "dydacticexamples/#Examples-1",
+    "location": "examples/#Examples-1",
     "page": "Examples",
     "title": "Examples",
     "category": "section",
@@ -81,15 +81,15 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "dydacticexamples/#Precision-Time-Management-1",
+    "location": "examples/#Precision-Time-Management-1",
     "page": "Examples",
     "title": "Precision Time Management",
     "category": "section",
-    "text": "julia> using TimesDates, Dates\n\njulia> datetime = DateTime(\"2001-05-10T23:59:59.999\")\n2001-05-10T23:59:59.999\n\njulia-> timedate = TimeDate(datetime)\n2001-05-10T23:59:59.999\n\njulia> timedate += Millisecond(1) + Nanosecond(1)\n2001-05-10T00:00:00.000000001"
+    "text": "julia> using TimesDates, Dates\n\njulia> datetime = DateTime(\"2001-05-10T23:59:59.999\")\n2001-05-10T23:59:59.999\n\njulia> timedate = TimeDate(datetime)\n2001-05-10T23:59:59.999\n\njulia> timedate += Millisecond(1) + Nanosecond(1)\n2001-05-11T00:00:00.000000001"
 },
 
 {
-    "location": "dydacticexamples/#Comprised-of-Time-Periods-1",
+    "location": "examples/#Comprised-of-Time-Periods-1",
     "page": "Examples",
     "title": "Comprised of Time Periods",
     "category": "section",
@@ -97,7 +97,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "dydacticexamples/#Relative-Dates-and-Days-1",
+    "location": "examples/#Relative-Dates-and-Days-1",
     "page": "Examples",
     "title": "Relative Dates and Days",
     "category": "section",
@@ -105,7 +105,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "dydacticexamples/#Temporal-Type-Interconversion-1",
+    "location": "examples/#Temporal-Type-Interconversion-1",
     "page": "Examples",
     "title": "Temporal Type Interconversion",
     "category": "section",
@@ -113,7 +113,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "dydacticexamples/#Parsing-Zoned-Dates-and-Times-1",
+    "location": "examples/#Parsing-Zoned-Dates-and-Times-1",
     "page": "Examples",
     "title": "Parsing Zoned Dates and Times",
     "category": "section",
