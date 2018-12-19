@@ -21,7 +21,15 @@ var documenterSearchIndex = {"docs": [
     "page": "Setup",
     "title": "install",
     "category": "section",
-    "text": "This package expects Julia v1 (v0.7 is allowed)pkg> up\npkg> add TimeZones\npkg> add CompoundPeriods\npkg> add TimesDates\npkg> precompile\n````\n\n#### use\njulia using TimesDates, CompoundPeriods, TimeZones, Dates ````"
+    "text": "This package expects Julia v1 (v0.7 is allowed)pkg> up\npkg> add TimeZones\npkg> add CompoundPeriods\npkg> add TimesDates\npkg> precompile"
+},
+
+{
+    "location": "setup/#use-1",
+    "page": "Setup",
+    "title": "use",
+    "category": "section",
+    "text": "using TimesDates, CompoundPeriods, TimeZones, Dates"
 },
 
 {
