@@ -7,7 +7,7 @@ makedocs(
         "Overview"                     => "index.md",
         "Setup"                        => "setup.md",
         "Types"                        => "timedate_zone.md",
-        "Examples"                     => "dydacticexamples.md",
+        "Examples"                     => "examples.md",
         "Design Notes"                 => "designnotes.md",
         "Acknowledgements"             => "acknowledgements.md"
         ]
