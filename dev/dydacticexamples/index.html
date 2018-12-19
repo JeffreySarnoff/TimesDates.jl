@@ -56,6 +56,12 @@ julia&gt; timedate = TimeDate(datetime);
 julia&gt; timedate, DateTime(timedate)
 (2011-02-05T11:22:33, 2011-02-05T11:22:33)</code></pre><h2><a class="nav-anchor" id="Parsing-Zoned-Dates-and-Times-1" href="#Parsing-Zoned-Dates-and-Times-1">Parsing Zoned Dates and Times</a></h2><pre><code class="language-julia">julia&gt; using TimesDates, TimeZones, Dates
 
+julia&gt; TimeDate(&quot;1963-03-15T11:55:33.123456789&quot;)
+1963-03-15T11:55:33.123456789
+
+julia&gt; TimeDateZone(&quot;1963-03-15T11:55:33.123456789Z&quot;)
+1963-03-15T11:55:33.123456789Z
+
 julia&gt; datetime = DateTime(&quot;2011-05-08T12:11:15.050&quot;);
 julia&gt; zdt = ZonedDateTime(datetime, tz&quot;Australia/Sydney&quot;)
 2011-05-08T12:11:15.05+10:00

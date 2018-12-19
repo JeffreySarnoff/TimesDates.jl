@@ -109,7 +109,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Examples",
     "title": "Parsing Zoned Dates and Times",
     "category": "section",
-    "text": "julia> using TimesDates, TimeZones, Dates\n\njulia> datetime = DateTime(\"2011-05-08T12:11:15.050\");\njulia> zdt = ZonedDateTime(datetime, tz\"Australia/Sydney\")\n2011-05-08T12:11:15.05+10:00\n\njulia> tdz = TimeDateZone(zdt)\n2011-05-08T02:11:15.05+10:00\n\njulia> tdz += Microsecond(11)\n2011-05-08T02:11:15.050011+10:00\n\njulia> string(tdz)\n\"2011-05-08T02:11:15.050011+10:00\"\n\njulia> TimeDateZone(string(tdz))\n2011-05-08T02:11:15.050011+10:00\n\njulia> string(tdz, tzname=true)\n\"2011-05-08T02:11:15.050011 Australia/Sydney\"\n\njulia> TimeDateZone(string(tdz, tzname=true))\n2011-05-07T16:11:15.050011+10:00"
+    "text": "julia> using TimesDates, TimeZones, Dates\n\njulia> TimeDate(\"1963-03-15T11:55:33.123456789\")\n1963-03-15T11:55:33.123456789\n\njulia> TimeDateZone(\"1963-03-15T11:55:33.123456789Z\")\n1963-03-15T11:55:33.123456789Z\n\njulia> datetime = DateTime(\"2011-05-08T12:11:15.050\");\njulia> zdt = ZonedDateTime(datetime, tz\"Australia/Sydney\")\n2011-05-08T12:11:15.05+10:00\n\njulia> tdz = TimeDateZone(zdt)\n2011-05-08T02:11:15.05+10:00\n\njulia> tdz += Microsecond(11)\n2011-05-08T02:11:15.050011+10:00\n\njulia> string(tdz)\n\"2011-05-08T02:11:15.050011+10:00\"\n\njulia> TimeDateZone(string(tdz))\n2011-05-08T02:11:15.050011+10:00\n\njulia> string(tdz, tzname=true)\n\"2011-05-08T02:11:15.050011 Australia/Sydney\"\n\njulia> TimeDateZone(string(tdz, tzname=true))\n2011-05-07T16:11:15.050011+10:00"
 },
 
 {
