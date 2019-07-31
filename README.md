@@ -21,7 +21,7 @@ This package expects Julia v1 (v0.7 is allowed)
 pkg> up
 pkg> add TimeZones
 pkg> add CompoundPeriods
-pkg> add TimesDates
+pkg> add TimesDates#master
 pkg> precompile
 ````
 
