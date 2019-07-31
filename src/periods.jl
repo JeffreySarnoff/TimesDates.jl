@@ -31,7 +31,7 @@ end
 end
 
 function CompoundPeriod(x::TimeDate)
-    tim, dat = timedate(x)
+    tim, dat = Time(x), Date(x)
     fast_time = fastpart(tim)
     slow_time = slowpart(tim)
     tm = CompoundPeriod(slow_time) + fast_time
@@ -40,7 +40,7 @@ function CompoundPeriod(x::TimeDate)
 end
 
 function CompoundPeriod(x::TimeDateZone)
-    tim, dat = timedate(x)
+    tim, dat = Time(x), Date(x)
     fast_time = fastpart(tim)
     slow_time = slowpart(tim)
     tm = CompoundPeriod(slow_time) + fast_time
@@ -49,7 +49,7 @@ function CompoundPeriod(x::TimeDateZone)
 end
 
 function (+)(x::TimeDate, y::Period)
-    tim, dat = timedate(x)
+    tim, dat = Time(x), Date(x)
     fasttime, slowtime = fastpart(tim), slowpart(tim)
     fastperiod, slowperiod = fastslow(y)
     fasttime, lessfast = fastslow(fasttime + fastperiod)
@@ -148,7 +148,17 @@ end
 
 for P in (:Hour, :Minute, :Second, :Millisecond, :Microsecond, :Nanosecond)
    @eval begin
-       (+)(dt::Date, period::$P) = TimeDate(dt) + period
-       (-)(dt::Date, period::$P) = TimeDate(dt) - period
+       function (+)(dt::Date, period::$P)
+            if signbit(period)
+                return dt - abs(period)
+            end
+            return TimeDate(dt) + period
+        end
+        function (-)(dt::Date, period::$P)
+            if signbit(period)
+                return dt + abs(period)
+            end
+            return TimeDate(dt) - period
+        end    
    end
 end
