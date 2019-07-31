@@ -2,7 +2,7 @@
 language: julia
 os:
   - linux
-  - osx
+  #- osx
 julia:
   - 1.0
   - nightly
@@ -16,15 +16,15 @@ script:
   - julia --color=yes --check-bounds=yes -e 'import Pkg; Pkg.test("TimesDates"; coverage=true)'
 after_success:
   - julia -e 'import Pkg; cd(Pkg.dir("TimesDates")); Pkg.add("Coverage"); using Coverage; Coveralls.submit(process_folder()); Codecov.submit(process_folder())'
-jobs:
-  include:
-    - stage: "Documentation"
-      script:
-        - julia --project=docs -e 'using Pkg; Pkg.instantiate();
-                                   Pkg.add(PackageSpec(path=pwd()));
-                                   import Pkg;
-                                   Pkg.add("TimeZones");
-                                   Pkg.add("CompoundPeriods");
-                                   Pkg.add("TimesDates");'
-        - julia --project=docs --color=yes docs/make.jl
+#jobs:
+#  include:
+#    - stage: "Documentation"
+#      script:
+#        - julia --project=docs -e 'using Pkg; Pkg.instantiate();
+#                                   Pkg.add(PackageSpec(path=pwd()));
+#                                   import Pkg;
+#                                   Pkg.add("TimeZones");
+#                                   Pkg.add("CompoundPeriods");
+#                                   Pkg.add("TimesDates");'
+#        - julia --project=docs --color=yes docs/make.jl
 after_success: skip
