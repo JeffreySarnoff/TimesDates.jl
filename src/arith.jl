@@ -47,6 +47,9 @@ end
 for P in (:Hour, :Minute, :Second, :Millisecond, :Microsecond, :Nanosecond)
     @eval begin
         function (+)(td::TimeDate, p::$P)
+            if signbit(p)
+                return td - abs(p)
+            end    
             tm, dt = at_time(td), on_date(td)
             cptm = canonical(CompoundPeriod(tm) + p)
             extradays = Day(cptm)
@@ -56,8 +59,10 @@ for P in (:Hour, :Minute, :Second, :Millisecond, :Microsecond, :Nanosecond)
             return TimeDate(tim, dt)
         end
         function (-)(td::TimeDate, p::$P)
-            p = -p
-            return td + p
+            if signbit(p)
+                return td + abs(p)
+            end
+            return td - Day(1) + (typeof(p)(Day(1)) - p)
         end
     end
 end
