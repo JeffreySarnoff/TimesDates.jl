@@ -14,7 +14,10 @@
 ----
 
 # Known Bug
+
+
 subtracting into negative time units was derailed with a change to CompoundPeriods .. working on this now
+
 ----
 
 ## Setup
