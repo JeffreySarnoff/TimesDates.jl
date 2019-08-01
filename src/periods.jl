@@ -162,3 +162,12 @@ for P in (:Hour, :Minute, :Second, :Millisecond, :Microsecond, :Nanosecond)
         end    
    end
 end
+
+timedate(x::TimeDate) = x.attime.instant, x.ondate.instant.periods
+
+function canonical(x::TimeDate)
+    tm, dt = timedate(x)
+    return canonical(canonical(dt) + canonical(tm))
+end
+canonical(x::Date) = canonical(x.instant.periods)
+canonical(x::Time) = canonical(x.instant)
