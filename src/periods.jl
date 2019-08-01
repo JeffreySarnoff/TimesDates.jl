@@ -168,5 +168,3 @@ function canonical(x::TimeDate)
     tm, dt = timedate(x)
     return canonical(canonical(dt) + canonical(tm))
 end
-canonical(x::Date) = canonical(x.instant.periods)
-canonical(x::Time) = canonical(x.instant)
