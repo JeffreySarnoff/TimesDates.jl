@@ -163,7 +163,6 @@ for P in (:Hour, :Minute, :Second, :Millisecond, :Microsecond, :Nanosecond)
    end
 end
 
-timedate(x::TimeDate) = x.attime.instant, x.ondate.instant.periods
 
 function canonical(x::TimeDate)
     tm, dt = timedate(x)
