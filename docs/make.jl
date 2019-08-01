@@ -1,7 +1,7 @@
-using Documenter, TimesDates, CompoundPeriods, Dates
+using Documenter
 
 makedocs(
-    modules = [TimesDates],
+    # modules = [TimesDates],
     sitename = "TimesDates",
     pages  = Any[
         "Overview"                     => "index.md",
