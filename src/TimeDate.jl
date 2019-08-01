@@ -59,6 +59,7 @@ end
 timedate(x::TimeDate) = at_time(x), on_date(x)
 timedate(x::DateTime) = at_time(x), on_date(x)
 timedate(x::Date) = at_time(x), on_date(x)
+timedate(x::Time) = at_time(x), Date(0, 12, 31)
 
 @inline function timedate(x::ZonedDateTime)
     datetime = DateTime(x)
