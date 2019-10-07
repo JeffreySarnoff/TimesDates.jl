@@ -44,27 +44,22 @@ for P in (:Year, :Month, :Day)
     end
 end
 
-for P in (:Hour, :Minute, :Second, :Millisecond, :Microsecond, :Nanosecond)
-    @eval begin
-        function (+)(td::TimeDate, p::$P)
-            if signbit(p)
-                return td - abs(p)
-            end    
-            tm, dt = at_time(td), on_date(td)
-            cptm = canonical(CompoundPeriod(tm) + p)
-            extradays = Day(cptm)
-            cptm -= extradays
-            dt += extradays
-            tim = Time(cptm)
-            return TimeDate(tim, dt)
-        end
-        function (-)(td::TimeDate, p::$P)
-            if signbit(p)
-                return td + abs(p)
-            end
-            return td - Day(1) + (typeof(p)(Day(1)) - p)
-        end
+function (+)(td::TimeDate, p::Union{Hour, Minute, Second, Millisecond, Microsecond, Nanosecond})
+    tm, dt = at_time(td), on_date(td)
+    extradays,extratime=divrem(p,oftype(p,oneunit(Day)))
+    newtm = sum(promote(extratime,tm.instant))
+    if newtm >= Nanosecond(oneunit(Day))
+        newtm -= Nanosecond(oneunit(Day))
+        extradays += 1
+    elseif newtm < zero(Nanosecond)
+        newtm += Nanosecond(oneunit(Day))
+        extradays -= 1
     end
+    return TimeDate(Time(newtm),dt+Day(extradays))
+end
+
+function (-)(td::TimeDate, p::Union{Hour, Minute, Second, Millisecond, Microsecond, Nanosecond})
+    td + (-p)
 end
 
 
@@ -76,14 +71,14 @@ function (-)(x::TimeDateZone, y::TimeDateZone)
     yy = Microsecond(y) + Nanosecond(y)
     yy = nonempty(yy)
     xy = xx - yy
-    xy = nonempty(xy)    
+    xy = nonempty(xy)
     zx = ZonedDateTime(x)
     zy = ZonedDateTime(y)
     zxy = zx - zy
     zxy = nonempty(zxy)
     result = zxy + xy
     result = nonempty(result)
-    
+
     return canonical(result)
 end
 

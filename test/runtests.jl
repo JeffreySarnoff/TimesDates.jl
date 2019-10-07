@@ -129,3 +129,10 @@ tdz_implicit_dayhour  = TimeDateZone(zdt_implicit_dayhour)
 tdz_implicit_day_hour = TimeDateZone(spring, warsaw) + Day(1) + Hour(24)
 @test zdt_implicit_dayhour == ZonedDateTime(tdz_implicit_dayhour)
 @test tdz_implicit_dayhour == tdz_implicit_day_hour
+
+Δms = DateTime(str2)-DateTime(1900)
+@test TimeDate(str2)-Δms == TimeDate(1900)
+@test TimeDate(str2)+(-Δms) == TimeDate(1900)
+@test TimeDate(1900)+Δms == TimeDate(str2)
+@test TimeDate(1900)-(-Δms) == TimeDate(str2)
+@test TimeDate(str2)-Nanosecond(Δms) == TimeDate(1900)
