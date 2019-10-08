@@ -5,7 +5,7 @@ uuid = "bdfc003b-8df8-5c39-adcd-3a9087f5df4a"
 repo = "https://github.com/JeffreySarnoff/TimesDates.jl.git"
 author = "Jeffrey Sarnoff <jeffrey.sarnoff@gmail.com>"
 license = "MIT"
-version = "v0.2.4"
+version = "v0.2.5"
 
 [deps]
 Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
