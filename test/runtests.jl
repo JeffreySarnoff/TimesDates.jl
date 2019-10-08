@@ -136,3 +136,13 @@ tdz_implicit_day_hour = TimeDateZone(spring, warsaw) + Day(1) + Hour(24)
 @test TimeDate(1900)+Δms == TimeDate(str2)
 @test TimeDate(1900)-(-Δms) == TimeDate(str2)
 @test TimeDate(str2)-Nanosecond(Δms) == TimeDate(1900)
+
+Δtd = td3 - TimeDate(1900)
+@test canonical(Δtd) == Nanosecond(3729608940042968750) == mapfoldl(Nanosecond,+,canonical(Δtd))
+@test dt2 - dt1 == td2 - td1
+let
+    td1 = TimeDate(2020,2,28,23,59,59,999,999,990)
+    td2 = TimeDate(2020,3,1,0,0,0,0,0,10)
+    @test td2 - td1 == Day(1)+Nanosecond(20)
+    @test td1 - td2 == Day(-1)+Nanosecond(-20) == Nanosecond(-86400000000020)
+end
