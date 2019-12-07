@@ -1,45 +1,30 @@
-function (==)(x::TimeDate, y::TimeDate)
-     Date(x) === Date(y) && Time(x) === Time(y)
-end
-function (!=)(x::TimeDate, y::TimeDate)
-     Date(x) !== Date(y) || (Date(x) == Date(y) && Time(x) != Time(y))
-end
-function (<)(x::TimeDate, y::TimeDate)
-    dtx = DateTime(x)
-    dty = DateTime(y)
-    (dtx < dty) || ((dtx === dty) && (Time(x) < Time(y)))
-end
-function (>)(x::TimeDate, y::TimeDate)
-    dtx = DateTime(x)
-    dty = DateTime(y)
-    (dtx > dty) || ((dtx === dty) && (Time(x) > Time(y)))
-end
-function (<=)(x::TimeDate, y::TimeDate)
-    dtx = DateTime(x)
-    dty = DateTime(y)
-    (dtx < dty) || ((dtx === dty) && (Time(x) <= Time(y)))
-end
-function (>=)(x::TimeDate, y::TimeDate)
-    dtx = DateTime(x)
-    dty = DateTime(y)
-    (dtx > dty) || ((dtx === dty) && (Time(x) >= Time(y)))
+function isless(x::TimeDate, y::TimeDate)
+    x.ondate < y.ondate || (x.ondate == y.ondate && x.attime < y.attime)
 end
 
 function isequal(x::TimeDate, y::TimeDate)
-    xx = Microsecond(x) + Nanosecond(x)
-    yy = Microsecond(y) + Nanosecond(y)
-    zx = DateTime(x)
-    zy = DateTime(y)
-    isequal(zx, zy) && isequal(xx, yy)
+    x.ondate == y.ondate && x.attime == y.attime
 end
 
-function isless(x::TimeDate, y::TimeDate)
-    xx = Microsecond(x) + Nanosecond(x)
-    yy = Microsecond(y) + Nanosecond(y)
-    zx = DateTime(x)
-    zy = DateTime(y)
-    isless(zx, zy) || (isequal(zx,zy) && isless(xx, yy))
+function isless(x::TimeDateZone, y::TimeDateZone)
+    zx = ZonedDateTime(x)
+    zy = ZonedDateTime(y)
+    isless(zx,zy) && return true 
+    !isequal(zx,zy) && return false
+    xx = Nanosecond(Microsecond(x)) + Nanosecond(x)
+    yy = Nanosecond(Microsecond(y)) + Nanosecond(y)
+    return isless(xx, yy)
 end
+
+function isequal(x::TimeDateZone, y::TimeDateZone)
+    zx = ZonedDateTime(x)
+    zy = ZonedDateTime(y)
+    !isequal(zx,zy) && return false 
+    xx = Nanosecond(Microsecond(x)) + Nanosecond(x)
+    yy = Nanosecond(Microsecond(y)) + Nanosecond(y)
+    return isequal(xx, yy)
+end
+
 
 isequal(x::TimeDate, y::DateTime) = isequal(x, TimeDate(y))
 isequal(x::DateTime, y::TimeDate) = isequal(TimeDate(x), y)
@@ -62,22 +47,12 @@ isless(x::DateTime, y::TimeDate) = isless(TimeDate(x), y)
 (==)(x::DateTime, y::TimeDate) = (==)(TimeDate(x), y)
 (!=)(x::DateTime, y::TimeDate) = (!=)(TimeDate(x), y)
 
-
-function isequal(x::TimeDateZone, y::TimeDateZone)
-    xx = Microsecond(x) + Nanosecond(x)
-    yy = Microsecond(y) + Nanosecond(y)
-    zx = ZonedDateTime(x)
-    zy = ZonedDateTime(y)
-    isequal(zx, zy) && isequal(xx, yy)
-end
-
-function isless(x::TimeDateZone, y::TimeDateZone)
-    xx = Microsecond(x) + Nanosecond(x)
-    yy = Microsecond(y) + Nanosecond(y)
-    zx = ZonedDateTime(x)
-    zy = ZonedDateTime(y)
-    isless(zx, zy) || (isequal(zx,zy) && isless(xx, yy))
-end
+(<)(x::TimeDate, y::TimeDate) = isless(x,y)
+(>)(x::TimeDate, y::TimeDate) = isless(y,x)
+(<=)(x::TimeDate, y::TimeDate) = isless(x,y) || isequal(x,y)
+(>=)(x::TimeDate, y::TimeDate) = isless(y,x) || isequal(x,y)
+(==)(x::TimeDate, y::TimeDate) = isequal(x,y)
+(!=)(x::TimeDate, y::TimeDate) = !isequal(x,y)
 
 
  (<)(x::TimeDateZone, y::TimeDateZone) = isless(x,y)
