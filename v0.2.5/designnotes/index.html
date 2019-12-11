@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Design Notes · TimesDates</title><link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.min.js" data-main="../assets/documenter.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link href="../assets/documenter.css" rel="stylesheet" type="text/css"/></head><body><nav class="toc"><h1>TimesDates</h1><select id="version-selector" onChange="window.location.href=this.value" style="visibility: hidden"></select><form class="search" id="search-form" action="../search/"><input id="search-query" name="q" type="text" placeholder="Search docs"/></form><ul><li><a class="toctext" href="../">Overview</a></li><li><a class="toctext" href="../setup/">Setup</a></li><li><a class="toctext" href="../timedate_zone/">Types</a></li><li><a class="toctext" href="../examples/">Examples</a></li><li class="current"><a class="toctext" href>Design Notes</a><ul class="internal"></ul></li><li><a class="toctext" href="../acknowledgements/">Acknowledgements</a></li></ul></nav><article id="docs"><header><nav><ul><li><a href>Design Notes</a></li></ul><a class="edit-page" href="https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/docs/src/designnotes.md"><span class="fa"></span> Edit on GitHub</a></nav><hr/><div id="topbar"><span>Design Notes</span><a class="fa fa-bars" href="#"></a></div></header><p>This package provides <code>TimeDate</code> to hold the date and time of day given in nanoseconds (or more coarsely). And provides<code>TimeDateZone</code> to holds the the date and time of day in nanoseconds with a timezone. This work relies heavily on <code>Dates</code> and <code>TimeZones</code>; most of the attention to detail plays through.</p><p><code>Dates</code> has a <code>Time</code> type that has nanosecond resolution; it is not well supported, even within <code>Dates</code>. This <code>Time</code> type recognizes strings only if they are limited to millisecond resolution. Only millisecond resolved times are relevant to <code>DateTime</code>s. While at present limited by this millisecond barrier, <code>TimeZones</code> is a laudable package with active support. I expect an eventual melding of what&#39;s best.</p><p>Here, the inner dynamics rely upon the <code>Period</code> types (<code>Year</code> .. <code>Day</code>, <code>Hour</code>, .., <code>Nanosecond</code>) and <code>CompoundPeriod</code> all provided by <code>Dates</code>. We distinguish <em>slowtime</em>, which is millisecond resolved, from a nanosecond resolved <em>fasttime</em>.</p><pre><code class="language-julia">julia&gt; using Dates, TimesDates
+
+julia&gt; datetime = now()
+2018-03-15T06:41:33.643
+
+julia&gt; currentdate = Date(datetime)
+2018-03-15
+
+julia&gt; currenttime = Time(datetime)
+06:41:33.643
+
+julia&gt; highrestime = currenttime + Nanosecond(98765)
+06:41:33.643098765
+
+julia&gt; date = currentdate
+2018-03-15
+
+julia&gt; fasttime = Microsecond(highrestime) + Nanosecond(highrestime)
+98 microseconds, 765 nanoseconds
+
+julia&gt; slowtime = highrestime - fasttime
+06:41:33.643</code></pre><p>The general approach is separate the date, slowtime, fasttime, and timezone (if appropriate), then use the date, slowtime and timezone (if appropriate) to obtain a coarse result using the facilities provided by the <code>Date</code> and <code>TimeZones</code> packages. We refine the coarse result by adding or subtracting the fasttime, as appropriate.</p><footer><hr/><a class="previous" href="../examples/"><span class="direction">Previous</span><span class="title">Examples</span></a><a class="next" href="../acknowledgements/"><span class="direction">Next</span><span class="title">Acknowledgements</span></a></footer></article></body></html>

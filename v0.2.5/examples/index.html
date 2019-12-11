@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Examples · TimesDates</title><link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.min.js" data-main="../assets/documenter.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link href="../assets/documenter.css" rel="stylesheet" type="text/css"/></head><body><nav class="toc"><h1>TimesDates</h1><select id="version-selector" onChange="window.location.href=this.value" style="visibility: hidden"></select><form class="search" id="search-form" action="../search/"><input id="search-query" name="q" type="text" placeholder="Search docs"/></form><ul><li><a class="toctext" href="../">Overview</a></li><li><a class="toctext" href="../setup/">Setup</a></li><li><a class="toctext" href="../timedate_zone/">Types</a></li><li class="current"><a class="toctext" href>Examples</a><ul class="internal"><li><a class="toctext" href="#Precision-Time-Management-1">Precision Time Management</a></li><li><a class="toctext" href="#Comprised-of-Time-Periods-1">Comprised of Time Periods</a></li><li><a class="toctext" href="#Relative-Dates-and-Days-1">Relative Dates and Days</a></li><li><a class="toctext" href="#Temporal-Type-Interconversion-1">Temporal Type Interconversion</a></li><li><a class="toctext" href="#Parsing-Zoned-Dates-and-Times-1">Parsing Zoned Dates and Times</a></li></ul></li><li><a class="toctext" href="../designnotes/">Design Notes</a></li><li><a class="toctext" href="../acknowledgements/">Acknowledgements</a></li></ul></nav><article id="docs"><header><nav><ul><li><a href>Examples</a></li></ul><a class="edit-page" href="https://github.com/JeffreySarnoff/TimesDates.jl/blob/master/docs/src/examples.md"><span class="fa"></span> Edit on GitHub</a></nav><hr/><div id="topbar"><span>Examples</span><a class="fa fa-bars" href="#"></a></div></header><h1><a class="nav-anchor" id="Examples-1" href="#Examples-1">Examples</a></h1><h2><a class="nav-anchor" id="Precision-Time-Management-1" href="#Precision-Time-Management-1">Precision Time Management</a></h2><pre><code class="language-julia">julia&gt; using TimesDates, Dates
+
+julia&gt; datetime = DateTime(&quot;2001-05-10T23:59:59.999&quot;)
+2001-05-10T23:59:59.999
+
+julia&gt; timedate = TimeDate(datetime)
+2001-05-10T23:59:59.999
+
+julia&gt; timedate += Millisecond(1) + Nanosecond(1)
+2001-05-11T00:00:00.000000001</code></pre><h2><a class="nav-anchor" id="Comprised-of-Time-Periods-1" href="#Comprised-of-Time-Periods-1">Comprised of Time Periods</a></h2><pre><code class="language-julia">julia&gt; using TimesDates, Dates
+
+julia&gt; timedate = TimeDate(&quot;2018-03-09T18:29:34.04296875&quot;)
+2018-03-09T18:29:34.04296875
+
+julia&gt; Month(timedate), Microsecond(timedate)
+(3 months, 968 microseconds)
+
+julia&gt; month(timedate), microsecond(timedate)
+(3, 968)
+
+julia&gt; yearmonthday(timedate)
+(2018, 3, 9)</code></pre><h2><a class="nav-anchor" id="Relative-Dates-and-Days-1" href="#Relative-Dates-and-Days-1">Relative Dates and Days</a></h2><pre><code class="language-julia">julia&gt; using TimesDates, TimeZones, Dates
+
+julia&gt; td = TimeDate(&quot;2018-05-06T08:09:10.123456789&quot;)
+2018-05-06T08:09:10.123456789
+
+julia&gt; tdz = TimeDateZone(td, tz&quot;America/New_York&quot;)
+2018-05-06T08:09:10.123456789-04:00
+
+julia&gt; firstdayofweek(td), firstdayofweek(tdz)
+(2018-04-30, 22018-04-30T00:00:00-04:00)
+
+julia&gt; dayname(td)
+&quot;Sunday&quot;
+
+julia&gt; td_midnight = TimeDate(Date(td))
+2018-05-06T00:00:00
+
+julia&gt; tonext(td_midnight, Friday)
+2018-05-11T00:00:00
+
+julia&gt; dayname(ans)
+&quot;Friday&quot;</code></pre><h2><a class="nav-anchor" id="Temporal-Type-Interconversion-1" href="#Temporal-Type-Interconversion-1">Temporal Type Interconversion</a></h2><pre><code class="language-julia">julia&gt; using TimesDates, Dates
+
+julia&gt; date = Date(&quot;2011-02-05&quot;)
+2011-02-05
+
+julia&gt; timedate = TimeDate(date); timedate, Date(timedate)
+(2011-02-05T00:00:00, 2011-02-05)
+
+julia&gt; datetime = DateTime(&quot;2011-02-05T11:22:33&quot;)
+2011-02-05T11:22:33
+
+julia&gt; timedate = TimeDate(datetime);
+julia&gt; timedate, DateTime(timedate)
+(2011-02-05T11:22:33, 2011-02-05T11:22:33)</code></pre><h2><a class="nav-anchor" id="Parsing-Zoned-Dates-and-Times-1" href="#Parsing-Zoned-Dates-and-Times-1">Parsing Zoned Dates and Times</a></h2><pre><code class="language-julia">julia&gt; using TimesDates, TimeZones, Dates
+
+julia&gt; TimeDate(&quot;1963-03-15T11:55:33.123456789&quot;)
+1963-03-15T11:55:33.123456789
+
+julia&gt; TimeDateZone(&quot;1963-03-15T11:55:33.123456789Z&quot;)
+1963-03-15T11:55:33.123456789Z
+
+julia&gt; datetime = DateTime(&quot;2011-05-08T12:11:15.050&quot;);
+julia&gt; zdt = ZonedDateTime(datetime, tz&quot;Australia/Sydney&quot;)
+2011-05-08T12:11:15.05+10:00
+
+julia&gt; tdz = TimeDateZone(zdt)
+2011-05-08T02:11:15.05+10:00
+
+julia&gt; tdz += Microsecond(11)
+2011-05-08T02:11:15.050011+10:00
+
+julia&gt; string(tdz)
+&quot;2011-05-08T02:11:15.050011+10:00&quot;
+
+julia&gt; TimeDateZone(string(tdz))
+2011-05-08T02:11:15.050011+10:00
+
+julia&gt; string(tdz, tzname=true)
+&quot;2011-05-08T02:11:15.050011 Australia/Sydney&quot;
+
+julia&gt; TimeDateZone(string(tdz, tzname=true))
+2011-05-07T16:11:15.050011+10:00</code></pre><footer><hr/><a class="previous" href="../timedate_zone/"><span class="direction">Previous</span><span class="title">Types</span></a><a class="next" href="../designnotes/"><span class="direction">Next</span><span class="title">Design Notes</span></a></footer></article></body></html>
