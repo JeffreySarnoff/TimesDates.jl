@@ -41,8 +41,8 @@ end
 @inline Time(x::TimeDate) = at_time(x)
 @inline Date(x::TimeDate) = on_date(x)
 
-@inline fastpart(x::Time) = Nanosecond(x) + Microsecond(x)
-@inline slowpart(x::Time) = x - (Nanosecond(x) + Microsecond(x))
+@inline fastpart(x::Time) = Nanosecond(rem(x.instant.value, MICROSECONDS_PER_SECOND))
+@inline slowpart(x::Time) = x - fastpart(x)
 
 @inline fastpart(x::Date) = Nanosecond(0)
 @inline slowpart(x::Date) = Millisecond(0)

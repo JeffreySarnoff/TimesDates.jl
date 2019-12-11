@@ -4,6 +4,7 @@ using Test
 str1 = "2011-05-08T11:15:00"
 str2 = "2015-08-17T21:08:11.125"
 str3 = "2018-03-09T18:29:00.04296875"
+str4 = "2018-03-09T18:29:00.04296999"
 
 dt1 = DateTime(str1)
 dt2 = DateTime(str2)
@@ -11,6 +12,8 @@ dt2 = DateTime(str2)
 td1 = TimeDate(str1)
 td2 = TimeDate(str2)
 td3 = TimeDate(str3)
+td3_copy = TimeDate(str3)
+td4 = TimeDate(str4)
 
 dtz1 = ZonedDateTime(dt1, tz"UTC")
 dtz2 = ZonedDateTime(dt1, tz"America/New_York")
@@ -36,6 +39,18 @@ tdz2 = TimeDateZone(td1, tz"America/New_York")
 @test yearmonthday(td1) == yearmonthday(dt1)
 @test lastdayofmonth(td1) == lastdayofmonth(dt1)
 
+@test td1 < td2
+@test td2 > td1
+@test td3 == td3_copy
+@test td3 <= td4
+@test td1 != td3
+@test td2 >= td1 
+@test td2 >= td2
+@test td1 <= td2 
+@test td1 <= td1
+
+
+
 str2000ms    = "2000-01-01T00:00:00.123"
 str2000ms_ut = string(str2000ms, "+00:00")
 str2000ms_ny = string(str2000ms, "-05:00")
@@ -53,13 +68,23 @@ tdz2000_ny = TimeDateZone(str2000ns_ny)
 @test  zdt2000_ut == ZonedDateTime(tdz2000_ut)
 @test  zdt2000_ny == ZonedDateTime(tdz2000_ny)
 
+tdz2000_ut_gt = tdz2000_ut + Nanosecond(1)
+tdz2000_ut_copy = deepcopy(tdz2000_ut)
+
+@test tdz2000_ut < tdz2000_ut_gt 
+@test tdz2000_ut <= tdz2000_ut_gt
+@test tdz2000_ut <= tdz2000_ut
+@test tdz2000_ut_gt > tdz2000_ut
+@test tdz2000_ut_gt >= tdz2000_ut
+@test tdz2000_ut_gt >= tdz2000_ut_gt
+@test tdz2000_ut_gt != tdz2000_ut
+@test tdz2000_ut_copy == tdz2000_ut
 
 zdt = ZonedDateTime(DateTime("2011-05-08T12:11:15.050"), tz"Australia/Sydney")
 tdz = TimeDateZone(zdt)
 tdz += Microsecond(11)
 
 # recasted tests from TimeZones.jl/test/
-
 
 warsaw = tz"Europe/Warsaw"
 
