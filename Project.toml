@@ -20,5 +20,5 @@ test = ["Test"]
 
 [compat]
 CompoundPeriods = "0"
-TimeZones = "0"
+TimeZones = "1"
 julia = "1"
