@@ -64,4 +64,26 @@ include("compare.jl")
 include("showstring.jl")
 include("passthru.jl")
 
+"""
+Same as `Dates.datetime2unix`, only with nanosecond granularity. Returns an Int instead of Float.
+"""
+function timedate2unix(x::TimeDate)
+    millis = round(Int64, Dates.datetime2unix(DateTime(x)) * MILLISECONDS_PER_SECOND)
+    millis * NANOSECONDS_PER_MILLISECOND +
+        Dates.value(Microsecond(x)) * NANOSECONDS_PER_MICROSECOND +
+        Dates.value(Nanosecond(x))
+end
+
+"""
+Similar to `Dates.unix2datetime`. Works with the result of `timedate2unix`.
+"""
+function unix2timedate(v :: Int)
+    nanos = v % NANOSECONDS_PER_MICROSECOND
+    micros = div(v % NANOSECONDS_PER_MILLISECOND - nanos, MICROSECONDS_PER_MILLISECOND)
+    epoch_millis = div(v, NANOSECONDS_PER_MILLISECOND)
+    dt = Dates.unix2datetime(epoch_millis / 1000)
+    TimeDate(dt) + Microsecond(micros) + Nanosecond(nanos)
+end
+
+
 end
