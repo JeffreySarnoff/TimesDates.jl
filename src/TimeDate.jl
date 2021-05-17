@@ -88,12 +88,12 @@ function TimeDate(y::Int64, m::Int64=1, d::Int64=1,
   h += fl
   fl, h = fldmod(h, HOURS_PER_DAY)
   d += fl
-  my, m = fldmod(m, MONTHS_PER_YEAR)
+  my, m = fldmod(m, MONTHS_PER_YEAR+1)
   y += my
-    
-  dt = Date(y, m, d)
+
+  dt = Date(y, max(1, m), d)
   tm = Time(h, mi, s, ms, us, ns)
-  td = TimeDate(dt, tm) 
+  td = TimeDate(dt, tm)
   return td
 end
 

@@ -171,3 +171,9 @@ let
     @test td2 - td1 == Day(1)+Nanosecond(20)
     @test td1 - td2 == Day(-1)+Nanosecond(-20) == Nanosecond(-86400000000020)
 end
+
+@test TimeDate(2020, 1, 1) == TimeDate(Date(2020, 1, 1))
+@test TimeDate(2020, 12, 1) == TimeDate(Date(2020, 12, 1))
+@test TimeDate(2020, 13, 1) == TimeDate(Date(2021, 1, 1))
+@test TimeDate(2020, 13, 1, 24) == TimeDate(Date(2021, 1, 2))
+@test TimeDate(2020, 13, 1, 25) == TimeDate(Date(2021, 1, 2), Time(1))
