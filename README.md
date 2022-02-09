@@ -3,7 +3,7 @@
 
 ----
 
-#### Copyright ©&thinsp;2018 by Jeffrey Sarnoff. &nbsp;&nbsp; Released under The MIT License.
+#### Copyright ©&thinsp;2018 by Jeffrey Sarnoff. &nbsp;&nbsp; The MIT License applies.
 
 
 -----
@@ -19,7 +19,8 @@
 This package expects Julia v1.6.3 or higher
 ```julia
 pkg> up
-pkg> add TimeZones CompoundPeriods TimesDates
+pkg> add TimeZones
+pkg> add CompoundPeriods TimesDates
 ````
 
 #### use
