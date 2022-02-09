@@ -12,7 +12,8 @@ jobs:
       os: linux
       script:
         - julia --project=docs/ -e 'using Pkg; Pkg.develop(PackageSpec(path=pwd()));
-                                               Pkg.instantiate()'
+                                               Pkg.instantiate();
+                                               Pkg.build("TimesDates");'
         - julia --project=docs/ docs/make.jl
       after_success: skip
   test:
