@@ -32,7 +32,6 @@ TimeDate(x::DateTime) = TimeDate(at_time(x), on_date(x))
 TimeDate(x::Date) = TimeDate(at_time(x), on_date(x))
 TimeDate(x::Time) = TimeDate(x, on_date(Dates.now()))
 
-
 @inline function TimeDate(x::ZonedDateTime)
     datetime = DateTime(x)
     return TimeDate(datetime)
@@ -72,6 +71,14 @@ end
     return dat + tim
 end
 
+function fldmod1(n, m)
+    a, b = fldmod(n, m)
+    if iszero(b)
+        a = a - 1
+        b = m
+    end
+    return a, b
+ end
 
 function TimeDate(y::Int64, m::Int64=1, d::Int64=1,
                   h::Int64=0, mi::Int64=0, s::Int64=0, ms::Int64=0,
@@ -88,7 +95,7 @@ function TimeDate(y::Int64, m::Int64=1, d::Int64=1,
   h += fl
   fl, h = fldmod(h, HOURS_PER_DAY)
   d += fl
-  my, m = fldmod(m, MONTHS_PER_YEAR)
+  my, m = fldmod1(m, MONTHS_PER_YEAR)
   y += my
     
   dt = Date(y, m, d)
