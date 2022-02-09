@@ -1,5 +1,5 @@
 # TimesDates
-#### Nanosecond Resolvable Times with Dates, Times in TimeZones.
+#### Nanosecond Resolvable Times with Dates and Times in TimeZones.
 
 ----
 
