@@ -171,3 +171,10 @@ let
     @test td2 - td1 == Day(1)+Nanosecond(20)
     @test td1 - td2 == Day(-1)+Nanosecond(-20) == Nanosecond(-86400000000020)
 end
+
+@testset "unix epoch" begin
+    td = TimeDate(2020,2,28,10,11,15,321,543,12)
+    epoch_nanos = TimesDates.timedate2unix(td)
+    @test epoch_nanos == 1582884675321543012
+    @test td == TimesDates.unix2timedate(epoch_nanos)
+end
