@@ -16,13 +16,10 @@
 
 #### install
 
-This package expects Julia v1 (v0.7 is allowed)
+This package expects Julia v1.6.3 or higher
 ```julia
 pkg> up
-pkg> add TimeZones
-pkg> add CompoundPeriods
-pkg> add TimesDates
-pkg> precompile
+pkg> add TimeZones CompoundPeriods TimesDates
 ````
 
 #### use
