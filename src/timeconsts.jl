@@ -1,3 +1,6 @@
+const EmptyPeriod = Year(0) + Hour(0)
+Base.isempty(x::Dates.CompoundPeriod) = isempty(x.periods)
+
 const QUARTERS_PER_YEAR = Int64(4)
 
 const MONTHS_PER_YEAR = Int64(12)

@@ -13,7 +13,6 @@ TimeDate(x::TimeDate) = x
 TimeDate(date::Date, time::Time) = TimeDate(time, date)
 TimeDate(x::DateTime) = TimeDate(Time(x), Date(x))
 
-
 TimeDate(x::Date) = TimeDate(zero(Time), x)
 TimeDate(x::Time) = TimeDate(x, today())
 
