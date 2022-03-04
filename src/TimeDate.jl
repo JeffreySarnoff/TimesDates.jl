@@ -1,5 +1,20 @@
 abstract type NanosecondBasis <: AbstractTime end  # a structural trait, inherited
 
+isatimeperiod(x) = isa(x, TimePeriod)
+isadateperiod(x) = isa(x, DatePeriod)
+timeperiods(x::TimePeriod) = [x]
+dateperiods(x::DatePeriod) = [x]
+timeperiods(x::DatePeriod) = []
+dateperiods(x::TimePeriod) = []
+timeperiods(x::CompoundPeriod) = filter(isatimeperiod, Dates.canonicalize(x).periods)
+dateperiods(x::CompoundPeriod) = filter(isadateperiod, Dates.canonicalize(x).periods)
+
+
+ # sum(Period[timeperiods(cptm2)...,dateperiods(cptm2)...])
+
+
+isatimeUnion{Period, CompoundPeriod}) = filter(x-)
+
 struct TimeDate <: NanosecondBasis
     time::Time
     date::Date
