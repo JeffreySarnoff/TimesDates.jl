@@ -1,21 +1,18 @@
-abstract type NanosecondBasis     <: AbstractTime end  # a structural trait, inherited
+abstract type NanosecondBasis <: AbstractTime end  # a structural trait, inherited
 
 struct TimeDate <: NanosecondBasis
     time::Time
     date::Date
 
-    # ensure other constructors will be give explictly
-
-    function TimeDate(time::Time, date::Date)
-        return new(time, date)
-    end
-    function TimeDate(date::Date, time::Time)
-        return new(time, date)
-    end
+    # ensure other constructors will be given explictly
+    TimeDate(time::Time, date::Date) = new(time, date)
 end
 
-TimeDate(x::DateTime) = TimeDate(Time(x), Date(x))
 TimeDate(x::TimeDate) = x
+
+TimeDate(date::Date, time::Time) = TimeDate(time, date)
+TimeDate(x::DateTime) = TimeDate(Time(x), Date(x))
+
 
 TimeDate(x::Date) = TimeDate(zero(Time), x)
 TimeDate(x::Time) = TimeDate(x, today())
@@ -82,30 +79,30 @@ function fldmod1(n, m)
         b = m
     end
     return a, b
- end
+end
 
-function TimeDate(y::Int64, m::Int64=1, d::Int64=1,
-                  h::Int64=0, mi::Int64=0, s::Int64=0, ms::Int64=0,
-                  us::Int64=0, ns::Int64=0)
-  fl, ns = fldmod(ns, NANOSECONDS_PER_MICROSECOND)
-  us += fl
-  fl, us = fldmod(us, MICROSECONDS_PER_MILLISECOND)
-  ms += fl
-  fl, ms = fldmod(ms, MILLISECONDS_PER_SECOND)
-  s += fl
-  fl, s = fldmod(s, SECONDS_PER_MINUTE)
-  mi += fl
-  fl, mi = fldmod(mi, MINUTES_PER_HOUR)
-  h += fl
-  fl, h = fldmod(h, HOURS_PER_DAY)
-  d += fl
-  my, m = fldmod1(m, MONTHS_PER_YEAR)
-  y += my
-    
-  dt = Date(y, m, d)
-  tm = Time(h, mi, s, ms, us, ns)
-  td = TimeDate(dt, tm) 
-  return td
+function TimeDate(y::Int64, m::Int64 = 1, d::Int64 = 1,
+    h::Int64 = 0, mi::Int64 = 0, s::Int64 = 0, ms::Int64 = 0,
+    us::Int64 = 0, ns::Int64 = 0)
+    fl, ns = fldmod(ns, NANOSECONDS_PER_MICROSECOND)
+    us += fl
+    fl, us = fldmod(us, MICROSECONDS_PER_MILLISECOND)
+    ms += fl
+    fl, ms = fldmod(ms, MILLISECONDS_PER_SECOND)
+    s += fl
+    fl, s = fldmod(s, SECONDS_PER_MINUTE)
+    mi += fl
+    fl, mi = fldmod(mi, MINUTES_PER_HOUR)
+    h += fl
+    fl, h = fldmod(h, HOURS_PER_DAY)
+    d += fl
+    my, m = fldmod1(m, MONTHS_PER_YEAR)
+    y += my
+
+    dt = Date(y, m, d)
+    tm = Time(h, mi, s, ms, us, ns)
+    td = TimeDate(dt, tm)
+    return td
 end
 
 
