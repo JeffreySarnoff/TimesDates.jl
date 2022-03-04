@@ -1,9 +1,9 @@
 function isless(x::TimeDate, y::TimeDate)
-    x.ondate < y.ondate || (x.ondate == y.ondate && x.attime < y.attime)
+    x.date < y.date || (x.date == y.date && x.time < y.time)
 end
 
 function isequal(x::TimeDate, y::TimeDate)
-    x.ondate == y.ondate && x.attime == y.attime
+    x.date == y.date && x.time == y.time
 end
 
 function isless(x::TimeDateZone, y::TimeDateZone)

@@ -82,11 +82,11 @@ function TimeDate(str::String)
 
     datepart, inttimepart, fractimepart = datetimeparts(str)
 
-    ondate = parse(Date, datepart)
-    attime = parse(Time, inttimepart)
-    attime = fractionaltime(attime, fractimepart)
+    date = parse(Date, datepart)
+    time = parse(Time, inttimepart)
+    time = fractionaltime(time, fractimepart)
 
-    return TimeDate(attime, ondate)
+    return TimeDate(time, date)
 end
 
 function TimeDateZone(str::String)
@@ -107,31 +107,31 @@ function TimeDateZone(str::String)
             tz = TimeZone(tzoffsetstr)
         end
         timedate = TimeDate(timedatestr)
-        tm = timedate.attime
-        dt = timedate.ondate
+        tm = timedate.time
+        dt = timedate.date
         TimeDateZone(tm, dt, tz)
     end
 end
 
-function fractionaltime(attime::Time, fractimepart::String)
+function fractionaltime(time::Time, fractimepart::String)
     n = length(fractimepart)
     if n > 0
         fractime = parse(Int, fractimepart)
         if n <= 3
             delta = fld(1000,10^n)
             fractime *= delta
-            attime = attime + Millisecond(fractime)
+            time = time + Millisecond(fractime)
         elseif n <= 6
             delta = fld(1000,10^(n-3))
             fractime *= delta
-            attime = attime + Microsecond(fractime)
+            time = time + Microsecond(fractime)
         else
             delta = fld(1000,10^(n-6))
             fractime *= delta
-            attime = attime + Nanosecond(fractime)
+            time = time + Nanosecond(fractime)
         end
     end
-    return attime
+    return time
 end
 
 function datetimeparts(str::String)

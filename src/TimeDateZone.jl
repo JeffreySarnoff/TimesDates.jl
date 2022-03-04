@@ -5,19 +5,19 @@ struct TimeDateZone <: NanosecondBasis
 
     # ensure other constructors will be give explictly
 
-    function TimeDateZone(attime::Time, ondate::Date, inzone::VariableTimeZone, atzone::FixedTimeZone)
-        tmdt = TimeDate(attime, ondate)
+    function TimeDateZone(time::Time, date::Date, inzone::VariableTimeZone, atzone::FixedTimeZone)
+        tmdt = TimeDate(time, date)
         return new(tmdt, inzone, atzone)
     end
-    function TimeDateZone(attime::Time, ondate::Date, inzone::FixedTimeZone, atzone::FixedTimeZone)
-        tmdt = TimeDate(attime, ondate)
+    function TimeDateZone(time::Time, date::Date, inzone::FixedTimeZone, atzone::FixedTimeZone)
+        tmdt = TimeDate(time, date)
         return new(tmdt, inzone, atzone)
     end
 end
 
 @inline timestamp(x::TimeDateZone) = x.timestamp
-@inline at_time(x::TimeDateZone) = x.timestamp.attime
-@inline on_date(x::TimeDateZone) = x.timestamp.ondate
+@inline at_time(x::TimeDateZone) = x.timestamp.time
+@inline on_date(x::TimeDateZone) = x.timestamp.date
 @inline in_zone(x::TimeDateZone) = x.inzone
 @inline at_zone(x::TimeDateZone) = x.atzone
 
@@ -35,13 +35,13 @@ end
 TimeDateZone(x::TimeDateZone) = x
 TimeDate(x::TimeDateZone) = x.timestamp
 
-function TimeDateZone(attime::Time, ondate::Date, atzone::FixedTimeZone)
-    return TimeDateZone(attime, ondate, atzone, atzone)
+function TimeDateZone(time::Time, date::Date, atzone::FixedTimeZone)
+    return TimeDateZone(time, date, atzone, atzone)
 end
 
-function TimeDateZone(attime::Time, ondate::Date, inzone::VariableTimeZone)
-    fast_time, slow_time = fastpart(attime), slowpart(attime)
-    datetime = ondate + slow_time
+function TimeDateZone(time::Time, date::Date, inzone::VariableTimeZone)
+    fast_time, slow_time = fastpart(time), slowpart(time)
+    datetime = date + slow_time
     zdt = ZonedDateTime(datetime, inzone)
     atzone = at_zone(zdt)
     tim, dat = timedate(zdt)
@@ -50,11 +50,11 @@ function TimeDateZone(attime::Time, ondate::Date, inzone::VariableTimeZone)
     return tdz
 end
 
-TimeDateZone(ondate::Date, attime::Time, inzone::VariableTimeZone) =
-    TimeDateZone(attime, ondate, inzone)
+TimeDateZone(date::Date, time::Time, inzone::VariableTimeZone) =
+    TimeDateZone(time, date, inzone)
 
-TimeDateZone(ondate::Date, attime::Time, atzone::FixedTimeZone) =
-    TimeDateZone(attime, ondate, atzone, atzone)
+TimeDateZone(date::Date, time::Time, atzone::FixedTimeZone) =
+    TimeDateZone(time, date, atzone, atzone)
 
 
 @inline function ZonedDateTime(tdz::TimeDateZone)

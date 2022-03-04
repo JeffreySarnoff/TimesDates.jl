@@ -1,23 +1,27 @@
-abstract type NanosecondTime      <: AbstractTime   end
-abstract type NanosecondTimeBase  <: NanosecondTime end  # to define Periods, CompoundPeriods
-abstract type NanosecondBasis     <: NanosecondTime end  # a structural trait, inherited
+abstract type NanosecondBasis     <: AbstractTime end  # a structural trait, inherited
 
 struct TimeDate <: NanosecondBasis
-    attime::Time
-    ondate::Date
+    time::Time
+    date::Date
 
     # ensure other constructors will be give explictly
 
-    function TimeDate(attime::Time, ondate::Date)
-        return new(attime, ondate)
+    function TimeDate(time::Time, date::Date)
+        return new(time, date)
     end
-    function TimeDate(ondate::Date, attime::Time)
-        return new(attime, ondate)
+    function TimeDate(date::Date, time::Time)
+        return new(time, date)
     end
 end
 
-@inline at_time(x::TimeDate) = x.attime
-@inline on_date(x::TimeDate) = x.ondate
+TimeDate(x::DateTime) = TimeDate(Time(x), Date(x))
+TimeDate(x::TimeDate) = x
+
+TimeDate(x::Date) = TimeDate(zero(Time), x)
+TimeDate(x::Time) = TimeDate(x, today())
+
+@inline at_time(x::TimeDate) = x.time
+@inline on_date(x::TimeDate) = x.date
 
 @inline at_time(x::DateTime) = Time(x)
 @inline on_date(x::DateTime) = Date(x)
