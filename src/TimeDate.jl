@@ -161,56 +161,30 @@ function Base.:(-)(td::TimeDate, cp::CompoundPeriod)
     result
 end
 
+for T in (:TimeDate, :DateTime, :Date, :Time)
+    @eval begin
+        function Base.:(-)(td::TimeDate, t::$T)
+            result = convert(CompoundPeriod, td)
+            cp = convert(CompoundPeriod, t)
+            for p in reverse(cp.periods)
+                result -= p
+            end
+            canonicalize(result)
+        end
+    end
+end
+
 Base.:(+)(td::TimeDate, tm::Time) = td + convert(CompoundPeriod, tm)
 Base.:(+)(tm::Time, td::TimeDate) = td + convert(CompoundPeriod, tm)
 
 Base.:(-)(td::TimeDate, tm::Time) = td - convert(CompoundPeriod, tm)
-Base.:(-)(td::TimeDate, dt::Date) = td - convert(CompoundPeriod, dt)
-Base.:(-)(td::TimeDate, dm::DateTime) = td - convert(CompoundPeriod, dm)
+
+Base.:(-)(td::TimeDate, dm::DateTime) =
+    canonicalize(convert(CompoundPeriod, td) - convert(CompoundPeriod, dm))
+Base.:(-)(dm::DateTime, td::TimeDate) =
+    canonicalize(convert(CompoundPeriod, dm) - convert(CompoundPeriod, td))
 Base.:(-)(td₁::TimeDate, td₂::TimeDate) = td₁ - convert(CompoundPeriod, td₂)
 
-
-
-
-#=
-function Base.:(+)(td::TimeDate, tm::Time)
-    result = td
-    cp = convert(CompoundPeriod, tm)
-    for p in reverse(cp.periods)
-        result += p
-    end
-    result
-end
-Base.:(+)(tm::Time, td::TimeDate) = td + tm
-
-function Base.:(-)(td::TimeDate, tm::Time)
-    result = td
-    cp = convert(CompoundPeriod, tm)
-    for p in reverse(cp.periods)
-        result -= p
-    end
-    result
-end
-
-function Base.:(-)(td::TimeDate, dt::DateTime)
-    result = td
-    cp = convert(CompoundPeriod, dt)
-    for p in reverse(cp.periods)
-        result -= p
-    end
-    result
-end
-
-function Base.:(-)(td₁::TimeDate, td₂::TimeDate)
-    result = td₁
-    cp = convert(CompoundPeriod, td₂)
-    for p in reverse(cp.periods)
-        result -= p
-    end
-    result
-end
-
-=#
 
 
 
