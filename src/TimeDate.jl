@@ -40,10 +40,11 @@ Base.promote_rule(::Type{TimeDate}, ::Type{Time}) = TimeDate
 Base.promote_rule(::Type{TimeDate}, ::Type{Date}) = TimeDate
 Base.promote_rule(::Type{TimeDate}, ::Type{DateTime}) = TimeDate
 
+Base.convert(::Type{TimeDate}, x::DateTime) = TimeDate(Date(x), Time(x))
+Base.convert(::Type{DateTime}, x::TimeDate) = DateTime(x)
+Base.convert(::Type{TimeDate}, x::Date) = TimeDate(Time(0), x)
 Base.convert(::Type{Date}, x::TimeDate) = Date(x)
 Base.convert(::Type{Time}, x::TimeDate) = Time(x)
-Base.convert(::Type{DateTime}, x::TimeDate) = DateTime(x)
-Base.convert(::Type{TimeDate}, x::DateTime) = TimeDate(Date(x), Time(x))
 
 #  Period subselection from TimeDate
 
@@ -186,12 +187,29 @@ Base.:(-)(dm::DateTime, td::TimeDate) =
 Base.:(-)(td₁::TimeDate, td₂::TimeDate) = td₁ - convert(CompoundPeriod, td₂)
 
 
+function Base.isless(a::TimeDate, b::TimeDate)
+    temporalsep = canonicalize(convert(CompoundPeriod, a) - convert(CompoundPeriod, b))
+    !isempty(temporalsep.periods) && signbit(sign(temporalsep.periods[1]))
+end
+
+function Base.isequal(a::TimeDate, b::TimeDate)
+    temporalsep = canonicalize(convert(CompoundPeriod, a) - convert(CompoundPeriod, b))
+    isempty(temporalsep.periods)
+end
+
+for (T,S) in ((:TimeDate, :DateTime), (:TimeDate, :Date))
+  @eval begin
+    Base.isless(a::$T, b::$S) = isless(promote(a, b)...)
+    Base.isless(a::$S, b::$T) = isless(promote(a, b)...)
+    Base.isequal(a::$T, b::$S) = isequal(promote(a, b)...)
+    Base.isequal(a::$S, b::$T) = isequal(promote(a, b)...)
+  end
+end
 
 
 
 
-
-
+#  ==========================================  #
 
 
 
