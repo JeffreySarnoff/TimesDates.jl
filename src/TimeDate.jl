@@ -45,8 +45,19 @@ Base.convert(::Type{Time}, x::TimeDate) = Time(x)
 Base.convert(::Type{DateTime}, x::TimeDate) = DateTime(x)
 Base.convert(::Type{TimeDate}, x::DateTime) = TimeDate(Date(x), Time(x))
 
+#  Period subselection from TimeDate
+
+for P in map(Symbol, DatePeriods)
+  @eval Dates.$P(td::TimeDate) = $P(date(td))     
+end
+
+for P in map(Symbol, TimePeriods)
+    @eval Dates.$P(td::TimeDate) = $P(time(td))
+end
+
+# using IO
 function Base.show(io::IO, x::TimeDate)
-    print(io, string(x.date, "T", x.time))
+   print(io, string("TimeDate(\"", x.date, "T", x.time, "\")"))
 end
 
 timeperiods(x::CompoundPeriod) = filter(istimeperiod, canonicalize(x).periods)
@@ -157,6 +168,8 @@ Base.:(-)(td::TimeDate, tm::Time) = td - convert(CompoundPeriod, tm)
 Base.:(-)(td::TimeDate, dt::Date) = td - convert(CompoundPeriod, dt)
 Base.:(-)(td::TimeDate, dm::DateTime) = td - convert(CompoundPeriod, dm)
 Base.:(-)(td₁::TimeDate, td₂::TimeDate) = td₁ - convert(CompoundPeriod, td₂)
+
+
 
 
 #=
