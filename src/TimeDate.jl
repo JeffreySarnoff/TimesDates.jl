@@ -1,4 +1,9 @@
-abstract type NanosecondBasis <: Dates.AbstractTime end  # a structural trait, inherited
+using Dates # Date, Time, DateTime, DatePeriods, TimePeriods
+            # canonicalize
+
+using Dates: AbstractTime, CompoundPeriod
+
+abstract type NanosecondBasis <: AbstractTime end  # a structural trait, inherited
 
 struct TimeDate <: NanosecondBasis
     time::Time
@@ -8,45 +13,53 @@ struct TimeDate <: NanosecondBasis
     TimeDate(time::Time, date::Date) = new(time, date)
 end
 
+time(x::TimeDate) = x.time
+date(x::TimeDate) = x.date
 
 TimeDate(x::TimeDate) = x
 
 TimeDate(date::Date, time::Time) = TimeDate(time, date)
 TimeDate(x::DateTime) = TimeDate(Time(x), Date(x))
 TimeDate(date::Date) = TimeDate(Time(0), date)
-TimeDate(time::Time) = TimeDate(time, today())
+# DateTime(::Time) is a method error, so we do not define
+# TimeDate(time::Time) = TimeDate(time, today())
 
 function TimeDate(x::Dates.CompoundPeriod)
-    datep = dateperiods(x)
-    timep = timeperiods(x)
-    date = isempty(datep) ? today() : Date(datep...)
-    time = isempty(timep) ? Time(0) : Time(timep...)
+    dateunits = dateperiods(x)
+    timeunits = timeperiods(x)
+    date = isempty(dateunits) ? today() : Date(dateunits...)
+    time = isempty(timeunits) ? Time(0) : Time(timeunits...)
     TimeDate(time, date)
 end
 
-timeperiods(x::CompoundPeriod) = filter(isatimeperiod, Dates.canonicalize(x).periods)
-dateperiods(x::CompoundPeriod) = filter(isadateperiod, Dates.canonicalize(x).periods)
-
-isatimeperiod(x) = isa(x, TimePeriod)
-isadateperiod(x) = isa(x, DatePeriod)
-
-time(x::TimeDate) = x.time
-date(x::TimeDate) = x.date
-Dates.Time(x::TimeDate) = x.time
-Dates.Date(x::TimeDate) = x.date
-Dates.DateTime(x::TimeDate) = DateTime(x.date, x.time)
-
-Base.convert(::Type{Dates.Date}, x::TimeDate) = date(x)
-Base.convert(::Type{Dates.Time}, x::TimeDate) = time(x)
-Base.convert(::Type{Dates.DateTime}, x::TimeDate) = DateTime(x)
+Time(x::TimeDate) = time(x)
+Date(x::TimeDate) = date(x)
+DateTime(x::TimeDate) = DateTime(date(x), time(x))
 
 Base.promote_rule(::Type{TimeDate}, ::Type{Time}) = TimeDate
 Base.promote_rule(::Type{TimeDate}, ::Type{Date}) = TimeDate
 Base.promote_rule(::Type{TimeDate}, ::Type{DateTime}) = TimeDate
 
+Base.convert(::Type{Date}, x::TimeDate) = Date(x)
+Base.convert(::Type{Time}, x::TimeDate) = Time(x)
+Base.convert(::Type{DateTime}, x::TimeDate) = DateTime(x)
+Base.convert(::Type{TimeDate}, x::DateTime) = TimeDate(Date(x), Time(x))
+
 function Base.show(io::IO, x::TimeDate)
     print(io, string(x.date, "T", x.time))
 end
+
+timeperiods(x::CompoundPeriod) = filter(istimeperiod, canonicalize(x).periods)
+dateperiods(x::CompoundPeriod) = filter(isdateperiod, canonicalize(x).periods)
+
+istimeperiod(x) = isa(x, TimePeriod)
+isdateperiod(x) = isa(x, DatePeriod)
+
+
+
+
+
+
 
 #=
    Dates.DateFormat(format::AbstractString)
