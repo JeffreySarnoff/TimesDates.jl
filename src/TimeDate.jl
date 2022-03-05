@@ -1,7 +1,7 @@
 using Dates # Date, Time, DateTime, DatePeriods, TimePeriods
             # canonicalize
 
-using Dates: AbstractTime, CompoundPeriod
+using Dates: AbstractTime, AbstractDateTime, CompoundPeriod
 
 abstract type NanosecondBasis <: AbstractTime end  # a structural trait, inherited
 
@@ -55,6 +55,168 @@ dateperiods(x::CompoundPeriod) = filter(isdateperiod, canonicalize(x).periods)
 istimeperiod(x) = isa(x, TimePeriod)
 isdateperiod(x) = isa(x, DatePeriod)
 
+Base.convert(::Type{CompoundPeriod}, x::Date) =
+    Day(x) + Month(x) + Year(x)
+
+Base.convert(::Type{CompoundPeriod}, x::Time) =
+    Nanosecond(x) + Microsecond(x) + Millisecond(x) + Second(x) + Minute(x) + Hour(x)
+
+Base.convert(::Type{CompoundPeriod}, x::DateTime) =
+    convert(CompoundPeriod, Time(x)) + convert(CompoundPeriod, Date(x))
+
+Base.convert(::Type{CompoundPeriod}, x::TimeDate) =
+    convert(CompoundPeriod, time(x)) + convert(CompoundPeriod, date(x))
+
+    # add Period to TimeDate
+
+# these are given sorted from shortest period to longest
+const DatePeriods = (Day, Week, Month, Quarter, Year)
+const TimePeriods = (Nanosecond, Microsecond, Millisecond, Second, Minute, Hour) 
+const TimeDatePeriods = (TimePeriods..., DatePeriods...)
+
+for P in map(Symbol, DatePeriods)
+  @eval begin
+    Base.:(+)(td::TimeDate, dateunit::$P) = TimeDate(time(td), date(td) + dateunit)
+    Base.:(+)(dateunit::$P, td::TimeDate) = TimeDate(time(td), date(td) + dateunit)
+  end
+end
+
+for P in map(Symbol, DatePeriods)
+  @eval begin
+    function Base.:(+)(td::TimeDate, dp::$P)
+        dateplus = date(td) + dp
+        TimeDate(time(td), dateplus)
+    end
+    Base.:(+)(dp::$P, td::TimeDate) = td + dp    
+  end
+end
+
+for P in map(Symbol, DatePeriods)
+  @eval begin
+    function Base.:(-)(td::TimeDate, dp::$P)
+        dateminus = date(td) - dp
+        TimeDate(time(td), dateminus)
+    end
+  end
+end
+
+for P in map(Symbol, TimePeriods)
+  @eval begin
+    function Base.:(+)(td::TimeDate, tp::$P)
+        compound = canonicalize(convert(CompoundPeriod, td) + tp)
+        idxtimes = findfirst(istimeperiod, compound.periods)
+        if isnothing(idxtimes)
+            TimeDate(Time(0), Date(compound.periods...))
+        elseif idxtimes === 1
+            TimeDate(Time(compound.periods...), Date(0))  # Date(0) = 0001-01-01, Year 0 does not exist
+        else
+            TimeDate(Time(compound.periods[idxtimes:end]...), Date(compound.periods[1:idxtimes-1]...))
+        end
+    end
+    Base.:(+)(tp::$P, td::TimeDate) = td + tp
+  end
+end
+
+for P in map(Symbol, TimePeriods)
+  @eval begin
+    function Base.:(-)(td::TimeDate, tp::$P)
+        compound = canonicalize(convert(CompoundPeriod, td) - tp)
+        idxtimes = findfirst(istimeperiod, compound.periods)
+        if isnothing(idxtimes)
+            TimeDate(Time(0), Date(compound.periods...))
+        elseif idxtimes === 1
+            TimeDate(Time(compound.periods...), Date(0))  # Date(0) = 0001-01-01, Year 0 does not exist
+        else
+            TimeDate(Time(compound.periods[idxtimes:end]...), Date(compound.periods[1:idxtimes-1]...))
+        end
+    end
+  end
+end
+
+function Base.:(+)(td::TimeDate, cp::CompoundPeriod)
+    result = td
+    for p in reverse(canonicalize(cp).periods)
+        result += p
+    end
+    result
+end
+Base.:(+)(cp::CompoundPeriod, td::TimeDate) = td + cp
+
+function Base.:(-)(td::TimeDate, cp::CompoundPeriod)
+    result = td
+    for p in reverse(canonicalize(cp).periods)
+        result -= p
+    end
+    result
+end
+
+Base.:(+)(td::TimeDate, tm::Time) = td + convert(CompoundPeriod, tm)
+Base.:(+)(tm::Time, td::TimeDate) = td + convert(CompoundPeriod, tm)
+
+Base.:(-)(td::TimeDate, tm::Time) = td - convert(CompoundPeriod, tm)
+Base.:(-)(td::TimeDate, dt::Date) = td - convert(CompoundPeriod, dt)
+Base.:(-)(td::TimeDate, dm::DateTime) = td - convert(CompoundPeriod, dm)
+Base.:(-)(td₁::TimeDate, td₂::TimeDate) = td₁ - convert(CompoundPeriod, td₂)
+
+
+#=
+function Base.:(+)(td::TimeDate, tm::Time)
+    result = td
+    cp = convert(CompoundPeriod, tm)
+    for p in reverse(cp.periods)
+        result += p
+    end
+    result
+end
+Base.:(+)(tm::Time, td::TimeDate) = td + tm
+
+function Base.:(-)(td::TimeDate, tm::Time)
+    result = td
+    cp = convert(CompoundPeriod, tm)
+    for p in reverse(cp.periods)
+        result -= p
+    end
+    result
+end
+
+function Base.:(-)(td::TimeDate, dt::DateTime)
+    result = td
+    cp = convert(CompoundPeriod, dt)
+    for p in reverse(cp.periods)
+        result -= p
+    end
+    result
+end
+
+function Base.:(-)(td₁::TimeDate, td₂::TimeDate)
+    result = td₁
+    cp = convert(CompoundPeriod, td₂)
+    for p in reverse(cp.periods)
+        result -= p
+    end
+    result
+end
+
+=#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Base.first(x::CompoundPeriod) = first(x.periods)
+
+const DateTimePeriods = (Millisecond, Second, Minute, Hour, Day, Week, Month, Quarter, Year)
+const SubsecondPeriods = (Nanosecond, Microsecond, Millisecond)
+const SubDateTimePeriods = (Nanosecond, Microsecond)
 
 
 
