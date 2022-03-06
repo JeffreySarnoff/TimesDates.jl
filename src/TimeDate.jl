@@ -1,7 +1,38 @@
-using Dates # Date, Time, DateTime, DatePeriods, TimePeriods
+using Dates # Date, Time, DateTime, DatePeriod, TimePeriod
             # canonicalize
 
 using Dates: AbstractTime, AbstractDateTime, CompoundPeriod
+
+
+isdateperiod(x) = isa(x, DatePeriod)
+isdateperiodfast(::Type{T}) where {T} = T ∈ FastDatePeriods
+isdateperiodslow(::Type{T}) where {T} = T ∈ SlowDatePeriods
+isdateperiodfast(x::T) where {T} = T ∈ FastDatePeriods
+isdateperiodslow(x::T) where {T} = T ∈ SlowDatePeriods
+
+istimeperiod(x) = isa(x, TimePeriod)
+istimeperiodfast(::Type{T}) where {T} = T ∈ FastTimePeriods
+istimeperiodslow(::Type{T}) where {T} = T ∈ SlowTimePeriods
+issubsecondperiod(::Type{T}) where {T} = T ∈ SubsecondPeriods
+istimeperiodfast(x::T) where {T} = T ∈ FastTimePeriods
+istimeperiodslow(x::T) where {T} = T ∈ SlowTimePeriods
+issubsecondperiod(x::T) where {T} = T ∈ SubsecondPeriods
+
+@inline canonicalperiods(x::CompoundPeriod) = canonicalize(x).periods
+
+timeperiods(x::CompoundPeriod) = filter(istimeperiod, canonicalperiods(x))
+dateperiods(x::CompoundPeriod) = filter(isdateperiod, canonicalperiods(x))
+
+fasttimeperiods(x::CompoundPeriod) = filter(istimeperiodfast, canonicalperiods(x))
+slowtimeperiods(x::CompoundPeriod) = filter(istimeperiodslow, canonicalperiods(x))
+subsecondperiods(x::CompoundPeriod) = filter(issubsecondperiod, canonicalperiods(x))
+fastdateperiods(x::CompoundPeriod) = filter(isdateperiodfast, canonicalperiods(x))
+slowdateperiods(x::CompoundPeriod) = filter(isdateperiodslow, canonicalperiods(x))
+
+datetimeperiods(x::CompoundPeriod) = slowtimeperiods(x) + dateperiods(x)
+timedateperiods(x::CompoundPeriod) = timeperiods(x) + dateperiods(x)
+
+# --------------- #
 
 abstract type NanosecondBasis <: AbstractTime end  # a structural trait, inherited
 
@@ -58,14 +89,10 @@ end
 
 # using IO
 function Base.show(io::IO, x::TimeDate)
-   print(io, string("TimeDate(\"", x.date, "T", x.time, "\")"))
+   print(io, string(x.date, "T", x.time))
 end
 
-timeperiods(x::CompoundPeriod) = filter(istimeperiod, canonicalize(x).periods)
-dateperiods(x::CompoundPeriod) = filter(isdateperiod, canonicalize(x).periods)
 
-istimeperiod(x) = isa(x, TimePeriod)
-isdateperiod(x) = isa(x, DatePeriod)
 
 Base.convert(::Type{CompoundPeriod}, x::Date) =
     Day(x) + Month(x) + Year(x)
@@ -81,10 +108,7 @@ Base.convert(::Type{CompoundPeriod}, x::TimeDate) =
 
     # add Period to TimeDate
 
-# these are given sorted from shortest period to longest
-const DatePeriods = (Day, Week, Month, Quarter, Year)
-const TimePeriods = (Nanosecond, Microsecond, Millisecond, Second, Minute, Hour) 
-const TimeDatePeriods = (TimePeriods..., DatePeriods...)
+
 
 for P in map(Symbol, DatePeriods)
   @eval begin
@@ -219,9 +243,6 @@ end
 
 Base.first(x::CompoundPeriod) = first(x.periods)
 
-const DateTimePeriods = (Millisecond, Second, Minute, Hour, Day, Week, Month, Quarter, Year)
-const SubsecondPeriods = (Nanosecond, Microsecond, Millisecond)
-const SubDateTimePeriods = (Nanosecond, Microsecond)
 
 
 

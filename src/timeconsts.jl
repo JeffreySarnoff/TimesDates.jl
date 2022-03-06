@@ -41,3 +41,18 @@ const NANOSECONDS_PER_HOUR = NANOSECONDS_PER_MINUTE * MINUTES_PER_HOUR
 const NANOSECONDS_PER_DAY = NANOSECONDS_PER_HOUR * HOURS_PER_DAY
 const NANOSECONDS_PER_WEEK = NANOSECONDS_PER_DAY * DAYS_PER_WEEK
 
+# ~ ~ ~ ~
+#   note these tuples are sorted by decreasing frequency
+
+const DatePeriods = (Day, Week, Month, Quarter, Year)
+const FastDatePeriods = (Day, Week)
+const SlowDatePeriods = (Month, Quarter, Year)
+
+const TimePeriods = (Nanosecond, Microsecond, Millisecond, Second, Minute, Hour)
+const FastTimePeriods = (Nanosecond, Microsecond)
+const SlowTimePeriods = (Millisecond, Second, Minute, Hour)
+
+const SubsecondPeriods = (FastTimePeriods..., Microsecond)
+
+const DateTimePeriods = (SlowTimePeriods..., Day, SlowDatePeriods...)
+const TimeDatePeriods = (TimePeriods..., Day, SlowDatePeriods...)
