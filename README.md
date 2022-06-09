@@ -1,9 +1,9 @@
 ## TimesDates.jl
+
 #### Nanosecond Resolvable Dates, Times, DateTimes, TimeZones
 
-----
 
-#### Copyright ©&thinsp;2018 by Jeffrey Sarnoff. &nbsp;&nbsp; The MIT License applies.
+##### Copyright ©&thinsp;2018..2022 by Jeffrey Sarnoff. &nbsp;&nbsp; The MIT License applies.
 
 
 -----
