@@ -1,5 +1,5 @@
-# TimesDates
-#### Nanosecond Resolvable Times with Dates and Times in TimeZones.
+## TimesDates.jl
+#### Nanosecond Resolvable Dates, Times, DateTimes, TimeZones
 
 ----
 
