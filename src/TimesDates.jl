@@ -65,6 +65,16 @@ include("showstring.jl")
 include("passthru.jl")
 
 """
+    TimeDate(::TimeDateZone)
+
+conversion adds back timezone offset
+- provides local wallclock time
+"""
+function TimeDate(tdz::TimeDateZone)
+    TimeDate(tdz) + utcoffset(tdz)
+end
+
+"""
 Same as `Dates.datetime2unix`, only with nanosecond granularity. Returns an Int instead of Float.
 """
 function timedate2unix(x::TimeDate)
