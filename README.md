@@ -10,6 +10,7 @@
 
 [![Docs Latest](https://img.shields.io/badge/docs-latest-blue.svg)](http://jeffreysarnoff.github.io/TimesDates.jl/latest/)
 
+[![Package Downloads](https://shields.io/endpoint?url=https://pkgs.genieframework.com/api/v1/badge/TimesDates)](https://pkgs.genieframework.com?packages=TimesDates&startdate=2015-12-30&enddate=2040-12-31)
 ----
 
 ## Setup
