@@ -34,33 +34,21 @@ isless(x::DateTime, y::TimeDate) = isless(TimeDate(x), y)
 
 
  (<)(x::TimeDate, y::DateTime) =  (<)(x, TimeDate(y))
- (>)(x::TimeDate, y::DateTime) =  (>)(x, TimeDate(y))
 (<=)(x::TimeDate, y::DateTime) = (<=)(x, TimeDate(y))
-(>=)(x::TimeDate, y::DateTime) = (>=)(x, TimeDate(y))
 (==)(x::TimeDate, y::DateTime) = (==)(x, TimeDate(y))
-(!=)(x::TimeDate, y::DateTime) = (!=)(x, TimeDate(y))
 
  (<)(x::DateTime, y::TimeDate) =  (<)(TimeDate(x), y)
- (>)(x::DateTime, y::TimeDate) =  (>)(TimeDate(x), y)
 (<=)(x::DateTime, y::TimeDate) = (<=)(TimeDate(x), y)
-(>=)(x::DateTime, y::TimeDate) = (>=)(TimeDate(x), y)
 (==)(x::DateTime, y::TimeDate) = (==)(TimeDate(x), y)
-(!=)(x::DateTime, y::TimeDate) = (!=)(TimeDate(x), y)
 
 (<)(x::TimeDate, y::TimeDate) = isless(x,y)
-(>)(x::TimeDate, y::TimeDate) = isless(y,x)
 (<=)(x::TimeDate, y::TimeDate) = isless(x,y) || isequal(x,y)
-(>=)(x::TimeDate, y::TimeDate) = isless(y,x) || isequal(x,y)
 (==)(x::TimeDate, y::TimeDate) = isequal(x,y)
-(!=)(x::TimeDate, y::TimeDate) = !isequal(x,y)
 
 
  (<)(x::TimeDateZone, y::TimeDateZone) = isless(x,y)
- (>)(x::TimeDateZone, y::TimeDateZone) = isless(y,x)
 (<=)(x::TimeDateZone, y::TimeDateZone) = isless(x,y) || isequal(x,y)
-(>=)(x::TimeDateZone, y::TimeDateZone) = isless(y,x) || isequal(x,y)
 (==)(x::TimeDateZone, y::TimeDateZone) = isequal(x,y)
-(!=)(x::TimeDateZone, y::TimeDateZone) = !isequal(x,y)
 
 
 isequal(x::TimeDateZone, y::ZonedDateTime) = isequal(x, TimeDateZone(y))
@@ -70,15 +58,9 @@ isless(x::TimeDateZone, y::ZonedDateTime) = isless(x, TimeDateZone(y))
 isless(x::ZonedDateTime, y::TimeDateZone) = isless(TimeDateZone(x), y)
 
  (<)(x::TimeDateZone, y::ZonedDateTime) =  (<)(x, TimeDateZone(y))
- (>)(x::TimeDateZone, y::ZonedDateTime) =  (>)(x, TimeDateZone(y))
 (<=)(x::TimeDateZone, y::ZonedDateTime) = (<=)(x, TimeDateZone(y))
-(>=)(x::TimeDateZone, y::ZonedDateTime) = (>=)(x, TimeDateZone(y))
 (==)(x::TimeDateZone, y::ZonedDateTime) = (==)(x, TimeDateZone(y))
-(!=)(x::TimeDateZone, y::ZonedDateTime) = (!=)(x, TimeDateZone(y))
 
  (<)(x::ZonedDateTime, y::TimeDateZone) =  (<)(TimeDateZone(x), y)
- (>)(x::ZonedDateTime, y::TimeDateZone) =  (>)(TimeDateZone(x), y)
 (<=)(x::ZonedDateTime, y::TimeDateZone) = (<=)(TimeDateZone(x), y)
-(>=)(x::ZonedDateTime, y::TimeDateZone) = (>=)(TimeDateZone(x), y)
 (==)(x::ZonedDateTime, y::TimeDateZone) = (==)(TimeDateZone(x), y)
-(!=)(x::ZonedDateTime, y::TimeDateZone) = (!=)(TimeDateZone(x), y)
